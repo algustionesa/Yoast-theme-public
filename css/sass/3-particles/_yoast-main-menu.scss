@@ -288,15 +288,16 @@
 
 @media only screen and (max-width: $page-width-medium) {
   #yoast-main-menu {
-    display: none;
+    display: block;
 
     position: fixed;
     top: 4em;
     bottom: 0;
-    right: -70%;
+    right:-70%;
     z-index: 90;
     width: 70%;
-    overflow: scroll;
+    overflow: auto;
+    transition: right 0.2s ease-out;
 
     background-color: $color-white;
     //text-shadow: none;
@@ -384,22 +385,29 @@
   [data-show-mobile-nav] {
     #yoast-main-menu {
       display: block;
-      right: -1%;
+      right: 0;
     }
   }
 
 }
 
+body::after{
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index:80;
+  pointer-events: none; // make it clicktrough
+  transition: background-color 0.5s ease-out;
+}
+
 [data-show-mobile-nav] {
   @media only screen and (max-width: $page-width-medium) {
     &::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 80;
+      display: block;
+      pointer-events: auto;
       background-color: rgba($color-black, .5);
     }
   }

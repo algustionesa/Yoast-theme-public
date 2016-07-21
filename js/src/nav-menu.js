@@ -29,5 +29,44 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	}
 
+	/**
+	 *
+	 */
+	function init_swipe_menu() {
+		var swipeDistance = 75; //distance in pixels
+		$( '.site' ).swipe( {
+			swipeLeft: function() {
+				if ( !$( 'body' ).attr( 'data-show-mobile-nav' ) ) { // if the mobile menu is not showing
+					$( '#mobile-show-nav' ).trigger( 'click' );
+				}
+			}
+		} );
+		$( 'body' ).after().swipe( {
+			swipeRight: function() {
+				if ( $( 'body' ).attr( 'data-show-mobile-nav' ) ) { // if the mobile menu is showing
+					$( '#mobile-show-nav' ).trigger( 'click' );
+				}
+			}
+		} );
+
+		// prevent clicking the link when the user tries to swipe the menu away. This is primarily a problem in desktop browsers.
+		var menu_item_links = $( '.sub-menu-item a' );
+		var startX;
+
+		menu_item_links.on( "mousedown", function( evt ) {
+			startX = evt.screenX;
+		} );
+
+		menu_item_links.on( 'click', function( evt ) {
+			var distance = Math.abs( startX - evt.screenX );
+			if ( distance >= swipeDistance ) {
+				evt.preventDefault();
+			}
+		} );
+	}
+
+
 	init();
+	init_swipe_menu();
+	
 } );

@@ -191,6 +191,8 @@ class Theme {
 
 			wp_localize_script( 'yoast-com-academy', 'AcademyAjax', array( 'ajaxurl' => apply_filters( 'yoast:domain', 'https://yoast.academy' ) . '/wp-admin/admin-ajax.php' ) );
 		}
+
+		wp_enqueue_script( 'touchSwipe', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js' );
 	}
 
 	/**
