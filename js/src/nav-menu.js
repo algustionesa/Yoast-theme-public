@@ -29,5 +29,35 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	}
 
+
+	function init_disable_scroll() {
+		// The show/hide menu event is bound later and, by jQuery standards, will be executed later.
+		// So, when checking if the menu is showing it actually says: the menu is going to be hidden very soon.
+
+		$( '#mobile-show-nav' ).click( function() {
+			if ( $( 'body' ).attr( 'data-show-mobile-nav' ) ) { // if the mobile menu is showing.
+				enable_scroll();
+			} else {
+				disable_scroll();
+			}
+		} );
+	}
+
+	function disable_scroll() {
+		var top = $( 'html' ).scrollTop() || $( 'body' ).scrollTop();
+		$( 'html' ).addClass( 'no-scroll' );
+		$( 'html' ).css( { 'top': -top } );
+	}
+
+	function enable_scroll() {
+		var topPx = $( 'html' ).css( 'top' );
+		var top = Math.abs( parseInt( topPx ) );
+
+		$( 'html' ).removeClass( 'no-scroll' );
+		$( 'html' ).css( { 'top': undefined } );
+		$( 'body' ).scrollTop( top );
+	}
+
 	init();
+	init_disable_scroll();
 } );

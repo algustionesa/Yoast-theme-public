@@ -19,7 +19,7 @@ $cart = apply_filters( 'yoast:url', 'checkout' );
 			class="visuallyhidden focusable"><?php _e( 'Search', 'yoastcom' ); ?></span><span
 			class="text-icon">&#xf002;</span></a>
 
-	<button data-toggle="data-show-mobile-nav" data-hide-on-active="data-show-mobile-search" class="button--naked"><span
+	<button data-toggle="data-show-mobile-nav" data-hide-on-active="data-show-mobile-search" class="button--naked" id="mobile-show-nav"><span
 			class="visuallyhidden focusable"><?php _e( 'Navigation', 'yoastcom' ); ?></span><span class="text-icon">&#xf0c9;</span>
 	</button>
 </div>

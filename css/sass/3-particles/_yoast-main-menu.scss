@@ -391,6 +391,7 @@
 }
 
 [data-show-mobile-nav] {
+  // show darkened background behind the mobile menu
   @media only screen and (max-width: $page-width-medium) {
     &::after {
       content: '';
@@ -403,4 +404,12 @@
       background-color: rgba($color-black, .5);
     }
   }
+}
+
+.no-scroll {
+  width:100%;
+  height:100%;
+  position: fixed;
+  overflow-y: scroll;
+  top:0; // To be set in js.
 }
