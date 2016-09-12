@@ -15,7 +15,6 @@ class Checkout_HTML {
 	 */
 	public function __construct() {
 		add_action( 'template_redirect', array( $this, 'change_edd_csau_location' ), 99 );
-		add_action( 'template_redirect', array( $this, 'change_edd_discount_location' ), 99 );
 
 		add_action( 'edd_cc_billing_bottom', array( $this, 'html_cc_billing_bottom' ) );
 		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_what_happens_next' ), 175 );
@@ -107,13 +106,6 @@ class Checkout_HTML {
 		remove_action( 'edd_after_checkout_cart', 'edd_csau_display_on_checkout_page' );
 	}
 
-	/**
-	 * Changes the location of the discount code entering form
-	 */
-	public function change_edd_discount_location() {
-		remove_action( 'edd_checkout_form_top', 'edd_discount_field', -1 );
-		add_action( 'edd_checkout_form_bottom', 'edd_discount_field' );
-	}
 	/**
 	 * Changes the cross selling HTML to be more in line what we want
 	 *
