@@ -45,8 +45,6 @@ class Theme {
 
 		new Widget_Color_Setting();
 		new Ajax();
-		new Checkout_HTML();
-		new Checkout();
 		new Text_Changes();
 		new Term();
 		new Page_Academy_Settings();
