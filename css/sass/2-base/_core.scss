@@ -1,5 +1,15 @@
 /* =WordPress Core
 -------------------------------------------------------------- */
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	padding-bottom: 120px;
+	position: relative;
+}
+
 .alignnone {
 	margin: 5px 20px 20px 0;
 }
@@ -112,7 +122,6 @@ a img.aligncenter {
 .clear {
   clear: both;
 }
-
 
 :target:before {
 	content: '';

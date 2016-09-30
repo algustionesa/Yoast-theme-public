@@ -1,7 +1,6 @@
 .sticky {
   &.is-sticky {
     position: fixed;
-    //top: 0;
     left: 0;
     will-change: transform;
 
@@ -13,6 +12,6 @@
 
 .admin-bar .sticky {
   &.is-sticky {
-    top: 32px;
+    top: 32px !important;
   }
 }
