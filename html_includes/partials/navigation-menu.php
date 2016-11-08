@@ -17,9 +17,10 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 
 	echo '<li class="controls">';
 
-//	echo '<a href="' . apply_filters( 'yoast:domain', 'my.yoast.com' ) . '">';
-//	echo '<span class="fa fa-user"></span>login';
-//	echo '</a>';
+	echo '<a href="' . apply_filters( 'yoast:domain', 'my.yoast.com' ) . '">';
+	echo '<span class="fa fa-user"></span>';
+	echo ( ! is_user_logged_in() ) ? __( 'login', 'yoastcom' ) : __( 'profile', 'yoastcom' );
+	echo '</a>';
 
 	echo '<a class="cart" href="' . apply_filters( 'yoast:url', 'checkout' ) . '">';
 	echo '<img src="' . get_template_directory_uri() . '/images/cart.svg" alt="' . esc_attr( __( 'Shopping Cart', 'yoastcom' ) ) . '" />';
@@ -38,8 +39,7 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 	echo '</nav>'; // nav holder
 
 	echo '</div>'; // main menu id
-}
-else {
+} else {
 	?>
 	<nav role="navigation" class="sitenav sticky" data-sticky data-sticky-desktop aria-hidden="true">
 		<?php wp_nav_menu( array(
