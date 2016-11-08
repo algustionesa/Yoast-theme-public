@@ -205,7 +205,7 @@ body.edd-checkout {
   }
 
   input.error {
-    border: 1px solid $color-error;
+    outline: 1px solid $color-error;
   }
 
   .checkout--payment-options {
