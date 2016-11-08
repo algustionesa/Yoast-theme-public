@@ -1,0 +1,33 @@
+body.page-template-user_account-page {
+  .sub-navigation {
+    ul {
+      padding: 0.5em;
+      margin: 0 0 2em 0;
+      background-color: $scheme-home-secondary;
+      a {
+        color: $color-white;
+      }
+
+      li {
+        display: inline-block;
+        padding: 0.2em 0.5em;
+
+        &.active {
+          background-color: white;
+          a {
+            color: $scheme-home-secondary;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  th, td {
+    line-height: 150%;
+  }
+
+  .edd_submit {
+    @extend .button;
+  }
+}
