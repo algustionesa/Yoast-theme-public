@@ -1,16 +1,17 @@
-body.page-template-user_account-page {
-  .sub-navigation {
+.user-accounts {
+  &.sub-navigation {
     ul {
       padding: 0.5em;
       margin: 0 0 2em 0;
       background-color: $scheme-home-secondary;
       a {
         color: $color-white;
+        padding: 0.2em 0.5em;
+        display: inline-block;
       }
 
       li {
         display: inline-block;
-        padding: 0.2em 0.5em;
 
         &.active {
           background-color: white;
