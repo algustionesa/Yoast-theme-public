@@ -7,6 +7,11 @@ $cart = apply_filters( 'yoast:url', 'checkout' );
 ?>
 <div class="header-controls header-controls--mobile  hide-on-desktop">
 
+	<a href="<?php echo apply_filters( 'yoast:domain', 'my.yoast.com' ) ?>">
+		<span class="fa fa-user"></span>
+		<span class="visuallyhidden focusable">Profile</span>
+	</a>
+
 	<a class="cart" href="<?php echo $cart ?>">
 		<img src="<?php echo get_template_directory_uri() ?>/images/cart.svg">
 		<span class="visuallyhidden focusable">Cart</span>
