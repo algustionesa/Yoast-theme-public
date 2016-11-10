@@ -180,8 +180,7 @@
 			// No special BTW rule for The Netherlands
 			if ( 'NL' == billingCountry ) {
 				btw_wrap
-					.after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
-
+					.after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT. VAT will be added to the invoice.</p>' );
 			}
 
 			// Check if the country is in our special tax list
