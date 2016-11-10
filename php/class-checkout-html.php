@@ -50,15 +50,10 @@ class Checkout_HTML {
 		$edd_cross_sells = edd_csau_html();
 		remove_filter( 'edd_csau_html', array( $this, 'cross_selling_html' ), 10 );
 
-		// Don't modify columns if there are no cross sells.
-		if ( ! empty( $edd_cross_sells ) ) {
-			$output .= '<div class="checkout-wrap__container">';
-			$output .= '<div class="checkout__form">' . $edd_checkout_form . '</div>'; // checkout--form
-			$output .= $edd_cross_sells;
-			$output .= '</div>'; // checkout-wrap--container
-		} else {
-			$output .= $edd_checkout_form;
-		}
+		$output .= '<div class="checkout-wrap__container">';
+		$output .= '<div class="checkout__form">' . $edd_checkout_form . '</div>'; // checkout--form
+		$output .= $edd_cross_sells;
+		$output .= '</div>'; // checkout-wrap--container
 
 		return $output;
 	}
