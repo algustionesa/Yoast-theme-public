@@ -18,6 +18,22 @@ body.edd-checkout {
   font-family: $font-stack-default;
 }
 
+fieldset {
+  p {
+    margin-bottom: 0.5em;
+  }
+}
+
+fieldset + fieldset {
+  p {
+    margin: 0;
+  }
+}
+
+#edd_terms_agreement {
+  margin-top: 2em;
+}
+
 .checkout {
   ul {
     margin-bottom: 0;
@@ -168,19 +184,26 @@ body.edd-checkout {
 }
 
 // Style the user information
-#edd_checkout_user_info,
-#edd_cc_fields,
-#edd_cc_address,
-#edd_purchase_submit,
-#edd-stripe-payment-errors,
-#edd_check_payment_info,
-#edd_terms_agreement {
+
+.checkout-wrap__container {
   @extend .row;
 }
 
 #edd_checkout_cart_wrap {
   @extend .iceberg;
 }
+
+#edd_checkout_login_register {
+  padding: 1em;
+  border: 1px solid #A4286A;
+  box-shadow: 0 4px 2px -3px rgba(0,0,0,0.3);
+  margin-bottom: 2em;
+
+  p.last {
+    margin-bottom: 0;
+  }
+}
+
 
 // Style the purchase form to make it more compact and responsive
 #edd_purchase_form {
@@ -282,6 +305,11 @@ body.edd-checkout {
     p {
       margin-bottom: 0;
     }
+
+    a {
+      color: $color-white !important;
+      text-decoration: underline;
+    }
   }
 
   label[for="edd_agree_to_terms"] {
@@ -335,15 +363,6 @@ body.edd-checkout {
 
   #edd-card-name-wrap {
     clear: both;
-  }
-
-  #edd-card-name-wrap,
-  #edd-card-city-wrap,
-  #edd-card-zip-wrap {
-
-    input {
-      margin-bottom: 0;
-    }
   }
 
   #edd-card-name-wrap,
@@ -412,6 +431,7 @@ body.edd-checkout {
 
   #yst-edd-btw-wrap {
     position: relative;
+    margin-top: 2em;
 
     .fa-spinner {
       display: none;
