@@ -25,7 +25,7 @@
 
 		$(document).ajaxComplete(reloadOnFreeCart);
 
-		$( '#edd_first' ).focus();
+//		$( '#edd_first' ).focus();
 	}
 
 	function reloadOnFreeCart( event, xhr, settings ) {
