@@ -1,12 +1,13 @@
 .user-accounts {
   &.sub-navigation {
     ul {
-      padding: 0.5em;
       margin: 0 0 2em 0;
+      border-radius: 4px;
+      padding: 0 4px;
       background-color: $scheme-home-secondary;
       a {
         color: $color-white;
-        padding: 0.2em 0.5em;
+        padding: 0.5em;
         display: inline-block;
       }
 
@@ -14,9 +15,8 @@
         display: inline-block;
 
         &.active {
-          background-color: white;
+          background-color: #77B227;
           a {
-            color: $scheme-home-secondary;
             text-decoration: none;
           }
         }
@@ -25,7 +25,17 @@
   }
 }
 
+body.edd-checkout {
+  nav.breadcrumb {
+    display: none;
+  }
+}
+
 body.page-template-user_account-page {
+  nav.breadcrumb {
+    display: none;
+  }
+
   th, td {
     line-height: 150%;
   }
