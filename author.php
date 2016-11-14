@@ -53,9 +53,9 @@ namespace Yoast\YoastCom\Theme;
 				}
 				?>
 			<section class="row">
+				<?php theme_object()->excerpt->more( ' <a href="' . get_permalink() . '">&raquo;</a>' ); ?>
 				<?php get_template_part( 'html_includes/partials/article-intro' ); ?>
 			</section>
-			<?php theme_object()->excerpt->more( ' <a href="' . get_permalink() . '">&raquo;</a>' ); ?>
 		<?php
 			$i++;
 			endwhile;

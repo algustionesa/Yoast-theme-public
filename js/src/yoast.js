@@ -7,11 +7,6 @@ document.onreadystatechange = function() {
 			document.querySelector( 'html' ).classList.add( 'supports-filter' );
 		}
 
-		// Make sure the top banner on the homepage has the right height
-		if ( document.querySelector( '[data-header-home]' ) ) {
-			setHomeBannerHeight();
-		}
-
 		document.addEventListener( 'click', function() {
 			if ( document.querySelector( 'body[data-show-mobile-search]' ) ) {
 				document.querySelector( '.searchbar input' ).focus();
