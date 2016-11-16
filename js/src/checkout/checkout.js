@@ -8,8 +8,27 @@
 
 		initCheckoutPage();
 		bindCurrencySwitch();
+		initTabs();
 
 		$body.ready( disableAutocompleteDiscount );
+	}
+
+	function initTabs() {
+		var $user_tabs = $('#user-tabs');
+		if ( ! $user_tabs.length ) {
+			return;
+		}
+
+		$( '.tab-holder .tab' ).click( function( e ) {
+			var $this = $( this );
+			var show = $this.data( 'show-id' );
+
+			$user_tabs.find( '.tab' ).removeClass('active');
+			$user_tabs.find( '.content-holder' ).children().hide();
+
+			$this.addClass('active');
+			$( '#' + show ).show();
+		} );
 	}
 
 	function bindCurrencySwitch() {
