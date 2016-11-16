@@ -19,7 +19,7 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 
 	echo '<a href="' . apply_filters( 'yoast:domain', 'my.yoast.com' ) . '">';
 	echo '<span class="fa fa-user"></span>';
-	echo '<span class="title">' . ( ( ! is_user_logged_in() ) ? __( 'login', 'yoastcom' ) : __( 'profile', 'yoastcom' ) ) . '</span>';
+	echo '<span class="title">' . ( ( ! is_user_logged_in() ) ? __( 'login', 'yoastcom' ) : __( 'account', 'yoastcom' ) ) . '</span>';
 	echo '</a>';
 
 	echo '<a class="cart" href="' . apply_filters( 'yoast:url', 'checkout' ) . '">';
