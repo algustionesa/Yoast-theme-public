@@ -30,6 +30,90 @@ class Checkout_HTML {
 		add_action( 'init', array( $this, 'init' ) );
 
 		add_shortcode( 'download_checkout', array( $this, 'edd_checkout_form_shortcode' ) );
+
+		add_action( 'edd_purchase_form_before_cc_form', function () {
+			echo '<fieldset>';
+		}, 1 );
+		add_action( 'edd_purchase_form_before_cc_form', [ $this, 'display_checkout_company' ], 10 );
+		add_action( 'edd_purchase_form_before_cc_form', [ $this, 'display_checkout_review_url' ], 11 );
+		add_action( 'edd_purchase_form_before_cc_form', function () {
+			echo '</fieldset>';
+		}, 99 );
+	}
+
+	/**
+	 * Display website field at checkout
+	 *
+	 * @link http://sumobi.com/adding-a-custom-checkout-field-in-easy-digital-downloads/
+	 */
+	public function display_checkout_company() {
+
+		$company = '';
+		if ( isset( $_POST['edd_company'] ) ) {
+			$company = $_POST['edd_company'];
+		}
+
+		$edd_purchase = EDD()->session->get( 'edd_purchase' );
+		if ( isset( $edd_purchase['post_data']['edd_company'] ) ) {
+			$company = $edd_purchase['post_data']['edd_company'];
+		}
+
+		?>
+		<p id="edd-company-wrap">
+			<label class="edd-label" for="edd-company">Company: (optional)</label>
+			<span class="edd-description"><?php echo 'Enter your company name.'; ?></span>
+			<input class="edd-input" type="text" name="edd_company" id="edd-company"
+			       value="<?php echo esc_attr( $company ); ?>"/>
+		</p>
+		<?php
+	}
+
+	/**
+	 * Display review URL field at checkout
+	 *
+	 * @link http://sumobi.com/adding-a-custom-checkout-field-in-easy-digital-downloads/
+	 */
+	public function display_checkout_review_url() {
+		$review_in_cart = false;
+		foreach ( edd_get_cart_contents() as $cart_item ) {
+			if ( $cart_item['id'] == 269192 ) {
+				$review_in_cart = true;
+				break;
+			}
+			$terms = get_the_terms( $cart_item['id'], 'download_category' );
+			if ( is_array( $terms ) ) {
+				foreach ( $terms as $cat ) {
+					if ( $cat->slug == 'services-reviews' ) {
+						$review_in_cart = true;
+						break( 2 );
+					}
+				}
+			}
+		}
+		if ( ! $review_in_cart ) {
+			return;
+		}
+
+		$website = '';
+		if ( isset( $_POST['edd_website_review_url'] ) ) {
+			$website = $_POST['edd_website_review_url'];
+		}
+
+		if ( isset( $edd_purchase['post_data']['edd_website_review_url'] ) ) {
+			$website = $edd_purchase['post_data']['edd_website_review_url'];
+		}
+		?>
+		<p id="edd-website-review-url-wrap">
+			<label class="edd-label" for="edd-website-review-url">
+				<?php echo 'Website:'; ?>
+			</label>
+			<span class="edd-description">
+        	<?php echo 'Enter the website you want us to review or work on, you can change this later (in the intake form) if needed.'; ?>
+        </span>
+			<input class="edd-input" type="url" name="edd_website_review_url" id="edd-website-review-url"
+			       placeholder="<?php echo 'http://www.example.com/'; ?>" value="<?php echo esc_attr( $website ); ?>"/>
+		</p>
+		<?php
 	}
 
 	public function html_clear() {
@@ -159,7 +243,25 @@ class Checkout_HTML {
 	 * Outputs the HTML for the checkout user fields
 	 */
 	public function html_user_info_fields() {
-		get_template_part( 'html_includes/shop/input-user-info' );
+		if ( ! is_user_logged_in() ) {
+			get_template_part( 'html_includes/shop/input-user-info' );
+		} else {
+			$customer = EDD()->session->get( 'customer' );
+			$customer = wp_parse_args( $customer, array( 'first_name' => '', 'last_name' => '', 'email' => '' ) );
+
+			$user_data = get_userdata( get_current_user_id() );
+			foreach ( $customer as $key => $field ) {
+				if ( 'email' == $key && empty( $field ) ) {
+					$customer[ $key ] = $user_data->user_email;
+				} elseif ( empty( $field ) ) {
+					$customer[ $key ] = $user_data->$key;
+				}
+			}
+
+			$customer = array_map( 'sanitize_text_field', $customer );
+
+			get_template_part( 'html_includes/shop/display-user-info', [ 'customer' => $customer ] );
+		}
 	}
 
 	/**
@@ -204,12 +306,12 @@ class Checkout_HTML {
 		}
 
 		return [
-			'options'     => [
+			'options' => [
 				'EUR' => __( 'EUR (&euro;)', 'yoastcom' ),
 				'USD' => __( 'USD ($)', 'yoastcom' )
 			],
-			'default'     => $default,
-			'current'     => $current,
+			'default' => $default,
+			'current' => $current,
 		];
 	}
 
