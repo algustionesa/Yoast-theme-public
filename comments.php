@@ -15,7 +15,7 @@ if ( Hide_Comments::hide_comments() ) {
 	return;
 }
 ?>
-
+<div class="row">
 <ol class="comment-list">
 	<?php
 	wp_list_comments( array(
@@ -24,4 +24,5 @@ if ( Hide_Comments::hide_comments() ) {
 		'type'   => 'comment',
 	) );
 	?>
-</ol><!-- .comment-list -->
+</ol>
+</div>

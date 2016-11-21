@@ -20,7 +20,7 @@
 				</h2>
 				<div class="meta">
 					<p class="ais-hits--tags">
-						{{{data.post_date_formatted}}}
+						{{{data.post_modified_formatted}}}
 						by
 						<a href="{{{data.post_author.author_link}}}">
 							{{{data.post_author.display_name}}}

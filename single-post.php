@@ -4,11 +4,12 @@
  */
 
 namespace Yoast\YoastCom\Theme;
-use Yoast\YoastCom\Settings\Hide_Comments;
 
-get_header(); ?>
+get_header();
 
-<?php get_template_part( 'html_includes/siteheader', array( 'academy-sub' => true ) ); ?>
+get_template_part( 'html_includes/siteheader', array( 'academy-sub' => true ) );
+
+?>
 <div class="site">
 
 	<main role="main">
@@ -34,33 +35,20 @@ get_header(); ?>
 			</div>
 		</div>
 
-		<?php get_template_part( 'html_includes/partials/bio' ); ?>
+		<?php
 
-		<?php get_template_part( 'html_includes/partials/newsletter-subscribe', array( 'class' => 'fill--secondary announcement--pointer' ) ); ?>
+		get_template_part( 'html_includes/partials/bio' );
 
-		<?php if ( ! Hide_Comments::hide_comments() ) :
-			$comments_number = get_comments_number();
+		get_template_part( 'html_includes/partials/newsletter-subscribe', array( 'class' => 'fill--secondary announcement--pointer' ) );
 
-			if ( $comments_number > 0 ) : ?>
-				<div class="entry-comments" id="comments">
-					<div class="row">
-						<h3><?php printf( _n( '%d Response to %s', '%d Responses to %s', $comments_number ), $comments_number, get_the_title() ); ?></h3>
-					</div>
-					<?php comments_template(); ?>
-				</div>
-				<?php
-			endif;
-
-			if ( comments_open() ) {
-				comment_form();
-			}
-		endif;
+		get_template_part( 'html_includes/partials/comments' );
 
 		$primary_term_id = yoast_get_primary_term_id();
 		if ( ! $primary_term_id ) {
 			$cats            = get_categories( array( 'fields' => 'ids' ) );
 			$primary_term_id = $cats[0];
 		}
+
 		$primary_term = get_term( $primary_term_id, 'category' );
 		if ( 494 !== $primary_term_id ):
 			?>
@@ -92,4 +80,6 @@ get_header(); ?>
 
 </div>
 
-<?php get_footer(); ?>
+<?php
+
+get_footer();
