@@ -29,6 +29,7 @@ class Shortcodes {
 		add_shortcode( 'testimonial', array( $this, 'testimonial' ) );
 		add_shortcode( 'yst_review_box', array( $this, 'review_box' ) );
 		add_shortcode( 'buy_buttons', array( $this, 'buy_buttons' ) );
+		add_shortcode( 'video_modal', array( $this, 'video_modal' ) );
 
 		// Deprecated shortcodes.
 		add_shortcode( 'box', array( $this, 'deprecate_box' ) );
@@ -37,13 +38,13 @@ class Shortcodes {
 
 		add_shortcode( 'llms_take_quiz', array( $this, 'llms_complete_lesson' ) );
 
-		add_action( 'instant_articles_before_transform_post', function() {
+		add_action( 'instant_articles_before_transform_post', function () {
 			$this->set_show_read_more( false );
-		});
+		} );
 
-		add_action( 'instant_articles_after_transform_post', function() {
+		add_action( 'instant_articles_after_transform_post', function () {
 			$this->set_show_read_more( true );
-		});
+		} );
 	}
 
 	/**
@@ -77,7 +78,7 @@ class Shortcodes {
 	 * Handler for the support shortcode. With this shortcode you used to be able to make a grid of boxes with content
 	 * in them.
 	 *
-	 * @param array $args The shortcode arguments.
+	 * @param array  $args    The shortcode arguments.
 	 * @param string $content The content inside the shortcode.
 	 *
 	 * @return string HTML to output.
@@ -209,7 +210,7 @@ class Shortcodes {
 	/**
 	 * Handler for the testimonial shortcode. Outputs a neat testimonial box with the possibility of an image.
 	 *
-	 * @param array $atts The shortcode attributes.
+	 * @param array  $atts    The shortcode attributes.
 	 * @param string $content The shortcode content.
 	 *
 	 * @return string
@@ -259,7 +260,7 @@ class Shortcodes {
 	/**
 	 * Allows putting the sidebar content higher up along the content than it would normally happen if there is other break out content
 	 *
-	 * @param array $atts
+	 * @param array  $atts
 	 * @param string $content
 	 *
 	 * @return string
@@ -441,7 +442,7 @@ class Shortcodes {
 	/**
 	 * Handler for the read more link shortcode
 	 *
-	 * @param array $atts The shortcode attributes
+	 * @param array  $atts The shortcode attributes
 	 * @param string $content
 	 *
 	 * @return string The content to output on the page.
@@ -509,11 +510,35 @@ class Shortcodes {
 		$plugin_price    = edd_get_price_option_amount( $args['id'], 0 );
 		$plugin_buy_link = edd_get_checkout_uri() . '?yst_action_edd=add_to_cart&license=0&download_id=' . $args['id'];
 
-		$out = '<a rel="nofollow" href="'.$plugin_buy_link.'"
+		$out = '<a rel="nofollow" href="' . $plugin_buy_link . '"
    class="button default openmodal" data-modal-product-id="' . $args['id'] . '">' . sprintf( $args['text'], $args['title'], $plugin_price ) . '</a>';
 
 		Product_Options_Modal::add_product_modal( $args );
 
 		return $out;
 	}
+
+	/**
+	 * Returns a link to open the video modal.
+	 *
+	 * @param array $atts The shortcode attributes
+	 *
+	 * @return string
+	 */
+	public function video_modal( $atts = array() ) {
+		$args = wp_parse_args( $atts, array(
+			'link_text'      => __( 'View video', 'yoastcom' ),
+			'title'     => __( 'Video', 'yoastcom' ),
+			'video_url' => "",
+			'image_url' => "",
+		) );
+
+
+		$out = '<a class="open-video-modal" data-title="' . $args['title'] . '" href="' . $args['video_url'] . '">' . $args['link_text'] . '<img src="' . $args['image_url'] . '"></a>';
+
+		Video_Modal::add_video_modal( $args );
+
+		return $out;
+	}
+
 }

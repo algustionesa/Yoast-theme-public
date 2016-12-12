@@ -48,7 +48,7 @@
 
   .content {
     padding: 15px 20px;
-
+    margin:0px;
     strong {
       color: $scheme-plugins-primary;
     }
@@ -93,10 +93,10 @@
   border-radius: 8px;
 }
 
-.prices-modal {
+.prices-modal, #video-modal{
   display: none;
 }
 
-.prices-modal.modal {
+.prices-modal.modal, #video-modal.modal {
   display: inline-block;
 }
