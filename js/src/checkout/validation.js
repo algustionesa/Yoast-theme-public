@@ -148,7 +148,7 @@
 					hideOrShowVATNumber( taxData );
 				}
 			}
-			$( '#yst_secondary_tax_rate' ).html( taxData.tax_rate.replace( '%', '' ) );
+			$( '#yst_secondary_tax_rate' ).html( taxData.tax_rate );
 			$( '#yst_secondary_tax' ).html( taxData.tax );
 
 		}
