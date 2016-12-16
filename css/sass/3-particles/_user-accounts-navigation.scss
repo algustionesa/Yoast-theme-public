@@ -4,7 +4,7 @@
       margin: 0 0 2em 0;
       border-radius: 4px;
       padding: 0 4px;
-      background-color: $scheme-home-secondary;
+      background-color: $color-pink-dark;
       a {
         color: $color-white;
         padding: 0.5em;
@@ -15,7 +15,7 @@
         display: inline-block;
 
         &.active {
-          background-color: #77B227;
+          background-color: $scheme-home-primary;
           a {
             text-decoration: none;
           }
