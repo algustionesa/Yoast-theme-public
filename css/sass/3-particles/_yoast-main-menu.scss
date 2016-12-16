@@ -1,11 +1,17 @@
+@mixin menu-item-color($color) {
+  background-color: $color;
+  .yoast-sub-menu {
+	background-color: $color;
+  }
+}
+
 @media only screen and (min-width: $page-width-medium) {
 
   .siteheader--home #yoast-main-menu {
-    border-top: 1px solid $color-white;
 
-    &.is-sticky{
-      margin-top: 0;
-    }
+	&.is-sticky {
+	  margin-top: 0;
+	}
   }
 
   #yoast-main-menu {
@@ -20,7 +26,6 @@
       left: 0;
       z-index: 0;
       width: 100%;
-      border-top: 1px solid $color-white;
     }
 
     nav {
@@ -99,10 +104,13 @@
       }
 
       &:before {
-        color: $color-white;
+        color: rgba(255,255,255,0.3);
         position: absolute;
-        content: '|';
-        margin-left: -4px;
+        height: 100%;
+        content: '●';
+        margin-left: -2px;
+        margin-top: 4px;
+        font-size: 70%;
       }
 
       &:first-child:before {
@@ -118,20 +126,9 @@
       }
     }
 
-    li.current-menu-parent {
-      border: 1px solid $color-white;
-      border-top: none;
-      border-bottom: none;
-    }
-
     li:hover, li:focus {
       z-index: 3;
 
-      &.menu-item {
-        border: 1px solid $color-white;
-        border-top: none;
-        border-bottom: none;
-      }
       .yoast-sub-menu {
         display: block;
       }
@@ -172,68 +169,35 @@
       }
     }
 
-    .menu-item {
-      &__home {
-        border-left: 1px solid $color-green;
-        border-right: 1px solid $color-green;
-        background-color: $color-green;
-        &.current-menu-item {
-          border-bottom-color: $color-green;
-        }
-        .yoast-sub-menu {
-          background-color: $color-green;
-        }
-      }
+	.menu-item {
+	  &__home {
+		@include menu-item-color($scheme-home-menu-primary);
+	  }
 
-      &__seo-blog {
-        border-left: 1px solid $color-purple;
-        border-right: 1px solid $color-purple;
-        background-color: $color-purple;
-        .yoast-sub-menu {
-          background-color: $color-purple;
-        }
-      }
-      &__plugins {
-        border-left: 1px solid $color-blue;
-        border-right: 1px solid $color-blue;
-        background-color: $color-blue;
-        .yoast-sub-menu {
-          background-color: $color-blue;
-        }
-      }
-      &__courses {
-        border-left: 1px solid $color-pink-light;
-        border-right: 1px solid $color-pink-light;
-        background-color: $color-pink-light;
-        .yoast-sub-menu {
-          background-color: $color-pink-light;
-        }
-      }
-      &__ebooks {
-        border-left: 1px solid $color-purple-dark;
-        border-right: 1px solid $color-purple-dark;
-        background-color: $color-purple-dark;
-        .yoast-sub-menu {
-          background-color: $color-purple-dark;
-        }
-      }
-      &__hire-us {
-        border-left: 1px solid $color-green-blue;
-        border-right: 1px solid $color-green-blue;
-        background-color: $color-green-blue;
-        .yoast-sub-menu {
-          background-color: $color-green-blue;
-        }
-      }
-      &__faq {
-        border-left: 1px solid $color-blue-dark;
-        border-right: 1px solid $color-blue-dark;
-        background-color: $color-blue-dark;
-        .yoast-sub-menu {
-          background-color: $color-blue-dark;
-        }
-      }
-    }
+	  &__seo-blog {
+		@include menu-item-color($scheme-seo-blog-menu-primary);
+	  }
+
+	  &__plugins {
+		@include menu-item-color($scheme-plugins-menu-primary);
+	  }
+
+	  &__courses {
+		@include menu-item-color($scheme-courses-menu-primary);
+	  }
+
+	  &__ebooks {
+		@include menu-item-color($scheme-ebooks-menu-primary);
+	  }
+
+	  &__hire-us {
+		@include menu-item-color($scheme-hire-us-menu-primary);
+	  }
+
+	  &__faq {
+		@include menu-item-color($scheme-faq-menu-primary);
+	  }
+	}
 
     li.controls {
       color: $color-white;
@@ -291,129 +255,144 @@
   }
 
   .is-sticky {
-    width: 100%;
-
+	width: 100%;
 	div.yoast-sub-menu {
-	  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0 5px 10px -4px rgba(0,0,0,0.3);
 	}
   }
 }
 
 @media only screen and (max-width: $page-width-medium) {
+
   #yoast-main-menu {
-    display: none;
+	display: none;
 
-    position: fixed;
-    top: 4em;
-    bottom: 0;
-    right: -70%;
-    z-index: 90;
-    width: 70%;
-    overflow: scroll;
+	position: fixed;
+	top: 4em;
+	bottom: 0;
+	right: -70%;
+	z-index: 90;
+	width: 70%;
+	overflow: scroll;
 
-    background-color: $color-white;
-    //text-shadow: none;
+	background-color: $color-white;
+	//text-shadow: none;
 
-    ul {
-      width: auto;
-      position: relative;
-      margin: 0;
+	ul {
+	  width: auto;
+	  position: relative;
+	  margin: 0;
 
-      li {
-        display: block;
-        width: 100%;
+	  li {
+		display: block;
+		width: 100%;
 
-        a {
-          text-decoration: none;
-        }
-      }
-    }
+		a {
+		  text-decoration: none;
+		}
+	  }
+	}
 
-    ul.yoast-main-menu {
-      li {
-        a {
-          padding: 0.5rem 1rem;
-          display: block;
-          color: $color-white;
-          .fa {
-            font-size: 1.4em;
-            position: relative;
-            top: 0.1em;
-          }
-        }
+	ul.yoast-main-menu {
 
-        &.menu-item {
-          &__home {
-            background-color: $color-green;
-          }
+	  li {
 
-          &__seo-blog {
-            background-color: $color-purple;
-          }
-          &__plugins {
-            background-color: $color-blue;
-          }
-          &__courses {
-            background-color: $color-pink-light;
-          }
-          &__ebooks {
-            background-color: $color-purple-dark;
-          }
-          &__hire-us {
-            background-color: $color-green-blue;
-          }
-          &__faq {
-            background-color: $color-blue-dark;
-          }
-        }
-        &.current-menu-parent {
-          a {
-            color: $color-black;
-          }
-          background-color: $color-grey;
-        }
-        &.controls {
-          display: none;
-        }
-      }
-    }
-    ul.yoast-sub-menu {
-      background-color: $color-white;
-      margin: 0;
-      li {
-        width: auto;
-        display: block;
-        padding: .4rem;
-        a {
-          color: $color-grey-text;
-        }
-        &.current-menu-item a {
-          text-decoration: underline;
-        }
-      }
-    }
+		a {
+		  padding: 0.5rem 1rem;
+		  display: block;
+		  color: $color-white;
+
+		  .fa {
+			font-size: 1.4em;
+			position: relative;
+			top: 0.1em;
+		  }
+		}
+
+		&.menu-item {
+
+		  &__home {
+			background-color: $scheme-home-menu-primary;
+		  }
+
+		  &__seo-blog {
+			background-color: $scheme-seo-blog-menu-primary;
+		  }
+
+		  &__plugins {
+			background-color: $scheme-plugins-menu-primary;
+		  }
+
+		  &__courses {
+			background-color: $scheme-courses-menu-primary;
+		  }
+
+		  &__ebooks {
+			background-color: $scheme-ebooks-menu-primary;
+		  }
+
+		  &__hire-us {
+			background-color: $scheme-hire-us-menu-primary;
+		  }
+
+		  &__faq {
+			background-color: $scheme-faq-menu-primary;
+		  }
+		}
+
+		&.current-menu-parent {
+		  a {
+			color: $color-black;
+		  }
+		  background-color: $color-grey;
+		}
+
+		&.controls {
+		  display: none;
+		}
+	  }
+	}
+	ul.yoast-sub-menu {
+	  background-color: $color-white;
+	  margin: 0;
+
+	  li {
+		width: auto;
+		display: block;
+		padding: .4rem;
+
+		a {
+		  color: $color-grey-text;
+		}
+
+		&.current-menu-item a {
+		  text-decoration: underline;
+		}
+	  }
+	}
   }
 
   [data-show-mobile-nav] {
-    #yoast-main-menu {
-      display: block;
-      right: -1%;
-    }
+	#yoast-main-menu {
+	  display: block;
+	  right: -1%;
+	}
   }
 
 }
 
 [data-show-mobile-nav] {
   @media only screen and (max-width: $page-width-medium) {
-    &::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 80;
-      background-color: rgba($color-black, .5);
-    }
+
+	&::after {
+	  content: '';
+	  position: fixed;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  z-index: 80;
+	  background-color: rgba($color-black, .5);
+	}
   }
 }

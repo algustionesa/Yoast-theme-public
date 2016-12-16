@@ -20,9 +20,12 @@ if ( $type === 'main' ) {
 
 if ( ! empty( $menu_item['icon'] ) ) {
 	echo '<span class="fa fa-' . esc_attr( $menu_item['icon'] ) . '" aria-hidden="true"></span>';
+	if ( $type === 'footer' ) {
+		echo esc_html( $menu_item['screenReaderText'] );
+	}
 }
 
-if ( $type === 'sub' ) {
+if ( $type !== 'main' ) {
 	echo esc_html( $menu_item['label'] );
 }
 

@@ -1,7 +1,0 @@
-.widget.theme-about {
-  @include headers($scheme-about-primary, $scheme-about-secondary);
-}
-
-.theme-about {
-  @include theme($scheme-about-primary, $scheme-about-secondary, $scheme-about-tertiary, $scheme-about-menu-primary, $scheme-about-menu-secondary);
-}

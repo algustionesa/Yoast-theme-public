@@ -17,7 +17,7 @@ namespace Yoast\YoastCom\Theme;
 	<main role="main">
 		<?php if ( ! is_paged() ) { ?>
 		<section class="row">
-			<h1 class="color-about--secondary">Posts by <?php the_author(); ?></h1>
+			<h1 class="color-home--secondary">Posts by <?php the_author(); ?></h1>
 		</section>
 
 		<section class="row bio">
@@ -25,7 +25,7 @@ namespace Yoast\YoastCom\Theme;
 				<a href="<?php echo esc_attr( get_the_author_meta( 'yst_profile_url' ) ); ?>" class="imgExt">
 					<img alt="<?php echo esc_attr( get_the_author() ); ?>" width="160" height="160" src="<?php echo esc_url( url_author_avatar() ); ?>" class="promoblock promoblock--imageholder">
 				</a>
-				<div class="bd color-academy--secondary">
+				<div class="bd color-courses--secondary">
 					<p>
 						<?php the_author_meta( 'description' ); ?>
 					</p>
@@ -40,7 +40,7 @@ namespace Yoast\YoastCom\Theme;
 		<?php get_template_part( 'html_includes/partials/announcement', array( 'class' => "announcement--pointer-top island fill--secondary", 'text' => "Get more visitors! Our SEO Website review will tell you what to improve. Order an SEO Website review &raquo;" ) ); ?>
 		<?php } else { ?>
 		<section class="row">
-			<h1 class="color-about--secondary">Posts by <?php the_author(); ?> archive - page <?php echo esc_html( get_query_var( 'paged' ) ); ?></h1>
+			<h1 class="color-home--secondary">Posts by <?php the_author(); ?> archive - page <?php echo esc_html( get_query_var( 'paged' ) ); ?></h1>
 		</section>
 		<hr class="row"/>
 		<?php } ?>

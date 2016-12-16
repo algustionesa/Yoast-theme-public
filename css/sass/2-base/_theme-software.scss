@@ -1,7 +1,0 @@
-.widget.theme-software {
-  @include headers($scheme-software-primary, $scheme-software-secondary);
-}
-
-.theme-software {
-	@include theme($scheme-software-primary, $scheme-software-secondary, $scheme-software-tertiary, $scheme-software-menu-primary, $scheme-software-menu-secondary);
-}

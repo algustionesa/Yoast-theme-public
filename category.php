@@ -38,13 +38,13 @@ $banner_icon = get_term_meta( $term_id, 'yoastcom_term_banner_icon', true );
 									<img
 										src="<?php echo wp_get_attachment_image_url( $cat_image_id, 'thumbnail-recent-articles' ); ?>"
 										width="250" height="131"
-										class="promoblock promoblock--imageholder theme-academy--secondary">
+										class="promoblock promoblock--imageholder theme-courses--secondary">
 								</div>
 							<?php endif; ?>
-							<div class="content promoblock theme-academy--secondary">
+							<div class="content promoblock theme-courses--secondary">
 								<?php the_archive_description(); ?>
 								<i aria-hidden="true"
-								   class="blockicon color-academy--secondary fa fa-<?php echo $cat_icon; ?>"></i>
+								   class="blockicon color-courses--secondary fa fa-<?php echo $cat_icon; ?>"></i>
 							</div>
 						</div>
 					</div>
@@ -69,7 +69,7 @@ $banner_icon = get_term_meta( $term_id, 'yoastcom_term_banner_icon', true );
 		?>
 
 		<?php if ( ! is_paged() ) : ?>
-			<?php get_template_part( 'html_includes/partials/must-read-articles', array( 'class1' => 'theme-academy--secondary', 'term_id' => $term_id ) ); ?>
+			<?php get_template_part( 'html_includes/partials/must-read-articles', array( 'class1' => 'theme-courses--secondary', 'term_id' => $term_id ) ); ?>
 		<?php endif; ?>
 
 		<?php if ( have_posts() ): ?>

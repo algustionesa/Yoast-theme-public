@@ -23,7 +23,7 @@ $i = 0;
 
 <?php while ( $plugins->have_posts() ) : $plugins->the_post(); ?>
 	<?php $icon = get_product_icon(); ?>
-	<a href="<?php the_permalink(); ?>" class="more color-academy hidden js-random-show-item">
+	<a href="<?php the_permalink(); ?>" class="more color-courses hidden js-random-show-item">
 		<?php if ( $icon && 0 === ( $i % 2 ) ) : ?>
 			<img src="<?php echo esc_url( $icon ); ?>" class="more__plug show-on-desktop" width="40" height="40" />
 		<?php endif; ?>

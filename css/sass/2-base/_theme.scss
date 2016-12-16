@@ -22,7 +22,7 @@
   }
 }
 
-@mixin theme($color-primary: black, $color-secondary: black, $color-tertiary: black,  $color-mainnav: black, $color-subnav: black ) {
+@mixin theme($color-primary: black, $color-secondary: black) {
   @include headers( $color-primary, $color-secondary );
 
   a {
@@ -50,6 +50,10 @@
 
   .arrowed, .arrowed-medium, .arrowed-small {
     border-color: $color-primary;
+  }
+
+  &.announcement-banner{
+    background-color: $color-primary;
   }
 
   hr {
@@ -86,20 +90,6 @@
 
   input, textarea {
     border-color: $color-secondary;
-  }
-
-  .sitenav {
-    background-color: $color-mainnav;
-
-    @media only screen and (min-width: $page-width-medium) {
-      &::before {
-        background-color: $color-mainnav;
-      }
-    }
-  }
-
-  .subnav {
-    background-color: $color-subnav;
   }
 
   .syllabus-section {

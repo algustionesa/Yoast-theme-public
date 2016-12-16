@@ -6,8 +6,17 @@
 	border-bottom: 1px solid;
 	margin-bottom: $spacing;
 
-	&--academy {
+	&--courses{
 		background-image: url(./../images/banner-academy-small.jpg);
-		border-color: $scheme-academy-secondary;
+		border-color: $scheme-courses-secondary;
+	}
+}
+
+.black-friday-2016 {
+	background-image: url(./../images/black-friday-2016-bg.gif);
+	background-position: center center;
+	background-size: cover;
+	img {
+		display: block;
 	}
 }

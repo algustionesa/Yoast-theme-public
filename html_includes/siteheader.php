@@ -16,9 +16,6 @@ $yoast_url = apply_filters( 'yoast:domain', 'yoast.com' );
 
 	<?php
 
-
-	$navigation = new Yoast_Navigation();
-	$navigation->output_menu_bar();
-
+	theme_object()->navigation->output_menu_bar();
 	?>
 </header>

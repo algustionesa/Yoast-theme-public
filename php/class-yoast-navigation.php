@@ -33,7 +33,13 @@ class Yoast_Navigation {
 		$this->main_menu_items = $this->menu_structure->getMenuItems();
 		$this->current_url     = $this->scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-		$this->set_active_menu_item();
+		// We use the wp filter here, so the post_id is available and the page isn't rendered yet, so we can change the active menu item.
+		if ( ! is_admin() ) {
+			add_filter( 'wp', function () {
+				$this->set_active_menu_item();
+			} );
+		}
+
 	}
 
 	/**
@@ -41,6 +47,15 @@ class Yoast_Navigation {
 	 */
 	public function output_menu_bar() {
 		get_template_part( 'html_includes/partials/navigation-menu', array(
+			'menu_data' => $this->get_menu_data(),
+		) );
+	}
+
+	/**
+	 * Run footer menu output
+	 */
+	public function output_menu_footer() {
+		get_template_part( 'html_includes/partials/footer-menu', array(
 			'menu_data' => $this->get_menu_data(),
 		) );
 	}
@@ -77,7 +92,8 @@ class Yoast_Navigation {
 			'icon'             => $main_menu_item->getIcon(),
 			'screenReaderText' => $main_menu_item->getScreenreaderText(),
 			'anchor_classes'   => array(),
-			'children'         => $this->get_children_menu_data( $main_menu_item )
+			'children'         => $this->get_children_menu_data( $main_menu_item ),
+			'type'             => $main_menu_item->getType(),
 		];
 
 		if ( ! empty( $main_menu_item->getIcon() ) ) {
@@ -119,7 +135,6 @@ class Yoast_Navigation {
 			if ( ! empty ( $child->getIcon() ) ) {
 				$child_data['anchor_classes'][] = 'icon';
 			}
-
 
 			$children[] = $child_data;
 		}
@@ -186,7 +201,7 @@ class Yoast_Navigation {
 	private function set_active_by_page_type() {
 		/** @var Main_Menu_Item $main_menu_item */
 		foreach ( $this->main_menu_items as $main_menu_item ) {
-			if ( $main_menu_item->getType() === theme_object()->get_page_type() ) {
+			if ( $main_menu_item->getType() === Page_Menu_Type::get_page_type() ) {
 				$main_menu_item->setActive();
 
 				return true;
@@ -204,7 +219,6 @@ class Yoast_Navigation {
 	private function set_active_by_page() {
 		/** @var Main_Menu_Item $main_menu_item */
 		foreach ( $this->main_menu_items as $main_menu_item ) {
-
 			$activeOn = $main_menu_item->getActiveOn();
 			if ( ! is_array( $activeOn ) ) {
 				continue;
@@ -263,4 +277,16 @@ class Yoast_Navigation {
 		$this->set_active_by_default();
 	}
 
+	/**
+	 * Gets the type of the currently active menu item.
+	 *
+	 * @return mixed
+	 */
+	public function get_active_type() {
+		foreach ( $this->main_menu_items as $main_menu_item ) {
+			if ( $main_menu_item->isActive() ) {
+				return $main_menu_item->getType();
+			}
+		}
+	}
 }

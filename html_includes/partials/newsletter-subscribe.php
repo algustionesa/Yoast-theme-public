@@ -14,11 +14,11 @@ if ( ! isset( $template_args['class'] ) ) {
 				<div class="grid">
 					<div class="two-fifth medium-one-third">
 						<label class="visuallyhidden" for="newsletter-name"><?php _e( 'Name', 'yoastcom' ); ?></label>
-						<input type="text" placeholder="<?php _e( 'Name', 'yoastcom' ); ?>" id="newsletter-name" name="NAME">
+						<input type="text" placeholder="<?php _e( 'Enter your name&hellip;', 'yoastcom' ); ?>" id="newsletter-name" name="NAME">
 					</div>
 					<div class="two-fifth medium-one-third">
 						<label class="visuallyhidden" for="newsletter-email"><?php _e( 'Email', 'yoastcom' ); ?></label>
-						<input type="email" placeholder="<?php _e( 'Email', 'yoastcom' ); ?>" id="newsletter-email" name="EMAIL">
+						<input type="email" placeholder="<?php _e( 'Enter your email address&hellip;', 'yoastcom' ); ?>" id="newsletter-email" name="EMAIL">
 					</div>
 					<div class="one-fifth medium-one-third">
 						<button type="submit" class="default" name="subscribe"><?php _e( 'Subscribe &raquo;', 'yoastcom' ); ?></button>

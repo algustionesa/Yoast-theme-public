@@ -54,7 +54,7 @@ get_template_part( 'html_includes/siteheader', array( 'academy-sub' => true ) );
 			?>
 			<hr>
 			<section class="row island iceberg">
-				<h2 class="color-academy--secondary"><?php printf( __( 'Check out our must read articles about %s' ), $primary_term->name ); ?></h2>
+				<h2 class="color-courses--secondary"><?php printf( __( 'Check out our must read articles about %s' ), $primary_term->name ); ?></h2>
 				<?php
 				get_template_part( 'html_includes/partials/recent-articles', array(
 					'must_read' => true,
@@ -66,7 +66,7 @@ get_template_part( 'html_includes/siteheader', array( 'academy-sub' => true ) );
 		endif;
 
 		get_template_part( 'html_includes/partials/announcement', array(
-			'class' => 'theme-academy announcement--pointer-top',
+			'class' => 'theme-courses announcement--pointer-top',
 			'text'  => __( 'Want to learn the basics of SEO? Or how to use Yoast SEO properly? Follow a course on Yoast Academy &raquo;', 'yoastcom' ),
 			'url'   => url_academy_overview() . 'courses/',
 			'icon'  => 'graduation-cap',

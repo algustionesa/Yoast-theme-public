@@ -16,7 +16,7 @@ $posts_query = query_must_read_articles( $args );
 if ( $posts_query->have_posts() ) :
 ?>
 <div class="row iceberg">
-	<h3 class="color-academy--secondary"><?php printf( __( ' Must read articles about %s' ), get_the_archive_title() ); ?></h3>
+	<h3 class="color-courses--secondary"><?php printf( __( ' Must read articles about %s' ), get_the_archive_title() ); ?></h3>
 
 	<div class="grid">
 		<?php

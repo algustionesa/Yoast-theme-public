@@ -2,7 +2,7 @@
 	padding: 0 0 ( $spacing * 4 ) 0;
 
 	.syllabus-section {
-		border-bottom: 1px solid $scheme-academy-primary;
+		border-bottom: 1px solid $scheme-courses-primary;
 		position: relative;
 		padding: $spacing-half 0;
 
@@ -26,7 +26,7 @@
 		h3,
 		a,
 		h5 {
-			color: $scheme-academy-primary;
+			color: $scheme-courses-primary;
 		}
 
 		.fa {
@@ -66,12 +66,12 @@
 		}
 		
 		&.current-section {
-			border-bottom-color: $scheme-academy-secondary;
+			border-bottom-color: $scheme-courses-secondary;
 
 			h3,
 			a,
 			h5 {
-				color: $scheme-academy-secondary;
+				color: $scheme-courses-secondary;
 			}
 			
 			.fa-check-square {
@@ -143,7 +143,7 @@
 
 		&:hover, &:focus {
 			background: none;
-			color: $scheme-academy-primary;
+			color: $scheme-courses-primary;
 		}
 	}
 }

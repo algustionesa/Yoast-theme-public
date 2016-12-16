@@ -1,0 +1,7 @@
+.widget.theme-plugins {
+  @include headers($scheme-plugins-primary, $scheme-plugins-secondary);
+}
+
+.theme-plugins {
+	@include theme($scheme-plugins-primary, $scheme-plugins-secondary);
+}

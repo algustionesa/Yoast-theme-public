@@ -1,0 +1,7 @@
+.widget.theme-seo-blog {
+  @include headers($scheme-seo-blog-primary, $scheme-seo-blog-secondary);
+}
+
+.theme-seo-blog {
+  @include theme($scheme-seo-blog-primary, $scheme-seo-blog-secondary);
+}

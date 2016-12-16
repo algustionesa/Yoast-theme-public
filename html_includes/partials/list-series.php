@@ -6,7 +6,7 @@ namespace Yoast\YoastCom\Theme;
 		<img src="http://placehold.it/220x150">
 	</a>
 	<div class="bd">
-		<h3 class="color-academy--tertiary">Check out the Google Webmaster Tools</h3>
+		<h3 class="color-courses--tertiary">Check out the Google Webmaster Tools</h3>
 		<dl>
 			<dt><a href="#">Part 1</a></dt>
 			<dd><a href="#">Search Appearance  &raquo;</a></dd>

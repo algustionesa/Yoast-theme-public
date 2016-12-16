@@ -31,11 +31,7 @@ namespace Yoast\YoastCom\Theme;
 			</div>
 		<?php endif; ?>
 
-		<?php
-		$navigation = new Yoast_Navigation();
-		$navigation->output_menu_bar();
-		?>
-
+		<?php theme_object()->navigation->output_menu_bar(); ?>
 	</header>
 
 <?php

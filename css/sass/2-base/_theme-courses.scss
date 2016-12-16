@@ -1,0 +1,8 @@
+.widget.theme-courses {
+  @include headers($scheme-courses-primary, $scheme-courses-secondary);
+}
+
+.theme-courses {
+  @include theme($scheme-courses-primary, $scheme-courses-secondary);
+}
+

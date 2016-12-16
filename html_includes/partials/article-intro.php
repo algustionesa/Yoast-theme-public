@@ -15,7 +15,7 @@ if ( 'yoast_dev_article' === $post_type->name ) {
 <div class="meta">
 	<p>
 		<?php if ( is_tag() ) { ?>
-			<i class="fa color-academy--secondary fa-<?php echo $icon; ?>"
+			<i class="fa color-courses--secondary fa-<?php echo $icon; ?>"
 			   title="<?php echo $post_type->labels->singular_name; ?>" aria-hidden="true"></i>
 		<?php } ?>
 		<?php the_time( 'j F Y' ); ?> <?php _e( 'by', 'yoastcom' ); ?> <a

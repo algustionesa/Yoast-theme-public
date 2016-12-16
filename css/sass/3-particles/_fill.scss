@@ -1,14 +1,20 @@
 // A background color based on the theme it is in.
 //
 // .fill              	 - This class automatically inherits its color from the theme it is in
-// .fill.theme-academy   - The background color for an Academy element
-// .fill.theme-software  - The background color for a Software element
-// .fill.theme-review    - The background color for a Review element
-// .fill.theme-about     - The background color for an About element
-// .theme-academy .fill  - The background color for an element in Academy
-// .theme-software .fill - The background color for an element in Software
-// .theme-review .fill   - The background color for an element in Review
-// .theme-about .fill    - The background color for an element in About
+// .fill.theme-courses   - The background color for an courses element
+// .fill.theme-plugins  - The background color for a plugins element
+// .fill.theme-hire-us    - The background color for a hire-us element
+// .fill.theme-seo-blog    - The background color for a seo-blog element
+// .fill.theme-home    - The background color for a home element
+// .fill.theme-ebooks    - The background color for a ebooks element
+// .fill.theme-faq    - The background color for a faq element
+// .theme-courses .fill  - The background color for an element in courses
+// .theme-plugins .fill - The background color for an element in plugins
+// .theme-hire-us .fill   - The background color for an element in hire-us
+// .theme-seo-blog .fill   - The background color for an element in seo-blog
+// .theme-home .fill   - The background color for an element in home
+// .theme-ebooks .fill   - The background color for an element in ebooks
+// .theme-faq .fill   - The background color for an element in faq
 //
 // Styleguide 0.0.1
 
@@ -104,47 +110,63 @@
 	p, .p {
 		color: $color-white;
 	}
-	
-	.theme-academy & {
-		@include fill($scheme-academy-primary, $scheme-academy-secondary, $scheme-academy-tertiary, .7);
+
+	.theme-courses & {
+		@include fill($scheme-courses-primary, $scheme-courses-secondary, $scheme-courses-tertiary, .7);
 	}
 
-	.theme-software & {
-		@include fill($scheme-software-primary, $scheme-software-secondary, $scheme-software-tertiary, .7);
+	.theme-plugins & {
+		@include fill($scheme-plugins-primary, $scheme-plugins-secondary, $scheme-plugins-tertiary, .7);
 	}
 
-	.theme-review & {
-		@include fill($scheme-review-primary, $scheme-review-secondary, $scheme-review-tertiary, .7);
+	.theme-hire-us & {
+		@include fill($scheme-hire-us-primary, $scheme-hire-us-secondary, $scheme-hire-us-tertiary, .7);
 	}
 
-	.theme-about & {
-		@include fill($scheme-about-primary, $scheme-about-secondary, $scheme-about-tertiary, .7);
+	.theme-seo-blog & {
+	  @include fill($scheme-seo-blog-primary, $scheme-seo-blog-secondary, $scheme-seo-blog-tertiary, .7);
 	}
 
 	.theme-home & {
 		@include fill($scheme-home-primary, $scheme-home-secondary, $scheme-home-tertiary, .5);
 	}
 
-	/* Explicit theming */ 
-
-	&.theme-academy {
-		@include fill($scheme-academy-primary, $scheme-academy-secondary, $scheme-academy-tertiary, .7);
+	.theme-ebooks & {
+	  @include fill($scheme-ebooks-primary, $scheme-ebooks-secondary, $scheme-ebooks-tertiary, .7);
 	}
 
-	&.theme-software {
-		@include fill($scheme-software-primary, $scheme-software-secondary, $scheme-software-tertiary, .7);
+  	.theme-faq & {
+		@include fill($scheme-faq-primary, $scheme-faq-secondary, $scheme-faq-tertiary, .7);
+  	}
+
+	/* Explicit theming */
+
+	&.theme-courses {
+		@include fill($scheme-courses-primary, $scheme-courses-secondary, $scheme-courses-tertiary, .7);
 	}
 
-	&.theme-review {
-		@include fill($scheme-review-primary, $scheme-review-secondary, $scheme-review-tertiary, .7);
+	&.theme-plugins {
+		@include fill($scheme-plugins-primary, $scheme-plugins-secondary, $scheme-plugins-tertiary, .7);
 	}
 
-	&.theme-about {
-		@include fill($scheme-about-primary, $scheme-about-secondary, $scheme-about-tertiary, .7);
+	&.theme-hire-us {
+		@include fill($scheme-hire-us-primary, $scheme-hire-us-secondary, $scheme-hire-us-tertiary, .7);
 	}
+
+  	&.theme-seo-blog {
+		@include fill($scheme-seo-blog-primary, $scheme-seo-blog-secondary, $scheme-seo-blog-tertiary, .7);
+  	}
 
 	&.theme-home {
 		@include fill($scheme-home-primary, $scheme-home-secondary, $scheme-home-tertiary, .5);
+	}
+
+	&.theme-ebooks {
+	  @include fill($scheme-ebooks-primary, $scheme-ebooks-secondary, $scheme-ebooks-tertiary, .7);
+	}
+
+	&.theme-faq {
+	  @include fill($scheme-faq-primary, $scheme-faq-secondary, $scheme-faq-tertiary, .7);
 	}
 
 }

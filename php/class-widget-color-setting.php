@@ -10,12 +10,14 @@ namespace Yoast\YoastCom\Theme;
  */
 class Widget_Color_Setting {
 
-	const COLOR_PURPLE = 'theme-academy';
-	const COLOR_BLUE   = 'theme-software';
-	const COLOR_GREEN  = 'theme-review';
-	const COLOR_PINK   = 'theme-about';
-	const COLOR_ORANGE = 'link';
-	const COLOR_DEFAULT = self::COLOR_PURPLE;
+	const COLOR_GREEN       = 'theme-home';
+	const COLOR_PURPLE      = 'theme-seo-blog';
+	const COLOR_BLUE        = 'theme-plugins';
+	const COLOR_PINK        = 'theme-courses';
+	const COLOR_GREEN_BLUE  = 'theme-hire-us';
+	const COLOR_DARK_BLUE   = 'theme-faq';
+	const COLOR_ORANGE      = 'link';
+	const COLOR_DEFAULT     = self::COLOR_PURPLE;
 
 	/**
 	 * Constructor
@@ -42,17 +44,23 @@ class Widget_Color_Setting {
 					<?php _e( 'Border color (Used in the footer)', 'yoastcom' ); ?>
 				</label>
 				<select id="<?php echo $widget->get_field_id( 'border-color' ); ?>" name="<?php echo $widget->get_field_name( 'border-color' ); ?>" class="widefat">
+					<option value="<?php echo esc_attr( self::COLOR_GREEN ); ?>"<?php selected( self::COLOR_GREEN, $border_color ); ?>>
+						<?php _e( 'Green (home)', 'yoastcom' ); ?>
+					</option>
 					<option value="<?php echo esc_attr( self::COLOR_PURPLE ); ?>"<?php selected( self::COLOR_PURPLE, $border_color ); ?>>
-						<?php _e( 'Purple', 'yoastcom' ); ?>
+						<?php _e( 'Purple (seo blog)', 'yoastcom' ); ?>
 					</option>
 					<option value="<?php echo esc_attr( self::COLOR_BLUE ); ?>"<?php selected( self::COLOR_BLUE, $border_color ); ?>>
-						<?php _e( 'Blue', 'yoastcom' ); ?>
-					</option>
-					<option value="<?php echo esc_attr( self::COLOR_GREEN ); ?>"<?php selected( self::COLOR_GREEN, $border_color ); ?>>
-						<?php _e( 'Green', 'yoastcom' ); ?>
+						<?php _e( 'Blue (plugins)', 'yoastcom' ); ?>
 					</option>
 					<option value="<?php echo esc_attr( self::COLOR_PINK ); ?>"<?php selected( self::COLOR_PINK, $border_color ); ?>>
-						<?php _e( 'Pink', 'yoastcom' ); ?>
+						<?php _e( 'Pink (courses)', 'yoastcom' ); ?>
+					</option>
+					<option value="<?php echo esc_attr( self::COLOR_GREEN_BLUE ); ?>"<?php selected( self::COLOR_GREEN_BLUE, $border_color ); ?>>
+						<?php _e( 'Teal (hire us)', 'yoastcom' ); ?>
+					</option>
+					<option value="<?php echo esc_attr( self::COLOR_DARK_BLUE ); ?>"<?php selected( self::COLOR_DARK_BLUE, $border_color ); ?>>
+						<?php _e( 'Dark blue (faq)', 'yoastcom' ); ?>
 					</option>
 					<option value="<?php echo esc_attr( self::COLOR_ORANGE ); ?>"<?php selected( self::COLOR_ORANGE, $border_color ); ?>>
 						<?php _e( 'Orange', 'yoastcom' ); ?>
@@ -75,7 +83,7 @@ class Widget_Color_Setting {
 	public function widget_update_callback( $instance, $new_instance ) {
 		$border_color = isset( $new_instance['border-color'] ) ? $new_instance['border-color'] : self::COLOR_DEFAULT;
 
-		if ( ! in_array( $border_color, array( self::COLOR_PURPLE, self::COLOR_BLUE, self::COLOR_GREEN, self::COLOR_PINK, self::COLOR_ORANGE ) ) ) {
+		if ( ! in_array( $border_color, array( self::COLOR_PURPLE, self::COLOR_BLUE, self::COLOR_GREEN, self::COLOR_PINK, self::COLOR_ORANGE, self::COLOR_DARK_BLUE, self::COLOR_GREEN_BLUE ) ) ) {
 			$border_color = self::COLOR_DEFAULT;
 		}
 
