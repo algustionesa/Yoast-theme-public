@@ -2,106 +2,99 @@
 	function( $ ) {
 		'use strict';
 
+		/**
+		 * Intializes the checkout.
+		 */
 		function init() {
-			$( document ).ready( bindCurrencySwitch );
+			$( document ).ready( bindEvents );
 			$( document ).ready( detectCurrency );
-
-			// Because the cart country can trigger a currency switch, check if we still display the current currency.
-			$( document ).on( 'edd_taxes_recalculated', function() {
-				var current_currency = readCookie( 'yoast_cart_currency' );
-				showCurrency( current_currency );
-			});
 		}
 
+		/**
+		 * Binds the events necessary for the currency switching.
+		 */
+		function bindEvents() {
+			$( document ).on( 'edd_cart_billing_address_updated', function() {
+				detectCurrency( $( '#billing_country' ).val() );
+			});
+
+			$( document ).on( 'change', '.yst_currency_switch_dropdown', function( event ) {
+				switchCurrency( $( this ).val() );
+			} );
+		}
+
+		/**
+		 * Shows the currency.
+		 *
+		 * @param {string} currency The currency to display.
+		 * @returns {void}
+		 */
 		function showCurrency( currency ) {
 			$( '.yst_currency_switch_dropdown' ).val( currency );
 
-			// Switch price fields to reflect currency change:
+			// Switch price fields to reflect currency change
 			$( '.yoast-currency' ).addClass( 'hidden' );
 			$( '.yoast-currency__' + currency ).removeClass( 'hidden' );
 		}
 
-		function detectCurrency() {
-			var current_currency = readCookie( 'yoast_cart_currency' );
-			if ( null == current_currency ) {
-				fetchCurrency();
+		/**
+		 * Detects the currency based on the passed country code.
+		 *
+		 * @param string country The country to look up a currency for.
+		 * @returns {void}
+		 */
+		function detectCurrency( country ) {
+			if ( typeof country !== "string" ) {
+				country = null;
 			}
-		}
 
-		function fetchCurrency() {
-			$.getJSON(
-				YoastAjax.admin + '?callback=?',
-				{action: 'detect_currency'},
-				setCurrentCurrency
-			);
-		}
-
-		function setCurrentCurrency( response ) {
-			if ( 'success' === response.status ) {
-				switchCurrency( response.data.currency, false, true );
-			}
-		}
-
-		function bindCurrencySwitch() {
-			$( '.yst_currency_switch' ).click( function() {
-				switchCurrency( $( this ).data( 'currency' ), true );
-				return false;
-			} );
-
-			$( '.yst_currency_switch_dropdown' ).change( function() {
-				switchCurrency( $( this ).val(), true );
-				return false;
+			$.ajax( {
+				url: YoastAjax.admin + '?callback=?&action=detect_currency',
+				data: { billing_country: country},
+				dataType: 'json',
+				type: 'post',
+				success: function( response ) {
+					switchCurrency( response.data.currency, true );
+				}
 			} );
 		}
 
-		function switchCurrency( to_currency, visitor_switched, force ) {
+		/**
+		 * Switches the currency based on the passed variable.
+		 *
+		 * @param {string} to_currency The currency to switch to.
+		 * @param {boolean} [force] Force the currency.
+		 * @returns {boolean} Whether or not the currency was successfully switched.
+		 */
+		function switchCurrency( to_currency, force ) {
 			var current_currency = readCookie( 'yoast_cart_currency' );
 
-			if ( ! force && current_currency == to_currency ) {
+			if ( to_currency === null ) {
+				to_currency = 'USD';
+			}
+
+			if ( force === false && current_currency === to_currency ) {
 				return false;
 			}
 
-			createCookie( 'yoast_cart_currency', to_currency, 356, '.yoast.com' );
-			createCookie( 'yoast_cart_currency', to_currency, 356, '.yoast.dev' );
-			if ( true === visitor_switched ) {
-				createCookie( 'yoast_cart_currency_manual', true, 356, '.yoast.com' );
-				createCookie( 'yoast_cart_currency_manual', true, 356, '.yoast.dev' );
-			}
+			$.ajax( {
+				url: YoastAjax.admin + '?callback=?&action=yst_update_current_currency',
+				data: {
+					currency: to_currency,
+					billing_country: $( '#billing_country').val(),
+				},
+				dataType: 'json',
+				type: 'post',
+				beforeSend: function() {
+					createCookie( 'yoast_cart_currency', to_currency, 356, '.yoast.com' );
+					createCookie( 'yoast_cart_currency', to_currency, 356, '.yoast.dev' );
+				},
+				success: function() {
+					showCurrency( to_currency );
 
-			showCurrency( to_currency );
-
-			$( window ).trigger( 'currency_switched', {'from': current_currency, 'to': to_currency} );
-		}
-
-		function createCookie( name, value, days, domain ) {
-			var extra = "; path=/";
-			if ( days ) {
-				var date = new Date();
-				date.setTime( date.getTime() + (
-						days * 24 * 60 * 60 * 1000
-					) );
-				extra += "; expires=" + date.toGMTString();
-			}
-
-			if ( domain ) {
-				extra += "; domain=" + domain;
-			}
-			document.cookie = name + "=" + value + extra + "";
-		}
-
-		function readCookie( name ) {
-			var nameEQ = name + "=";
-			var ca = document.cookie.split( ';' );
-			for ( var i = 0; i < ca.length; i ++ ) {
-				var c = ca[i];
-				while ( c.charAt( 0 ) == ' ' ) {
-					c = c.substring( 1, c.length );
+					$( window ).trigger( 'currency_switched' );
 				}
-				if ( c.indexOf( nameEQ ) == 0 ) {
-					return c.substring( nameEQ.length, c.length );
-				}
-			}
-			return null;
+			} );
 		}
 
 		$( init );

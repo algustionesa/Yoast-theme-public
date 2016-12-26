@@ -10,7 +10,7 @@ if ( isset( $_POST['yst_btw'] ) ) {
 	$vat_nr = $_POST['yst_btw'];
 }
 ?>
-<p id="yst-edd-btw-wrap">
+<p id="yst-edd-btw-wrap" style="display: none;">
 	<label for="yst_btw" class="edd-label">
 		<?php _e( 'VAT number (optional)', 'yoast-theme' ); ?>
 		<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>

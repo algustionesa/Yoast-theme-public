@@ -29,7 +29,7 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 
 	// Only for Yoast.com & my.yoast.com:
 	if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
-		get_template_part( 'html_includes/partials/navigation-currency-switcher', Checkout_HTML::get_currency_switch_template_arguments() );
+		get_template_part( 'html_includes/shop/switch-currency', Checkout_HTML::get_currency_switch_template_arguments() );
 	}
 
 	echo '</li>';

@@ -28,27 +28,37 @@ class Ajax {
 
 		add_action( 'wp_ajax_yst_update_payment_methods', array( $this, 'update_payment_methods' ) );
 		add_action( 'wp_ajax_nopriv_yst_update_payment_methods', array( $this, 'update_payment_methods' ) );
+
+		add_action( 'wp_ajax_yst_update_supported_currencies', array( $this, 'update_supported_currencies' ) );
+		add_action( 'wp_ajax_nopriv_yst_update_supported_currencies', array( $this, 'update_supported_currencies' ) );
+
+		add_action( 'wp_ajax_yst_update_current_currency', array( $this, 'update_current_currency' ) );
+		add_action( 'wp_ajax_nopriv_yst_update_current_currency', array( $this, 'update_current_currency' ) );
+
+		add_action( 'wp_ajax_yst_is_country_in_eu', array( $this, 'is_country_in_eu' ) );
+		add_action( 'wp_ajax_nopriv_yst_is_country_in_eu', array( $this, 'is_country_in_eu' ) );
 	}
 
 	/**
 	 * Detect currency
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function detect_currency() {
 		$data = [ 'status' => 'error' ];
 
-		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+		if ( class_exists( Currency_Controller::class ) ) {
 			$alternate_currency = Currency_Controller::get_instance();
-			$data               = [
+
+			$data = [
 				'status' => 'success',
-				'data'   => [
-					'currency' => $alternate_currency->get_currency(),
+				'data' => [
+					'currency' => $alternate_currency->detect_currency(),
 				],
 			];
 		}
 
-		header( 'Content-Type: text/javascript' );
-		$callback = filter_input( INPUT_GET, 'callback' );
-		printf( '%s(%s);', $callback, wp_json_encode( $data ) );
+		$this->create_callback( $data );
 
 		wp_die();
 	}
@@ -65,9 +75,7 @@ class Ajax {
 			],
 		] );
 
-		header( 'Content-Type: text/javascript' );
-		$callback = filter_input( INPUT_GET, 'callback' );
-		printf( '%s(%s);', $callback, $data );
+		$this->create_callback( $data );
 
 		wp_die();
 	}
@@ -125,5 +133,96 @@ class Ajax {
 				] )
 		] );
 		wp_die();
+	}
+
+	/**
+	 * Updates the HTML based on the supported currencies.
+	 */
+	public function update_supported_currencies() {
+		$billing_country = filter_input( INPUT_POST, 'billing_country' );
+
+		if ( $billing_country === false ) {
+			echo wp_json_encode( [
+				'status' => 'error',
+				'error'  => __( 'No country code provided.', 'yoastcom' ),
+			] );
+			wp_die();
+		}
+
+		echo wp_json_encode( [
+			'status' => 'success',
+			'menu_html' => get_template_part(
+				'html_includes/shop/switch-currency',
+				Checkout_HTML::get_currency_switch_template_arguments( '', false, $billing_country, true )
+			),
+			'html'   => get_template_part(
+				'html_includes/shop/switch-currency',
+				Checkout_HTML::get_currency_switch_template_arguments( 'I want to pay in', true, $billing_country, true )
+			),
+		] );
+
+		wp_die();
+	}
+
+	/**
+	 * Determines whether or not the posted country is in the European Union.
+	 */
+	public function is_country_in_eu() {
+		$billing_country = filter_input( INPUT_POST, 'billing_country' );
+		$is_in_eu = false;
+
+		if ( class_exists( Currency_Controller::class ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			$is_in_eu = in_array( $billing_country, $currency_controller->get_eu_countries(), false );
+		}
+
+		echo wp_json_encode( [
+			'status' => 'success',
+			'display_vat' => $is_in_eu,
+		] );
+
+		wp_die();
+	}
+
+	/**
+	 * Updates the current currency.
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function update_current_currency() {
+		$currency = filter_input( INPUT_POST, 'currency' );
+
+		if ( class_exists( Currency_Controller::class ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+			$currency_controller->set_currency( $currency );
+
+			$this->create_callback( [
+				'status' => 'success',
+				'data' => [
+					'currency' => $currency_controller->detect_currency(),
+				],
+			] );
+
+			wp_die();
+		}
+
+		echo wp_json_encode( [
+			'status' => 'error',
+			'error'  => __( 'Could not update currency.', 'yoastcom' ),
+		] );
+
+		wp_die();
+	}
+
+	/**
+	 * Creates a valid JavaScript callback method.
+	 *
+	 * @param array $data The data to pass to the callback.
+	 */
+	private function create_callback( $data ) {
+		header( 'Content-Type: text/javascript' );
+		$callback = filter_input( INPUT_GET, 'callback' );
+		printf( '%s(%s);', $callback, wp_json_encode( $data ) );
 	}
 }

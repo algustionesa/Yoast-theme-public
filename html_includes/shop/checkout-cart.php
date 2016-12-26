@@ -47,7 +47,7 @@ namespace Yoast\YoastCom\Theme;
 				<?php foreach ( $discounts as $i => $discount ) : ?>
 					<?php get_template_part( 'html_includes/shop/discount-item', array(
 						'discount' => $discount,
-						'title'    => ( ( 0 === $i ) ? __( 'Discount', 'yoastcom' ) : '' ),
+						'title'    => ( 0 === $i ) ? __( 'Discount', 'yoastcom' ) : '',
 					) ); ?>
 				<?php endforeach; ?>
 			</ul>

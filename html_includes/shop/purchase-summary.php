@@ -5,15 +5,12 @@
 
 namespace Yoast\YoastCom\Theme;
 
-$hide_vat = true;
-if ( 0 != edd_get_cart_tax() ) {
-	$hide_vat = false;
-}
+$hide_vat = edd_get_cart_tax() === 0;
 ?>
 <div class="purchase_summary alignright">
 	<table>
 		<tr><th colspan="2"><?php _e( 'Purchase summary', 'yoastcom' ); ?></th></tr>
-		<tr class="edd_cart_tax_row"<?php ( ( $hide_vat ) ? 'style="display:none;"' : '' ); ?>>
+		<tr class="edd_cart_tax_row"<?php $hide_vat ? 'style="display:none;"' : ''; ?>>
 			<th class="edd_cart_tax">
 				<?php _e( 'VAT', 'yoastcom' ); ?>
 				(<span id="yst_secondary_tax_rate"><?php echo esc_html( edd_get_tax_rate() ); ?></span>%)

@@ -56,21 +56,27 @@
 		var vatStatistics = new VATStatistics();
 
 		/**
-		 * Checks the BTW NR with the VIES API
+		 * Checks the VAT NR with the VIES API
 		 */
-		function checkBtwNr( country, btw_nr ) {
+		function checkVATNumber( country, vat_number ) {
+			// There's no need to check an empty VAT number.
+			if ( vat_number === '' ) {
+				return;
+			}
+
 			var $spinner = $( '#yst-edd-btw-wrap .fa-spinner' );
 			$spinner.addClass( 'show' );
+
 			vatStatistics.start();
 
-			VATDetails.country = country;
-			VATDetails.number = btw_nr;
-			VATDetails.valid = null;
+			VATDetails.country  = country;
+			VATDetails.number   = vat_number;
+			VATDetails.valid    = null;
 
 			var xhr = jQuery.post( yoast_com_checkout_vars.ajaxurl, {
 				action: 'yst_check_vat',
 				country: country,
-				vat_nr: btw_nr
+				vat_nr: vat_number
 			}, function( response ) {
 				$spinner.removeClass( 'show' );
 				$( '#vaterror' ).remove();
@@ -102,7 +108,7 @@
 
 			// If we fail, try again in a second.
 			xhr.fail( function() {
-				setTimeout( checkBtwNr, 1000 );
+				setTimeout( checkVATNumber, 1000 );
 			} );
 		}
 
@@ -116,6 +122,10 @@
 			return Math.round( price * 100 ) / 100;
 		}
 
+		function isValidNonDutchTaxRate() {
+			return VATDetails.valid == true && VATDetails.country !== 'NL' && taxData.tax_rate_raw !== 0;
+		}
+
 		/**
 		 * Fixes the tax in the UI after everything has been recalculated by EDD
 		 *
@@ -125,7 +135,11 @@
 		function fixTaxAfterRecalculation( e, data ) {
 			var taxData = data.response;
 
-			if ( VATDetails.valid == true && VATDetails.country != 'NL' && 0 !== taxData.tax_rate_raw ) {
+			if ( taxData.billing_country !== '' ) {
+				displayVATField( taxData.billing_country );
+			}
+
+			if ( isValidNonDutchTaxRate() ) {
 				taxData.total_raw = taxData.total_raw - parseFloat( taxData.tax_raw );
 
 				taxData.tax_raw = 0;
@@ -133,22 +147,20 @@
 				taxData.tax_rate = '0%';
 
 				// Format fancy prices
-				taxData.total = '$ ' + roundPrice( taxData.total_raw );
-				taxData.tax = '$' + roundPrice( taxData.tax_raw );
+				taxData.total   = '$ ' + roundPrice( taxData.total_raw );
+				taxData.tax     = '$' + roundPrice( taxData.tax_raw );
 
 				$( '.edd_cart_amount' ).html( taxData.total );
 				$( '.yst-tax-rate' ).html( taxData.tax_rate.replace( '%', '' ) );
 				$( '.edd_cart_tax_amount' ).html( taxData.tax );
 			}
-			else {
-				if (VATDetails.country == '' ) {
-					// Don't hide the field when no country is selected yet.
-					hideOrShowVATNumber();
-				} else {
-					hideOrShowVATNumber( taxData );
-				}
+
+			var secondaryTax = $( '#yst_secondary_tax_rate' );
+
+			if ( secondaryTax.length > 0 ) {
+				secondaryTax.html( taxData.tax_rate.replace( '%', '' ) );
 			}
-			$( '#yst_secondary_tax_rate' ).html( taxData.tax_rate.replace( '%', '' ) );
+
 			$( '#yst_secondary_tax' ).html( taxData.tax );
 
 		}
@@ -168,6 +180,24 @@
 			}
 		}
 
+		function displayVATField( country ) {
+			$.ajax( {
+				url: YoastAjax.admin + '?action=yst_is_country_in_eu',
+				data: { billing_country: country },
+				dataType: 'json',
+				type: 'post',
+				beforeSend: function() {
+				},
+				success: function( response ) {
+					if ( response.display_vat === true ) {
+						$( '#yst-edd-btw-wrap' ).show();
+					} else {
+						$( '#yst-edd-btw-wrap' ).hide();
+					}
+				}
+			} );
+		}
+
 		/**
 		 * Hides or shows the VAT Number field based on the selected country
 		 */
@@ -178,11 +208,13 @@
 			$( '#yst-dutch-vat-notice' ).remove();
 
 			// No special BTW rule for The Netherlands
-			if ( 'NL' == billingCountry ) {
+			if ( billingCountry === 'NL' ) {
 				btw_wrap
 					.after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
 
 			}
+
+			console.log( "TaxData", taxData );
 
 			// Check if the country is in our special tax list
 			if ( taxData && taxData.tax_rate_raw === 0 ) {
@@ -316,13 +348,13 @@
 				}
 			} );
 
-			$body.on( "change", "#yst_btw,#billing_country,#card_state", function() {
-				var btw_nr = $( '#yst_btw' ).val();
+			$body.on( "change", "#yst_btw, #billing_country, #card_state", function() {
+				var vat_number = $( '#yst_btw' ).val();
 				var billingCountry = $( '#billing_country' ).val();
 
 				// VAT nr given, validate it.
-				if ( '' != btw_nr && '' != billingCountry ) {
-					checkBtwNr( billingCountry, btw_nr );
+				if ( billingCountry !== '' ) {
+					checkVATNumber( billingCountry, vat_number );
 				}
 
 				// Re-calculate taxes based on current country and state.

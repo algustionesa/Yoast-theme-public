@@ -194,36 +194,91 @@ class Checkout_HTML {
 	 * Ouputs the HTML for switching between currencies.
 	 */
 	public function html_switch_currency() {
-		if ( ! class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+		if ( ! class_exists( Currency_Controller::class ) ) {
 			return;
 		}
 
-		get_template_part( 'html_includes/shop/switch-currency', self::get_currency_switch_template_arguments() );
+		get_template_part(
+			'html_includes/shop/switch-currency',
+			self::get_currency_switch_template_arguments( 'I want to pay in', true )
+		);
+	}
+
+	/**
+	 * Gets the default currency.
+	 *
+	 * @return string The default currency.
+	 */
+	private static function get_default_currency() {
+		if ( class_exists( Currency_Controller::class ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			return $currency_controller->get_default_currency()->get_code();
+		}
+
+		return 'USD';
+	}
+
+	/**
+	 * Gets the current currency.
+	 *
+	 * @return bool|null|string The found currency.
+	 * @throws \InvalidArgumentException
+	 */
+	private static function get_current_currency() {
+		if ( class_exists( Currency_Controller::class ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			return $currency_controller->detect_currency();
+		}
+
+		return 'USD';
+	}
+
+	/**
+	 * Gets the available currencies.
+	 * Optionally, a country can be specified to lookup the currencies for.
+	 *
+	 * @param string $country The country to look for.
+	 *
+	 * @return array The currencies that were found.
+	 */
+	private static function get_available_currencies( $country = '' ) {
+		if ( class_exists( Currency_Controller::class ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			if ( $country === '' ) {
+				return $currency_controller->get_currencies();
+			}
+
+			return $currency_controller->get_by_country_code( $country );
+		}
+
+		return [];
 	}
 
 	/**
 	 * Retrieves the settings to be used for the currency switcher.
 	 *
+	 * @param string $label The label to use to prefix the currency switcher.
+	 *
+	 * @param bool   $wrap  Whether or not to wrap the dropdown.
+	 *
+	 * @param string   $country
+	 *
 	 * @return array Array containing the options for the currency switcher.
 	 */
-	public static function get_currency_switch_template_arguments() {
-		$default = 'USD';
-		$current = 'USD';
-
-		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
-			$currency_controller = Currency_Controller::get_instance();
-
-			$default = $currency_controller->get_default_currency();
-			$current = $currency_controller->get_currency();
-		}
+	public static function get_currency_switch_template_arguments( $label = '', $wrap = false, $country = '', $return = false ) {
+		$default = self::get_default_currency();
+		$current = self::get_current_currency();
 
 		return [
-			'options'     => [
-				'EUR' => __( 'EUR (&euro;)', 'yoastcom' ),
-				'USD' => __( 'USD ($)', 'yoastcom' )
-			],
-			'default'     => $default,
-			'current'     => $current,
+			'options' => self::get_available_currencies( $country ),
+			'default' => $default,
+			'current' => $current,
+			'label'   => $label,
+			'wrap'    => $wrap,
+			'return'  => $return,
 		];
 	}
 
@@ -242,12 +297,13 @@ class Checkout_HTML {
 
 	/**
 	 * Outputs the HTML to display the available payment providers.
+	 * @throws \Exception
 	 */
 	public function html_payment_providers() {
 		$providers = new Payment_Method_Provider();
 		$current_country = $this->get_shop_country();
 
-		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+		if ( class_exists( Currency_Controller::class ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
 			$current_currency = $currency_controller->get_currency();

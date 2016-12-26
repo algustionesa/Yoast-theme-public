@@ -38,7 +38,12 @@
 		$body.on( 'edd_quantity_updated', handleQuantityUpdate );
 		$body.on( 'change', '.yst-edd-pricing-switcher', handleChangeDownloadVariation );
 		$body.on( 'edd_cart_billing_address_updated', hideProvinceField );
-		$( '#billing_country' ).on( 'change', displaySupportedPaymentMethods );
+
+		$( '#billing_country' ).on( 'change', function() {
+			displaySupportedCurrencies();
+			displaySupportedPaymentMethods();
+
+		} );
 
 		$(document).ajaxComplete(reloadOnFreeCart);
 
@@ -172,6 +177,28 @@
 				payment_options_list.html( response.html );
 			}
 		});
+	}
+
+	/**
+	 * Displays the supported currencies.
+	 *
+	 * @returns {void}
+	 */
+	function displaySupportedCurrencies() {
+		var billing_country = $( '#billing_country' ).val();
+
+		$.ajax({
+			type: "POST",
+			data: { billing_country: billing_country },
+			dataType: "json",
+			url: YoastAjax.admin + '?action=yst_update_supported_currencies',
+			beforeSend: function() {
+				$( '.yst_currency_switch' ).text( YoastI18n.loading + '...' );
+			}
+		}).success( function( response ) {
+			$( '.yst_currency_switch' ).replaceWith( response.html );
+			$( 'ul.yoast-main-menu li.controls' ).find('select.yst_currency_switch_dropdown').replaceWith( response.menu_html );
+		} );
 	}
 
 	$( init );
