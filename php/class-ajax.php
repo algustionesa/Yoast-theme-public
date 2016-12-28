@@ -68,12 +68,12 @@ class Ajax {
 	 */
 	public function cart_item_number() {
 
-		$data = wp_json_encode( [
+		$data = [
 			'status' => 'success',
 			'data'   => [
 				'cartItems' => function_exists( 'edd_get_cart_quantity' ) ? edd_get_cart_quantity() : 0,
 			],
-		] );
+		];
 
 		$this->create_callback( $data );
 
