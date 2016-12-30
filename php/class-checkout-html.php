@@ -194,13 +194,13 @@ class Checkout_HTML {
 	 * Ouputs the HTML for switching between currencies.
 	 */
 	public function html_switch_currency() {
-		if ( ! class_exists( Currency_Controller::class ) ) {
+		if ( ! class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			return;
 		}
 
 		get_template_part(
 			'html_includes/shop/switch-currency',
-			self::get_currency_switch_template_arguments( 'I want to pay in', true )
+			self::get_currency_switch_template_arguments( __( 'I want to pay in', 'yoastcom' ), true )
 		);
 	}
 
@@ -210,7 +210,7 @@ class Checkout_HTML {
 	 * @return string The default currency.
 	 */
 	private static function get_default_currency() {
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
 			return $currency_controller->get_default_currency()->get_code();
@@ -226,7 +226,7 @@ class Checkout_HTML {
 	 * @throws \InvalidArgumentException
 	 */
 	private static function get_current_currency() {
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
 			return $currency_controller->detect_currency();
@@ -244,7 +244,7 @@ class Checkout_HTML {
 	 * @return array The currencies that were found.
 	 */
 	private static function get_available_currencies( $country = '' ) {
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
 			if ( $country === '' ) {
@@ -264,7 +264,9 @@ class Checkout_HTML {
 	 *
 	 * @param bool   $wrap  Whether or not to wrap the dropdown.
 	 *
-	 * @param string   $country
+	 * @param string $country The country to lookup the currencies for.
+	 *
+	 * @param bool   $return Whether or not the output should be returned instead of echoed.
 	 *
 	 * @return array Array containing the options for the currency switcher.
 	 */
@@ -303,7 +305,7 @@ class Checkout_HTML {
 		$providers = new Payment_Method_Provider();
 		$current_country = $this->get_shop_country();
 
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
 			$current_currency = $currency_controller->get_currency();

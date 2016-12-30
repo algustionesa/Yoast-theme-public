@@ -59,8 +59,8 @@
 		 * Checks the VAT NR with the VIES API
 		 */
 		function checkVATNumber( country, vat_number ) {
-			// There's no need to check an empty VAT number.
-			if ( vat_number === '' ) {
+			// We can't determine the validity without a country and VAT number.
+			if ( country === '' || vat_number === '' ) {
 				return;
 			}
 
@@ -180,14 +180,18 @@
 			}
 		}
 
+		/**
+		 * Determines whether or not the VAT field should be displayed based on the country.
+		 *
+		 * @param {string} country The country to check.
+		 * @returns {void}
+		 */
 		function displayVATField( country ) {
 			$.ajax( {
-				url: YoastAjax.admin + '?action=yst_is_country_in_eu',
+				url: YoastAjax.admin + '?action=yst_display_vat_input',
 				data: { billing_country: country },
 				dataType: 'json',
 				type: 'post',
-				beforeSend: function() {
-				},
 				success: function( response ) {
 					if ( response.display_vat === true ) {
 						$( '#yst-edd-btw-wrap' ).show();
@@ -213,8 +217,6 @@
 					.after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
 
 			}
-
-			console.log( "TaxData", taxData );
 
 			// Check if the country is in our special tax list
 			if ( taxData && taxData.tax_rate_raw === 0 ) {
@@ -352,10 +354,7 @@
 				var vat_number = $( '#yst_btw' ).val();
 				var billingCountry = $( '#billing_country' ).val();
 
-				// VAT nr given, validate it.
-				if ( billingCountry !== '' ) {
-					checkVATNumber( billingCountry, vat_number );
-				}
+				checkVATNumber( billingCountry, vat_number );
 
 				// Re-calculate taxes based on current country and state.
 				EDD_Checkout.recalculate_taxes();

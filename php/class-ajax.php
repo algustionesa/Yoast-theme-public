@@ -35,8 +35,8 @@ class Ajax {
 		add_action( 'wp_ajax_yst_update_current_currency', array( $this, 'update_current_currency' ) );
 		add_action( 'wp_ajax_nopriv_yst_update_current_currency', array( $this, 'update_current_currency' ) );
 
-		add_action( 'wp_ajax_yst_is_country_in_eu', array( $this, 'is_country_in_eu' ) );
-		add_action( 'wp_ajax_nopriv_yst_is_country_in_eu', array( $this, 'is_country_in_eu' ) );
+		add_action( 'wp_ajax_yst_display_vat_input', array( $this, 'display_vat_input' ) );
+		add_action( 'wp_ajax_nopriv_yst_display_vat_input', array( $this, 'display_vat_input' ) );
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Ajax {
 	public function detect_currency() {
 		$data = [ 'status' => 'error' ];
 
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$alternate_currency = Currency_Controller::get_instance();
 
 			$data = [
@@ -165,21 +165,21 @@ class Ajax {
 	}
 
 	/**
-	 * Determines whether or not the posted country is in the European Union.
+	 * Determines whether or not the posted country should result in displaying a VAT input field.
 	 */
-	public function is_country_in_eu() {
+	public function display_vat_input() {
 		$billing_country = filter_input( INPUT_POST, 'billing_country' );
-		$is_in_eu = false;
+		$display_vat = false;
 
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
-			$is_in_eu = in_array( $billing_country, $currency_controller->get_eu_countries(), false );
+			$display_vat = in_array( $billing_country, $currency_controller->get_eu_countries(), false );
 		}
 
 		echo wp_json_encode( [
 			'status' => 'success',
-			'display_vat' => $is_in_eu,
+			'display_vat' => $display_vat,
 		] );
 
 		wp_die();
@@ -193,7 +193,7 @@ class Ajax {
 	public function update_current_currency() {
 		$currency = filter_input( INPUT_POST, 'currency' );
 
-		if ( class_exists( Currency_Controller::class ) ) {
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 			$currency_controller->set_currency( $currency );
 
