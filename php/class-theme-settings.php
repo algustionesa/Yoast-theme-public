@@ -125,6 +125,7 @@ class Theme_Settings {
 				'ebooks' => __( 'eBooks (dark purple)', 'yoastcom' ),
 				'hire-us' => __( 'Hire us (teal)', 'yoastcom' ),
 				'faq' => __( 'FAQ (dark blue)', 'yoastcom' ),
+				'new-years' => __( 'New years 2017', 'yoastcom' ),
 			],
 			'default' => get_theme_option( 'banner_theme_class', 'child-settings' ),
 		) );
@@ -137,6 +138,7 @@ class Theme_Settings {
 			'options' => [
 				'' => __( 'None', 'yoastcom' ),
 				'site-structure' => __( 'Honeycomb and bee', 'yoastcom' ),
+				'new-years' => __( 'Fireworks', 'yoastcom' ),
 			],
 			'default' => get_theme_option( 'banner_theme_variation', 'child-settings' ),
 		) );

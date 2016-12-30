@@ -62,6 +62,20 @@ body .button, body button {
     top: 1px;
   }
 
+  &.disabled {
+    color: $color-white;
+    background: $color-grey-text;
+    text-shadow: $text-shadow;
+    box-shadow: none;
+    &:hover, &:focus, &:active {
+      color: $color-white;
+      background: $color-grey-text;
+      text-shadow: $text-shadow;
+      box-shadow: none;
+      top: 0;
+    }
+  }
+
   &.dimmed {
     color: $color-grey-text;
 
