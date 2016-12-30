@@ -157,7 +157,7 @@ class Ajax {
 			),
 			'html'   => get_template_part(
 				'html_includes/shop/switch-currency',
-				Checkout_HTML::get_currency_switch_template_arguments( 'I want to pay in', true, $billing_country, true )
+				Checkout_HTML::get_currency_switch_template_arguments( __( 'I want to pay in', 'yoastcom' ), true, $billing_country, true )
 			),
 		] );
 

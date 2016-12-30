@@ -35,5 +35,5 @@ if ( is_null( $forced_currency ) ) {
 		);
 	}
 
-	printf( __('%s', 'yoastcom'), $output );
+	echo $output;
 }

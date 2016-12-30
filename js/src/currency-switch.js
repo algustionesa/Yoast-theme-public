@@ -69,6 +69,10 @@
 		function switchCurrency( to_currency, force ) {
 			var current_currency = readCookie( 'yoast_cart_currency' );
 
+			/**
+			 * In the case that we cannot determine the proper currency,
+			 * display all available currencies and default to USD
+			 */
 			if ( to_currency === null ) {
 				to_currency = 'USD';
 			}
