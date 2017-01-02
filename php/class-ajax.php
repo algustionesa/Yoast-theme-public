@@ -58,9 +58,7 @@ class Ajax {
 			];
 		}
 
-		$this->create_callback( $data );
-
-		wp_die();
+		$this->write_javascript_callback( $data );
 	}
 
 	/**
@@ -75,9 +73,7 @@ class Ajax {
 			],
 		];
 
-		$this->create_callback( $data );
-
-		wp_die();
+		$this->write_javascript_callback( $data );
 	}
 
 	/**
@@ -197,14 +193,12 @@ class Ajax {
 			$currency_controller = Currency_Controller::get_instance();
 			$currency_controller->set_currency( $currency );
 
-			$this->create_callback( [
+			$this->write_javascript_callback( [
 				'status' => 'success',
 				'data' => [
 					'currency' => $currency_controller->detect_currency(),
 				],
 			] );
-
-			wp_die();
 		}
 
 		echo wp_json_encode( [
@@ -220,9 +214,10 @@ class Ajax {
 	 *
 	 * @param array $data The data to pass to the callback.
 	 */
-	private function create_callback( $data ) {
+	private function write_javascript_callback( $data ) {
 		header( 'Content-Type: text/javascript' );
 		$callback = filter_input( INPUT_GET, 'callback' );
 		printf( '%s(%s);', $callback, wp_json_encode( $data ) );
+		wp_die();
 	}
 }
