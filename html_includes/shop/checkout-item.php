@@ -1,6 +1,8 @@
 <?php
 namespace Yoast\YoastCom\Theme;
 
+use Yoast\YoastCom\EDD\Alternate_Currency;
+
 $item = $template_args['item'];
 $id   = 'edd_cart_item_' . $template_args['key'] . '_' . $item['id'];
 
@@ -18,7 +20,7 @@ if ( isset( $template_args['readonly'] ) && $template_args['readonly'] ) {
 		<div class="checkout-item__icon show-on-desktop"><?php
 			$icon = get_product_icon( $item['id'] );
 			if ( $icon ) {
-				printf( '<img class="more__plug more__plug--small" src="%s" width="40" height="40"/>', esc_url( $icon ) );
+				printf( '<img class="more__plug more__plug--small" src="%s" width="40" height="40" alt="">', esc_url( $icon ) );
 			}
 			?>
 		</div>
@@ -61,6 +63,9 @@ if ( isset( $template_args['readonly'] ) && $template_args['readonly'] ) {
 		<?php } ?>
 	</div>
 	<div class="checkout__price one-seventh medium-one-third small-full">
+		<a href="<?php echo esc_url( edd_remove_item_url( $template_args['key'] ) ); ?>"
+		   class="button--naked checkout__cancel edd_cart_remove_item_btn"><span class="text-icon">&#xf00d;</a>
+
 		<?php
 		echo esc_html(
 			edd_currency_filter( edd_format_amount(
@@ -69,7 +74,6 @@ if ( isset( $template_args['readonly'] ) && $template_args['readonly'] ) {
 			) )
 		);
 		?>
-		<a href="<?php echo esc_url( edd_remove_item_url( $template_args['key'] ) ); ?>"
-		   class="button--naked checkout__cancel edd_cart_remove_item_btn"><span class="text-icon">&#xf00d;</a>
+
 	</div>
 </li>

@@ -66,7 +66,8 @@ function get_template_part( $file, $template_args = array(), $cache_args = array
 	}
 
 	ob_start();
-	if ( is_admin() || ( isset( $template_args['debug'] ) && $template_args['debug'] === true ) ) {
+
+	if ( get_current_user_id() !== 0 || ( isset( $template_args['debug'] ) && $template_args['debug'] === true ) ) {
 		printf( '<!-- Including template "%s" -->', $file );
 	}
 	$return = require $file;

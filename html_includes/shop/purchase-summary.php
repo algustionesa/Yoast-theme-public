@@ -28,5 +28,3 @@ if ( 0 != edd_get_cart_tax() ) {
 		</tr>
 	</table>
 </div>
-<div class="clear"></div>
-<br />

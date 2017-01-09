@@ -1,8 +1,0 @@
-.widget.theme-academy {
-  @include headers($scheme-academy-primary, $scheme-academy-secondary);
-}
-
-.theme-academy {
-  @include theme($scheme-academy-primary, $scheme-academy-secondary, $scheme-academy-tertiary, $scheme-academy-menu-primary, $scheme-academy-menu-secondary);
-}
-

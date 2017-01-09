@@ -6,6 +6,8 @@ namespace Yoast\YoastCom\Theme;
 
 class Shortcodes {
 
+	protected $show_read_more = true;
+
 	/**
 	 * Adds the themes shortcodes
 	 */
@@ -34,6 +36,14 @@ class Shortcodes {
 		add_shortcode( 'support', array( $this, 'support' ) );
 
 		add_shortcode( 'llms_take_quiz', array( $this, 'llms_complete_lesson' ) );
+
+		add_action( 'instant_articles_before_transform_post', function() {
+			$this->set_show_read_more( false );
+		});
+
+		add_action( 'instant_articles_after_transform_post', function() {
+			$this->set_show_read_more( true );
+		});
 	}
 
 	/**
@@ -437,6 +447,10 @@ class Shortcodes {
 	 * @return string The content to output on the page.
 	 */
 	public function read_more_link( $atts, $content ) {
+		if ( ! $this->show_read_more() ) {
+			return '';
+		}
+
 		$args = wp_parse_args( $atts, array(
 			'url'    => '',
 			'prefix' => '',
@@ -463,7 +477,15 @@ class Shortcodes {
 			$readmore_counter ++;
 		}
 
-		return '<p class="readmore"><a title="' . esc_attr( $content ) . '" data-prefix="' . esc_attr( $args['prefix'] ) . '" href="' . esc_attr( $args['url'] ) . '">' . $args['prefix'] . ': &lsquo;' . strip_tags( $content ) . '&rsquo; &raquo;</a></p>';
+		return '<p class="readmore"><a title="' . esc_attr( strip_tags( $content ) ) . '" data-prefix="' . esc_attr( $args['prefix'] ) . '" href="' . esc_attr( $args['url'] ) . '">' . $args['prefix'] . ': &lsquo;' . strip_tags( $content ) . '&rsquo; &raquo;</a></p>';
+	}
+
+	public function show_read_more() {
+		return $this->show_read_more;
+	}
+
+	public function set_show_read_more( $enabled = true ) {
+		$this->show_read_more = (bool) $enabled;
 	}
 
 	/**

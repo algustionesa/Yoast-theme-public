@@ -14,4 +14,25 @@ namespace Yoast\YoastCom\Theme;
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-	<?php do_action( 'yst_body_open' ); ?>
+<?php
+
+do_action( 'yst_body_open' );
+
+$banner = get_theme_option( 'banner', 'child-settings' );
+$show_banner = get_theme_option( 'show_banner', 'child-settings' );
+$class = get_theme_option( 'banner_theme_class', 'child-settings' );
+$variation = get_theme_option( 'banner_theme_variation', 'child-settings' );
+$variation = ( ! empty( $variation ) ? ' ' . $variation : $variation );
+
+if ( $show_banner === "on" && ! empty( $banner ) ) { ?>
+	<div class="announcement-banner theme-<?php echo $class; ?>">
+		<div class="decoration<?php echo $variation; ?>"></div>
+		<div class="accent<?php echo $variation; ?>"></div>
+		<div class="row">
+			<?php echo $banner; ?>
+		</div>
+		<div class="decoration<?php echo $variation; ?> right"></div>
+	</div>
+<?php
+
+}

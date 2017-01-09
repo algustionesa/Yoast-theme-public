@@ -26,7 +26,7 @@ namespace Yoast\YoastCom\Theme;
 
 		<div class="rowholder">
 			<section class="row island">
-				<?php get_template_part( 'html_includes/partials/more-categories', array( 'class' => "color-software--secondary" ) ); ?>
+				<?php get_template_part( 'html_includes/partials/more-categories', array( 'class' => "color-plugins--secondary" ) ); ?>
 			</section>
 		</div>
 

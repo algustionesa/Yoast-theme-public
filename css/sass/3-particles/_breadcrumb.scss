@@ -16,27 +16,45 @@
     color: $color-grey-text;
   }
 
-  .theme-academy & {
+  .theme-home & {
     &, a, .sep {
-      color: $scheme-academy-primary;
+      color: $scheme-home-primary;
     }
   }
 
-  .theme-software & {
+  .theme-seo-blog & {
     &, a, .sep {
-      color: $scheme-software-primary;
+      color: $scheme-seo-blog-primary;
     }
   }
 
-  .theme-review & {
+  .theme-plugins & {
     &, a, .sep {
-      color: $scheme-review-primary;
+      color: $scheme-plugins-primary;
     }
   }
 
-  .theme-about & {
+  .theme-courses & {
     &, a, .sep {
-      color: $scheme-about-primary;
+      color: $scheme-courses-primary;
+    }
+  }
+
+  .theme-ebooks & {
+    &, a, .sep {
+      color: $scheme-ebooks-primary;
+    }
+  }
+
+  .theme-hire-us & {
+    &, a, .sep {
+      color: $scheme-hire-us-primary;
+    }
+  }
+
+  .theme-faq-us & {
+    &, a, .sep {
+      color: $scheme-faq-primary;
     }
   }
 }

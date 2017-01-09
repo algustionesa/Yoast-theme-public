@@ -33,7 +33,7 @@ namespace Yoast\YoastCom\Theme;
 
 		<section class="row iceberg">
 			<h2><?php _e( 'Recent posts', 'yoastcom' ); ?></h2>
-			<?php get_template_part( 'html_includes/partials/more-articles' ); ?>
+			<?php get_template_part( 'html_includes/partials/recent-articles' ); ?>
 		</section>
 
 		<?php get_template_part( 'html_includes/partials/newsletter-subscribe' ); ?>

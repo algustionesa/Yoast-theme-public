@@ -1,5 +1,6 @@
 hr {
 	position: relative;
+	clear: both;
 	padding-bottom: $spacing;
 	background-color: $color-white;
 
@@ -18,6 +19,10 @@ hr {
 			line-height: 0;
 			@include vendor(transform, translateX(-50%));
 		}
+	}
+
+	&.row {
+		padding: 1em 0;
 	}
 
 	&.hr--no-pointer {

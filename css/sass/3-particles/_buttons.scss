@@ -1,268 +1,159 @@
-.button, button {
+body .button, body button {
   font-family: $font-stack-default;
+  color: $color-white;
+
+  background: rgb(230, 102, 14); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(230, 102, 14, 1) 0%, rgba(195, 67, 0, 1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(230, 102, 14, 1) 0%, rgba(195, 67, 0, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(230, 102, 14, 1) 0%, rgba(195, 67, 0, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6660e', endColorstr='#c34300', GradientType=0); /* IE6-9 */
+
+  &:hover, &:focus {
+    color: $color-white;
+    text-decoration: none;
+  }
+}
+
+.button, button {
   position: relative;
   display: inline-block;
-  width: 100%;
-  padding: 0.345em 1.5em 0.345em 1em;
+  width: auto;
+  padding: 0.345em 1em;
   font-size: 1.1em;
-  background-color: transparent;
-  background-color: $color-orange;
-  color: $color-white;
   border: 0;
-  //text-shadow: $text-shadow;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 3px;
+  text-shadow: $text-shadow;
+  box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
 
-  @media only screen and (min-width: $page-width-small) {
-    margin-right: 1.36rem;
-    width: auto;
-    max-height: 1.43rem + 1.43rem;
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -1.36rem;
-      height: 0;
-      width: 0;
-      border-right: 0;
-      border-left: 1.43rem solid $color-orange;
-      border-top: 1.43rem solid transparent;
-      border-bottom: 1.44rem solid transparent;
-    }
+  max-height: 1.43rem + 1.43rem;
 
-    &.left {
-      &::after {
-        content: none;
-      }
-
-      margin-right: 0;
-      margin-left: 1.36rem;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -1.36rem;
-        height: 0;
-        width: 0;
-        border-left: 0;
-        border-right: 1.43rem solid $color-orange;
-        border-top: 1.43rem solid transparent;
-        border-bottom: 1.44rem solid transparent;
-      }
-    }
-  }
-
-  &.alignleft {
-    margin: 1rem 2.5rem 0 0 !important;
-  }
+  margin-bottom: 1em;
+  margin-right: 1em;
 
   .arrow {
     display: none;
   }
 
-  & + & {
-    margin-top: 1em;
-    margin-left: $spacing;
+  &--slim {
+    padding: 0.18em 0.5em;
+    font-size: 0.9em;
+    margin: 0 0.5em 0.5em 0;
   }
 
   &--full {
     width: 100%;
-
-    &::after {
-      content: none;
-    }
   }
 
   &.default {
     color: $color-white;
-    background-color: $color-orange;
-
-    &::after {
-      border-left-color: $color-orange;
-    }
-
-    &::before {
-      border-right-color: $color-orange;
-    }
   }
 
-  &:hover, a:focus {
-    background-color: $color-orange-hover;
-    color: $color-white;
-    text-decoration: underline;
-    &::after {
-      border-left-color: $color-orange-hover;
-    }
-    &::before {
-      border-right-color: $color-orange-hover;
-    }
+  &:hover, &:focus {
+    background: #e6660e;
   }
 
-  &.academy {
-    color: $color-white;
-    background-color: $scheme-academy-primary;
-
-    &::after {
-      border-left-color: $scheme-academy-primary;
-    }
-
-    &::before {
-      border-right-color: $scheme-academy-primary;
-    }
-
-    @media only screen and (max-width: $page-width-xsmall) {
-      background-color: $scheme-academy-primary;
-    }
+  &:active {
+    background: #c34300;
+    text-shadow: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    top: 1px;
   }
 
-  &.academy--secondary {
+  &.disabled {
     color: $color-white;
-    background-color: $scheme-academy-secondary;
-
-    &::after {
-      border-left-color: $scheme-academy-secondary;
-    }
-
-    &::before {
-      border-right-color: $scheme-academy-secondary;
-    }
-
-    @media only screen and (max-width: $page-width-xsmall) {
-      background-color: $scheme-academy-secondary;
-    }
-  }
-
-  &.software {
-    color: $color-white;
-    background-color: $scheme-software-primary;
-
-    &::after {
-      border-left-color: $scheme-software-primary;
-    }
-
-    &::before {
-      border-right-color: $scheme-software-primary;
-    }
-
-    @media only screen and (max-width: $page-width-xsmall) {
-      //background-color: $scheme-software-primary;
-    }
-  }
-
-  &.review {
-    color: $color-white;
-    background-color: $scheme-review-primary;
-
-    &::after {
-      border-left-color: $scheme-review-primary;
-    }
-
-    &::before {
-      border-right-color: $scheme-review-primary;
-    }
-
-    @media only screen and (max-width: $page-width-xsmall) {
-      //background-color: $scheme-review-primary;
-    }
-  }
-
-  &.about {
-    color: $color-white;
-    background-color: $scheme-about-primary;
-
-    &::after {
-      border-left-color: $scheme-about-primary;
-    }
-
-    &::before {
-      border-right-color: $scheme-about-primary;
-    }
-
-    @media only screen and (max-width: $page-width-xsmall) {
-      //background-color: $scheme-about-primary;
-    }
-  }
-
-  .yoast_academy & {
-    color: $color-white;
-    background-color: $color-pink;
-
-    &::after {
-      border-left-color: $color-pink;
-    }
-
-    &::before {
-      border-right-color: $color-pink;
-    }
-
-    &:hover, a:focus {
-      background-color: $color-pink-hover;
+    background: $color-grey-text;
+    text-shadow: $text-shadow;
+    box-shadow: none;
+    &:hover, &:focus, &:active {
       color: $color-white;
-      text-decoration: underline;
-
-      &::after {
-        border-left-color: $color-pink-hover;
-      }
-
-      &::before {
-        border-right-color: $color-pink-hover;
-      }
+      background: $color-grey-text;
+      text-shadow: $text-shadow;
+      box-shadow: none;
+      top: 0;
     }
   }
 
-  body &,
-  .yoast_academy & {
-    &.dimmed {
+  &.dimmed {
+    color: $color-grey-text;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e6e6e6+0,bebebe+100 */
+    background: rgb(230,230,230); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(230,230,230,1) 0%, rgba(190,190,190,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(230,230,230,1) 0%,rgba(190,190,190,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(230,230,230,1) 0%,rgba(190,190,190,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', endColorstr='#bebebe',GradientType=0 ); /* IE6-9 */
+
+    text-shadow: none;
+
+    &:hover, &:focus {
       color: $color-grey-text;
-      background-color: $color-grey;
-      //text-shadow: none;
-
-      &::after {
-        border-left-color: $color-grey;
-      }
-
-      &::before {
-        border-right-color: $color-grey;
-      }
-
-      @media only screen and (max-width: $page-width-xsmall) {
-        //background-color: $color-grey;
-      }
-
-      &:hover, a:focus {
-        background-color: $color-grey-hover;
-        color: $color-grey-text;
-        text-decoration: underline;
-        &::after {
-          border-left-color: $color-grey-hover;
-        }
-        
-        &:before {
-          border-right-color: $color-grey-hover;
-        }
-      }
+      background: $color-grey-hover;
     }
-  }
 
-  &--noarrow {
-    &::after {
-      content: none;
+    &.flat {
+      background: #e6e6e6;
+      box-shadow: none;
+
+      &:hover, &:focus {
+        background: $color-grey-hover;
+      }
     }
   }
 
   &--naked {
     border: none;
-    background-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
     padding: 0;
-    //text-shadow: none;
+    overflow: auto;
+    margin: 0;
 
-    &::after {
-      content: none;
+    &:hover, &:focus {
+      text-decoration: underline;
+      background: transparent;
+    }
+
+    &:active {
+      top: 0;
+      box-shadow: none;
+      background: transparent;
     }
   }
 
   i.fa {
     font-size: 140%;
-    margin: 4px 10px 0 0;
+    margin: 0 10px 0 0;
+    position: relative;
+    top: 1px;
+
+    &.fa-pencil-square-o {
+      top: 3px;
+    }
+
+    &.fa-arrow-circle-right {
+      top: 2px;
+    }
+
+    &.fa-info-circle {
+      font-size: 130%;
+      margin: 0 5px 0 0;
+      top: 2px;
+    }
+  }
+}
+
+.alignright {
+  .button, button {
+    margin: 0;
+    min-width: 60%;
+  }
+
+  .button + .button.dimmed {
+    min-width: 35%;
+    float: right;
   }
 }

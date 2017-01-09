@@ -4,36 +4,61 @@
 		border-color: $color-white !important;
 	}
 
-	&-academy {
-		border-color: $scheme-academy-primary !important;
+	&-courses {
+		border-color: $scheme-courses-primary !important;
 	}
 
-	&-academy--secondary {
-		border-color: $scheme-academy-secondary !important;
+	&-courses--secondary {
+		border-color: $scheme-courses-secondary !important;
 	}
 
-	&-software {
-		border-color: $scheme-software-primary !important;
+	&-plugins {
+		border-color: $scheme-plugins-primary !important;
 	}
 
-	&-software--secondary {
-		border-color: $scheme-software-secondary !important;
+	&-plugins--secondary {
+		border-color: $scheme-plugins-secondary !important;
 	}
 
-	&-review {
-		border-color: $scheme-review-primary !important;
+	&-hire-us {
+		border-color: $scheme-hire-us-primary !important;
 	}
 
-	&-review--secondary {
-		border-color: $scheme-review-secondary !important;
+	&-hire-us--secondary {
+		border-color: $scheme-hire-us-secondary !important;
 	}
 
-	&-about {
-		border-color: $scheme-about-primary !important;
+	&-home {
+		border-color: $scheme-home-primary !important;
 	}
 
-	&-about--secondary {
-		border-color: $scheme-about-secondary !important;
+	&-home--secondary {
+		border-color: $scheme-home-secondary !important;
 	}
+
+	&-seo-blog {
+	  border-color: $scheme-seo-blog-primary !important;
+	}
+
+	&-seo-blog--secondary {
+	  border-color: $scheme-seo-blog-secondary !important;
+	}
+
+	&-ebooks {
+	  border-color: $scheme-ebooks-primary !important;
+	}
+
+	&-ebooks--secondary {
+	  border-color: $scheme-ebooks-secondary !important;
+	}
+
+	&-faq {
+	  border-color: $scheme-faq-primary !important;
+	}
+
+	&-faq--secondary {
+	  border-color: $scheme-faq-secondary !important;
+	}
+
 
 }

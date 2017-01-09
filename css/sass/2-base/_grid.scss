@@ -57,6 +57,11 @@
 	margin-bottom: $spacing;
 }
 
+.extra.alignright {
+	clear: right;
+	max-width: 320px;
+}
+
 .grid {
 	@include display-flex;
 	@include vendor(flex-wrap, wrap);

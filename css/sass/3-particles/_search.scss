@@ -1,9 +1,24 @@
+.siteheader--home {
+  .searchbar {
+    @media only screen and (min-width: $page-width-medium) {
+      position: absolute;
+      top: 112px;
+      right: 0;
+    }
+  }
+}
+
 .searchbar {
+
+  .aa-input {
+    width: 20rem;
+    padding: 0.65rem;
+  }
 
   @media only screen and (min-width: $page-width-medium) {
     position: absolute;
-    top: 40px;
-    right: 100px;
+    top: 20px;
+    right: 0;
   }
 
   @media only screen and (max-width: $page-width-medium) {
@@ -44,71 +59,12 @@
 
 }
 
-// Algolia overrides.
-.no-results {
-  margin-bottom: 1em;
-}
-
-#refine-toggle,
-.no-results .button {
-  display: none;
-}
-
-@media only screen and (max-width: $page-width-medium) {
-  #algolia-left-container,
-  #instant-search-facets-container {
-    display: none;
-  }
-
-  #algolia_instant_selector.with-facets #algolia-right-container {
-    float: none;
-    width: 100%;
-  }
-
-  #algolia_instant_selector #instant-search-box svg.magnifying-glass {
-    right: 32px;
-  }
-}
-
-@media only screen and (min-width: $page-width-medium) {
-  #algolia_instant_selector.with-facets #algolia-left-container {
-	width: 25%;
-  }
-
-  #algolia_instant_selector.with-facets #algolia-right-container {
-	width: 75%;
-  }
-}
-
-#instant-search-facets-container .count {
-  padding: 0 6px;
-  font-size: .8em;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  background-color: $color-purple-dark;
-  color: white;
-}
-
-#algolia_instant_selector .result .content {
-  width: auto;
-}
-
-#algolia_instant_selector .result .imgExt {
-  max-width: 200px;
-  max-height: 200px;
-}
-
-#algolia_instant_selector .result .result-title {
-  margin-bottom: auto;
-}
-
 // New Algolia plugin overrides
 
 .ais-hits--item {
   margin-bottom: 0;
   .meta {
-    margin-bottom:0;
+    margin-bottom: 0;
   }
 }
 
@@ -134,7 +90,7 @@
     width: 30%;
 
     @media only screen and (max-width: $page-width-medium) {
-      margin-bottom:0;
+      margin-bottom: 0;
     }
   }
 
@@ -150,5 +106,28 @@
       width: 70%;
       margin-left: 0;
     }
+  }
+}
+
+.aa-dropdown-menu {
+  .suggestion-post-attributes {
+    float: left;
+    display: block;
+
+    width: 100%;
+    &.with-image {
+      width: 78%;
+    }
+
+    .suggestion-post-title {
+      font-size: 1.2em;
+    }
+
+  }
+
+  .suggestion-post-thumbnail {
+    height: 49px;
+    width: 64px;
+    margin: 0 0 0 5px;
   }
 }

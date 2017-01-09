@@ -1,93 +1,92 @@
 fieldset {
-	padding: 0;
-	margin: 0 0 $spacing-half 0;
-	border: none;
-	font-family: $font-stack-article;
+  padding: 0;
+  margin: 0 0 $spacing-half 0;
+  border: none;
+  font-family: $font-stack-article;
 }
 
-input, textarea{
-	width: 100%;
-	border:1px solid;
-	padding: 0.75rem;
-	margin-bottom: 1rem;
-	color: $color-black;
-	font-family: $font-stack-default;
+input, textarea {
+  width: 100%;
+  border: 1px solid;
+  padding: 0.65rem;
+  margin-bottom: 1rem;
+  color: $color-black;
+  font-family: $font-stack-default;
 
-	&.size-s {
-		width: 5em;
-	}
+  &.size-s {
+    width: 5em;
+  }
 
-	&.size-m {
-		width: 6em;
-		@media only screen and (min-width: $page-width-full) {
-			width: 7em;
-		}
-	}
+  &.size-m {
+    width: 6em;
+    @media only screen and (min-width: $page-width-full) {
+      width: 7em;
+    }
+  }
 }
 
 textarea {
-	display: block;
+  display: block;
 }
 
 // We cannot use label.error here because that would color the normal label also red
 span.error, small.error, label.error.error-message {
-	display: block;
-	background: $color-error;
-	color: $color-white;
-	font-style: italic;
-	margin-bottom: 1rem;
-	margin-top: -1rem;
-	padding: 0.25rem 0.5rem;
+  display: block;
+  background: $color-error;
+  color: $color-white;
+  font-style: italic;
+  margin-bottom: 1rem;
+  margin-top: -1rem;
+  padding: 0.25rem 0.5rem;
 
-	a, a:hover {
-		color: $color-white;
-		font-weight: bold;
-	}
+  a, a:hover {
+    color: $color-white;
+    font-weight: bold;
+  }
 
 }
 
 label.error {
-	color: $color-error;
-	input, textarea {
-		border-color: $color-error;
-	}
+  color: $color-error;
+  input, textarea {
+    border-color: $color-error;
+  }
 }
 
 input[type="file"], input[type="checkbox"], input[type="radio"], select {
-	margin: 0 0 0.75rem 0;
-	width: auto;
-	border: 0;
+  margin: 0 0 0.75rem 0;
+  width: auto;
 }
 
 input[type="number"], select {
-	margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 input[type="checkbox"] + label, input[type="radio"] + label {
-	display: inline-block;
-	margin: 0 0.75rem 0 0.5rem;
-	vertical-align: baseline;
+  display: inline-block;
+  margin: 0 0.75rem 0 0.5rem;
+  vertical-align: baseline;
 }
 
 label {
-	cursor: pointer;
-	display: block;
-	margin-bottom: 0;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 0;
 
-	@media only screen and (max-width: $page-width-medium) {
-		margin: $spacing 0;
-	}
+  @media only screen and (max-width: $page-width-medium) {
+    margin: $spacing 0;
+  }
 }
 
 input.valid {
-	border: 5px solid $color-green !important;
+  border: 5px solid $color-green !important;
 }
 
 legend {
-	@extend .h2;
+  @extend .h2;
 }
 
 /**************** Gravityforms specific styles ************/
 .gform_button {
-	color: $color-white;
+  color: $color-white;
 }

@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  z-index: 31;
+  z-index: 2147483647;
   padding: 20px;
   box-sizing: border-box;
   background-color: rgb(0, 0, 0);
@@ -31,13 +31,13 @@
   vertical-align: middle;
   position: relative;
   z-index: 2;
-  max-width: 600px;
+  max-width: 650px;
   background: #fff;
   box-shadow: 0 0 10px #000;
   text-align: left;
 
   h3 {
-    background-color: $scheme-software-primary;
+    background-color: $scheme-plugins-primary;
     color: $color-white;
     padding: 20px 30px;
 
@@ -50,7 +50,7 @@
     padding: 15px 20px;
 
     strong {
-      color: $scheme-software-primary;
+      color: $scheme-plugins-primary;
     }
     p, form {
       padding: 0 10px;

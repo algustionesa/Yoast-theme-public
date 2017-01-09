@@ -20,44 +20,44 @@ namespace Yoast\YoastCom\Theme;
 			<h1><?php echo esc_html( get_the_archive_title() ); ?></h1>
 			<?php if ( is_search() ) { ?>
 				<div id="content">
-				<form action="<?php echo home_url(); ?>">
-					<input type="search" name="s" value="<?php echo get_search_query(); ?>"/>
+					<form action="<?php echo home_url(); ?>">
+						<input type="search" name="s" value="<?php echo get_search_query(); ?>"/>
 
-					<p>
-						You can filter your search by post type:
-						<select name="post_type">
-							<?php
-							$post_types = get_post_types( array( 'public' => true ), 'objects' );
-							unset( $post_types['attachment'], $post_types['plugin_review'] );
+						<p>
+							You can filter your search by post type:
+							<select name="post_type">
+								<?php
+								$post_types = get_post_types( array( 'public' => true ), 'objects' );
+								unset( $post_types['attachment'], $post_types['plugin_review'] );
 
-							$post_types = array_merge(
-								array(
-									'any' => (object) array(
-										'labels' => (object) array(
-											'name' => 'Any',
+								$post_types = array_merge(
+									array(
+										'any' => (object) array(
+											'labels' => (object) array(
+												'name' => 'Any',
+											)
 										)
-									)
-								),
-								$post_types
-							);
+									),
+									$post_types
+								);
 
-							$req_post_type = filter_input( INPUT_GET, 'post_type' );
-							if ( ! $req_post_type ) {
-								$req_post_type = 'any';
-							}
-
-							foreach ( $post_types as $post_type => $obj ) {
-								$sel = '';
-								if ( $req_post_type === $post_type ) {
-									$sel = 'selected ';
+								$req_post_type = filter_input( INPUT_GET, 'post_type' );
+								if ( ! $req_post_type ) {
+									$req_post_type = 'any';
 								}
-								echo '<option ' . $sel . 'value="' . $post_type . '">' . str_replace( 'Yoast ', '', $obj->labels->name ) . '</option>';
-							}
-							?>
-						</select>
-					</p>
-					<input type="submit" class="button default" value="Search"/>
-				</form>
+
+								foreach ( $post_types as $post_type => $obj ) {
+									$sel = '';
+									if ( $req_post_type === $post_type ) {
+										$sel = 'selected ';
+									}
+									echo '<option ' . $sel . 'value="' . $post_type . '">' . str_replace( 'Yoast ', '', $obj->labels->name ) . '</option>';
+								}
+								?>
+							</select>
+						</p>
+						<input type="submit" class="button default" value="Search"/>
+					</form>
 				</div>
 			<?php } ?>
 		</div>
@@ -72,23 +72,23 @@ namespace Yoast\YoastCom\Theme;
 							<img
 								src="<?php echo wp_get_attachment_image_url( get_post_thumbnail_id( $posts_page_id ), 'thumbnail-recent-articles' ); ?>"
 								width="250" height="131"
-								class="promoblock promoblock--imageholder theme-academy--secondary">
+								class="promoblock promoblock--imageholder theme-courses--secondary">
 						</div>
 					<?php endif; ?>
-					<div class="bd content color-academy--secondary">
-						<div class="content promoblock theme-academy--secondary">
-						<?php
-						$home_post = get_post( $posts_page_id );
-						if ( $home_post->post_content !== '' ) {
-							$content = $home_post->post_content;
-						} else {
-							$content = $home_post->post_excerpt;
-						}
+					<div class="bd content color-courses--secondary">
+						<div class="content promoblock theme-courses--secondary">
+							<?php
+							$home_post = get_post( $posts_page_id );
+							if ( $home_post->post_content !== '' ) {
+								$content = $home_post->post_content;
+							} else {
+								$content = $home_post->post_excerpt;
+							}
 
-						echo wpautop( do_shortcode( $content ) );
-						?>
+							echo wpautop( do_shortcode( $content ) );
+							?>
 							<i aria-hidden="true"
-							   class="blockicon color-academy--secondary fa fa-newspaper-o"></i>
+							   class="blockicon color-courses--secondary fa fa-newspaper-o"></i>
 						</div>
 					</div>
 				</div>
@@ -100,47 +100,41 @@ namespace Yoast\YoastCom\Theme;
 			if ( $banner_content !== '' ) {
 				$args = array(
 					'text'  => $banner_content,
-				    'url'   => $banner_url,
-				    'class' => 'announcement-pointer announcement--pointer-top',
+					'url'   => $banner_url,
+					'class' => 'announcement-pointer announcement--pointer-top',
 					'icon'  => 'gears',
 				);
 				get_template_part( 'html_includes/partials/announcement', $args );
 			} else {
-				echo '<hr class="hr--no-pointer">';
+				echo '<hr class="row hr--no-pointer">';
 			}
 			?>
 		<?php elseif ( '' !== term_description() ) : ?>
 			<div class="row">
 				<div class="media media--nofloat">
-					<!--					<a href="#" class="imgExt">-->
-					<!--						<img src="http://placehold.it/250x160" class="promoblock promoblock--imageholder">-->
-					<!--					</a>-->
-					<div class="bd content color-academy--secondary">
+					<div class="bd content color-courses--secondary">
 						<?php the_archive_description(); ?>
 					</div>
 				</div>
 			</div>
 
-			<hr class="hr--no-pointer">
+			<hr class="row hr--no-pointer">
+		<?php else : ?>
+			<hr class="row hr--no-pointer">
 		<?php endif; ?>
 
-		<?php //get_template_part( 'html_includes/partials/announcement', array( 'text' => "Want to learn more long tail keywords and keyword research? Check out our eBook Optimize your WordPress site / Optimize your website &raquo;", ) ); ?>
-
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php theme_object()->excerpt->more( ' <a href="' . get_permalink() . '">&raquo;</a>' ); ?>
+		<?php if ( have_posts() ): ?>
 			<div class="row">
-				<?php get_template_part( 'html_includes/partials/article-intro' ); ?>
+				<?php while ( have_posts() ) : the_post(); ?>
+					<?php theme_object()->excerpt->more( ' <a href="' . get_permalink() . '">&raquo;</a>' ); ?>
+					<?php get_template_part( 'html_includes/partials/article-intro' ); ?>
+					<hr class="hr--no-pointer">
+				<?php endwhile; ?>
+
+				<?php get_template_part( 'html_includes/partials/pagination' ); ?>
 			</div>
-
-			<hr class="hr--no-pointer">
-		<?php endwhile; ?>
-		<?php theme_object()->excerpt->clear(); ?>
-
-		<?php //get_template_part( 'html_includes/partials/announcement-addonmodules', array( 'class' => "fill--secondary", ) ); ?>
-
-		<div class="row">
-			<?php get_template_part( 'html_includes/partials/pagination' ); ?>
-		</div>
+			<?php theme_object()->excerpt->clear(); ?>
+		<?php endif; ?>
 
 		<?php if ( is_category() ) : ?>
 			<hr>
@@ -148,7 +142,6 @@ namespace Yoast\YoastCom\Theme;
 			<div class="row iceberg">
 				<h2 class="tight"><?php _e( 'Browse other Yoast Categories', 'yoastcom' ); ?></h2>
 				<?php get_template_part( 'html_includes/partials/more-categories' ); ?>
-
 			</div>
 		<?php endif; ?>
 

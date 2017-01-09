@@ -6,11 +6,19 @@
 	color: $color-white;
 }
 
-.link--naked, .link--download {
+.link--naked, .link--download{
 	text-decoration: none !important;
 
 	&:hover, &:focus {
 		text-decoration: underline !important;
+	}
+}
+
+.link--implicit {
+	text-decoration: none !important;
+
+	&:hover, &:focus {
+		text-decoration: none !important;
 	}
 }
 
@@ -20,17 +28,16 @@
 
 .link--download {
 	display: block;
-	margin: 15px 0;
+	margin: 0 0 1em 0;
 	color: $color-grey-text !important;
 
 	&::before {
 		font-family: $font-stack-icon;
 		content: '\f019';
-		margin-right: 5px;
+		margin-right: 0.5em;
 
 		&:hover {
 			text-decoration: none !important;
 		}
 	}
-
 }

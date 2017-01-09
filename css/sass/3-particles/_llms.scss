@@ -5,6 +5,8 @@
 .llms-lesson-button-wrapper {
   @extend .island;
 
+  text-align: left;
+
   input[type="submit"] {
     width: 100%;
     color: $color-white;
@@ -15,10 +17,10 @@
   input[type="submit"], input[type="button"] {
     color: $color-white;
   }
-}
 
-#llms-quiz-question-wrapper .button {
-  color: $color-white;
+  .button, button {
+    display: inline;
+  }
 }
 
 .llms-button {
@@ -43,14 +45,6 @@
 .llms-course-navigation {
   .button {
     width: 100%;
-  }
-
-  .next-lesson {
-    margin-left: 0;
-  }
-
-  .previous-lesson {
-    margin-left: 1.36rem;
   }
 }
 
@@ -104,8 +98,6 @@ svg .llms-animated-circle {
 
 .llms-return {
   a {
-    @extend .button, .left, .dimmed;
-
     .single-llms_quiz & {
       width: 100%;
       text-align: center;
@@ -225,6 +217,10 @@ svg .llms-animated-circle {
   position: -webkit-sticky;
   position: sticky;
   top: 115px;
+
+  .button, button {
+    width: 100%;
+  }
 }
 
 .sticky-filled .extra + div {

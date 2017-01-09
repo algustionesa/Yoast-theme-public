@@ -29,6 +29,12 @@ class Theme {
 	 */
 	public $shortcodes;
 
+
+	/**
+	 * @var Yoast_Navigation
+	 */
+	public $navigation;
+
 	/**
 	 * Constructor. Adds WordPress hooks.
 	 */
@@ -42,6 +48,8 @@ class Theme {
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		add_filter( 'site_icon_meta_tags', array( $this, 'site_icons' ) );
+
+		add_filter( 'comments_template_query_args', array( $this, 'reverse_comments_order' ) );
 
 		new Widget_Color_Setting();
 		new Ajax();
@@ -66,9 +74,10 @@ class Theme {
 		add_filter( 'yoast:url', array( $yoast_domains, 'get_url' ) );
 		add_filter( 'yoast:domain', array( $yoast_domains, 'get_domain' ) );
 
-		$this->color = new Color_Scheme();
-		$this->page_type = new Page_Menu_Type();
+		$this->color      = new Color_Scheme();
+		$this->page_type  = new Page_Menu_Type();
 		$this->extra_head = new Extra_Head();
+		$this->navigation = new Yoast_Navigation();
 
 		$this->excerpt = new Excerpt_Manager();
 		$this->excerpt->add_hooks();
@@ -89,17 +98,25 @@ class Theme {
 	}
 
 	/**
+	 * Reverse the comments order
+	 *
+	 * To display the most recent one on top
+	 *
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	public function reverse_comments_order( $args ) {
+		$args['order'] = 'DESC';
+
+		return $args;
+	}
+
+	/**
 	 * @return string Color Scheme
 	 */
 	public function get_color_scheme() {
 		return $this->color->get_color_scheme();
-	}
-
-	/**
-	 * @return string The type of the current page.
-	 */
-	public function get_page_type(){
-		return $this->page_type->get_page_type();
 	}
 
 	/**
@@ -139,19 +156,18 @@ class Theme {
 	 * Registers a theme asset
 	 *
 	 * @param string $script_or_style Whether it is a script or a style.
-	 * @param string $handle The handle for this asset.
-	 * @param string $file_path The file path for this asset.
-	 * @param array  $dependencies The dependencies of this asset.
+	 * @param string $handle          The handle for this asset.
+	 * @param string $file_path       The file path for this asset.
+	 * @param array  $dependencies    The dependencies of this asset.
 	 */
 	private function register_asset( $script_or_style, $handle, $file_path, $dependencies = array() ) {
-		$url  = trailingslashit( get_template_directory_uri() ) . $file_path;
-		$global_path = trailingslashit( get_template_directory() ) . $file_path;
+		$url           = trailingslashit( get_template_directory_uri() ) . $file_path;
+		$global_path   = trailingslashit( get_template_directory() ) . $file_path;
 		$last_modified = filemtime( $global_path );
 
 		if ( 'style' === $script_or_style ) {
 			wp_register_style( $handle, $url, $dependencies, $last_modified );
-		}
-		elseif ( 'script' === $script_or_style ) {
+		} elseif ( 'script' === $script_or_style ) {
 			wp_register_script( $handle, $url, $dependencies, $last_modified, true );
 		}
 	}
@@ -163,7 +179,40 @@ class Theme {
 		wp_enqueue_style( 'yoast-com' );
 		wp_enqueue_script( 'yoast-com' );
 
-		wp_localize_script( 'yoast-com', 'YoastAjax', array( 'ajaxurl' => apply_filters( 'yoast:url', 'shop_counter_ajax' ) ) );
+		wp_localize_script(
+			'yoast-com',
+			'YoastAjax',
+			array(
+				'ajaxurl' => apply_filters( 'yoast:url', 'shop_counter_ajax' ),
+				'shop'    => apply_filters( 'yoast:url', 'shop_counter_ajax' ),
+				'admin'   => admin_url( 'admin-ajax.php' ),
+			)
+		);
+
+		wp_localize_script(
+			'yoast-com-checkout',
+			'YoastI18n',
+			array(
+				'loading' => __( 'Loading', 'yoastcom' ),
+				'select_country' => __( 'Please select a country first', 'yoastcom' ),
+				'select_currency' => __( 'Please select a currency first', 'yoastcom' ),
+			)
+		);
+
+		/**
+		 * Apply hotjar tracking code if supplied by the child theme.
+		 */
+		$tracking_code = apply_filters( 'yoast_hotjar_tracking_code', null );
+		if ( is_array( $tracking_code ) ) {
+			wp_localize_script(
+				'yoast-com',
+				'yoast_hotjar',
+				[
+					'id' => $tracking_code['id'],
+					'sv' => $tracking_code['sv']
+				]
+			);
+		}
 
 		if ( function_exists( 'edd_is_checkout' ) && edd_is_checkout() ) {
 			wp_enqueue_style( 'chosen' );
@@ -172,7 +221,7 @@ class Theme {
 				'ajaxurl'        => edd_get_ajax_url(),
 				'checkout_nonce' => wp_create_nonce( 'edd_checkout_nonce' ),
 				'taxes_enabled'  => edd_use_taxes() ? '1' : '0',
-				'tax_rates'      => $this->get_tax_rates()
+				'tax_rates'      => $this->get_tax_rates(),
 			) );
 		}
 
@@ -183,7 +232,11 @@ class Theme {
 		// Remove the cross selling CSS because we overwrite it completely.
 		wp_deregister_style( 'edd-csau-css' );
 
-		if ( is_singular( array( 'post', 'yoast_dev_article' ) ) && ! Hide_Comments::hide_comments() && comments_open() ) {
+		if ( is_singular( array(
+				'post',
+				'yoast_dev_article'
+			) ) && ! Hide_Comments::hide_comments() && comments_open()
+		) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 

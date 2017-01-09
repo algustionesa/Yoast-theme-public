@@ -30,7 +30,7 @@ $plugins = query_plugins( $args );
 	<a href="<?php the_permalink(); ?>" class="more">
 		<?php $icon = get_product_icon(); ?>
 		<?php if ( $icon ) : ?>
-			<img src="<?php echo esc_url( $icon ); ?>" class="more__plug show-on-desktop" width="40" height="40" />
+			<img src="<?php echo esc_url( $icon ); ?>" class="more__plug show-on-desktop" width="40" height="40" alt="" />
 		<?php endif; ?>
 		<div class="more__holder more__holder--left">
 			<div class="more__title"><?php the_title(); ?></div>

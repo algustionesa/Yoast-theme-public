@@ -5,6 +5,9 @@
 
 namespace Yoast\YoastCom\Theme;
 
+use Yoast\YoastCom\EDD\Payment_Method_Provider;
+use Yoast\YoastCom\VisitorCurrency\Currency_Controller;
+
 /**
  * Handles all the customization to the EDD checkout HTML
  */
@@ -17,13 +20,22 @@ class Checkout_HTML {
 		add_action( 'template_redirect', array( $this, 'change_edd_csau_location' ), 99 );
 
 		add_action( 'edd_cc_billing_bottom', array( $this, 'html_cc_billing_bottom' ) );
+
 		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_what_happens_next' ), 175 );
 		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_purchase_summary' ), 180 );
+		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_switch_currency' ), 200 );
+		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_payment_providers' ), 210 );
+		add_action( 'edd_purchase_form_before_submit', array( $this, 'html_clear' ), 220 );
+
 		add_action( 'edd_purchase_link_end', array( $this, 'html_button_purchase_link' ), 10, 2 );
 
 		add_action( 'init', array( $this, 'init' ) );
 
 		add_shortcode( 'download_checkout', array( $this, 'edd_checkout_form_shortcode' ) );
+	}
+
+	public function html_clear() {
+		echo '<div class="clear"></div>';
 	}
 
 	/**
@@ -46,8 +58,7 @@ class Checkout_HTML {
 			$output .= '<div class="checkout__form">' . $edd_checkout_form . '</div>'; // checkout--form
 			$output .= $edd_cross_sells;
 			$output .= '</div>'; // checkout-wrap--container
-		}
-		else {
+		} else {
 			$output .= $edd_checkout_form;
 		}
 
@@ -95,7 +106,7 @@ class Checkout_HTML {
 		$always_show_discount = true;
 
 		if ( ! $always_show_discount && ! $yst_edd_discount ) {
-			remove_action( 'edd_checkout_form_top', 'edd_discount_field', -1 );
+			remove_action( 'edd_checkout_form_top', 'edd_discount_field', - 1 );
 		}
 	}
 
@@ -177,6 +188,88 @@ class Checkout_HTML {
 		}
 
 		get_template_part( 'html_includes/shop/input-creditcard' );
+	}
+
+	/**
+	 * Ouputs the HTML for switching between currencies.
+	 */
+	public function html_switch_currency() {
+		if ( ! class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+			return;
+		}
+
+		get_template_part( 'html_includes/shop/switch-currency', self::get_currency_switch_template_arguments() );
+	}
+
+	/**
+	 * Retrieves the settings to be used for the currency switcher.
+	 *
+	 * @return array Array containing the options for the currency switcher.
+	 */
+	public static function get_currency_switch_template_arguments() {
+		$default = 'USD';
+		$current = 'USD';
+
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			$default = $currency_controller->get_default_currency();
+			$current = $currency_controller->get_currency();
+		}
+
+		return [
+			'options'     => [
+				'EUR' => __( 'EUR (&euro;)', 'yoastcom' ),
+				'USD' => __( 'USD ($)', 'yoastcom' )
+			],
+			'default'     => $default,
+			'current'     => $current,
+		];
+	}
+
+	/**
+	 * Retrieves the shop country from the EDD settings page. Defaults to no country.
+	 *
+	 * @see edd_get_shop_country()
+	 *
+	 * @return string The current country.
+	 */
+	public function get_shop_country() {
+		$country = edd_get_option( 'base_country', '' );
+
+		return apply_filters( 'edd_shop_country', $country );
+	}
+
+	/**
+	 * Outputs the HTML to display the available payment providers.
+	 */
+	public function html_payment_providers() {
+		$providers = new Payment_Method_Provider();
+		$current_country = $this->get_shop_country();
+
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+			$currency_controller = Currency_Controller::get_instance();
+
+			$current_currency = $currency_controller->get_currency();
+		}
+
+		$output = __( 'Please select a country first', 'yoastcom' );
+
+		if ( $current_country ) {
+			$output = get_template_part(
+				'html_includes/shop/payment-providers',
+				[
+					'return' => true,
+					'providers' => $providers->filter_by_currency_and_country( $current_currency, $current_country )
+				]);
+		}
+
+		printf(
+			'<div id="yst-payment-methods"><strong>%s</strong><p>%s</p><p id="yst-payment-methods-list">%s</p></div><div class="clear"></div>',
+			__( 'Payment options', 'yoastcom' ),
+			__( 'Based on your selection, these are the payment options that will be available for you upon checkout.', 'yoastcom' ),
+			$output
+		);
 	}
 
 	/**

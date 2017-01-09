@@ -18,8 +18,8 @@ $products = array_map( function( $product_id ) {
 			$url = get_permalink();
 		}
 		?>
-		<h2 class="h3 tight color-academy--tertiary"><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h2>
-		<h3 class="h2 tight color-academy--tertiary"><a href="<?php echo $url; ?>"><?php echo implode( ' &amp ', array_map( 'esc_html', wp_list_pluck( $products, 'post_title' ) ) ); ?></a></h3>
+		<h2 class="h3 tight color-courses--tertiary"><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h2>
+		<h3 class="h2 tight color-courses--tertiary"><a href="<?php echo $url; ?>"><?php echo implode( ' &amp ', array_map( 'esc_html', wp_list_pluck( $products, 'post_title' ) ) ); ?></a></h3>
 		<?php the_content(); ?>
 		
 		<?php get_template_part( 'html_includes/partials/more-save' ); ?>

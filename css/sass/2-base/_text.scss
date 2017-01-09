@@ -55,9 +55,12 @@ p, .p {
   }
   .extra.show-off & {
     font-size: 1.4em;
-    line-height: 1.5em;
+    line-height: 1.4em;
     color: $color-pink;
     font-family: $font-stack-default;
+    a {
+      color: $color-pink;
+    }
     span {
       font-family: $font-stack-article;
       font-weight: bold;

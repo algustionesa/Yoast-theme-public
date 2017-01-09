@@ -1,0 +1,7 @@
+.widget.theme-hire-us {
+  @include headers($scheme-hire-us-primary, $scheme-hire-us-secondary);
+}
+
+.theme-hire-us {
+  @include theme($scheme-hire-us-primary, $scheme-hire-us-secondary);
+}

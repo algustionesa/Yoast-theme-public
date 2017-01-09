@@ -22,7 +22,7 @@ ul, ol {
 		li {
 			list-style: none !important;
 			position: relative;
-			padding-left: $spacing / 1.5;
+			padding-left: 1.5rem;
 
 			&::before {
 				content: '\f00c\0020';

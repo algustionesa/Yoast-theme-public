@@ -5,6 +5,9 @@
 
 namespace Yoast\YoastCom\Theme;
 
+use Yoast\YoastCom\EDD\Payment_Method_Provider;
+use Yoast\YoastCom\VisitorCurrency\Currency_Controller;
+
 /**
  * Handles the ajax requests in the theme
  */
@@ -17,8 +20,37 @@ class Ajax {
 		add_action( 'wp_ajax_cart_item_number', array( $this, 'cart_item_number' ) );
 		add_action( 'wp_ajax_nopriv_cart_item_number', array( $this, 'cart_item_number' ) );
 
+		add_action( 'wp_ajax_detect_currency', array( $this, 'detect_currency' ) );
+		add_action( 'wp_ajax_nopriv_detect_currency', array( $this, 'detect_currency' ) );
+
 		add_action( 'wp_ajax_yst_update_variation', array( $this, 'update_variation' ) );
 		add_action( 'wp_ajax_nopriv_yst_update_variation', array( $this, 'update_variation' ) );
+
+		add_action( 'wp_ajax_yst_update_payment_methods', array( $this, 'update_payment_methods' ) );
+		add_action( 'wp_ajax_nopriv_yst_update_payment_methods', array( $this, 'update_payment_methods' ) );
+	}
+
+	/**
+	 * Detect currency
+	 */
+	public function detect_currency() {
+		$data = [ 'status' => 'error' ];
+
+		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+			$alternate_currency = Currency_Controller::get_instance();
+			$data               = [
+				'status' => 'success',
+				'data'   => [
+					'currency' => $alternate_currency->get_currency(),
+				],
+			];
+		}
+
+		header( 'Content-Type: text/javascript' );
+		$callback = filter_input( INPUT_GET, 'callback' );
+		printf( '%s(%s);', $callback, wp_json_encode( $data ) );
+
+		wp_die();
 	}
 
 	/**
@@ -63,6 +95,34 @@ class Ajax {
 
 		echo wp_json_encode( [
 			'status' => 'success',
+		] );
+		wp_die();
+	}
+
+	/**
+	 * Updates the list of available payment providers.
+	 */
+	public function update_payment_methods() {
+		$country_code = filter_input( INPUT_POST, 'country_code' );
+		$currency     = filter_input( INPUT_POST, 'currency' );
+
+		if ( $country_code === false || $currency === false ) {
+			echo wp_json_encode( [
+				'status' => 'error',
+				'error'  => __( 'No country code and currency provided.', 'yoastcom' ),
+			] );
+			wp_die();
+		}
+
+		$providers = new Payment_Method_Provider();
+
+		echo wp_json_encode( [
+			'status' => 'success',
+			'html'   => get_template_part( 'html_includes/shop/payment-providers',
+				[
+					'return'    => true,
+					'providers' => $providers->filter_by_currency_and_country( $currency, $country_code )
+				] )
 		] );
 		wp_die();
 	}

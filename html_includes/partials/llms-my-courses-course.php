@@ -57,7 +57,7 @@ if ( $completed ) {
 		<div class="link">
 			<?php $next_lesson = $course->get_next_uncompleted_lesson(); ?>
 			<a class="button default" href="<?php echo esc_url( get_permalink( $next_lesson ) ); ?>">
-				<i class="fa fa-arrow-circle-right" aria-hidden="true"></i><?php printf( __( 'Continue %s', 'yoastcom' ), get_the_title( $course->id ) ); ?>
+				<i class="fa fa-arrow-circle-right" aria-hidden="true"></i><?php _e( 'Continue', 'yoastcom' ); ?>
 			</a>
 		</div>
 	<?php endif; ?>

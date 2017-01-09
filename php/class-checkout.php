@@ -17,7 +17,7 @@ class Checkout {
 		// VAT related functions.
 		add_action( 'wp_ajax_yst_check_vat', array( $this, 'ajax_check_vat' ) );
 		add_action( 'wp_ajax_nopriv_yst_check_vat', array( $this, 'ajax_check_vat' ) );
-//		add_action( 'edd_checkout_error_checks', array( $this, 'validate_btw_nr' ), 10, 2 );
+		add_action( 'edd_checkout_error_checks', array( $this, 'validate_btw_nr' ), 10, 2 );
 		add_filter( 'edd_payment_meta', array( $this, 'add_btw_nr_to_payment' ) );
 		add_filter( 'edd_purchase_data_before_gateway', array( $this, 'maybe_remove_tax' ) );
 		add_filter( 'edd_purchase_form_required_fields', array( $this, 'fix_state_required' ), 10 );

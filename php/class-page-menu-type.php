@@ -7,7 +7,7 @@ class Page_Menu_Type {
 	const HOME = 'home';
 	const SEO_BLOG = 'seo-blog';
 	const PLUGINS = 'plugins';
-	const COURCES = 'courses';
+	const COURSES = 'courses';
 	const EBOOKS = 'ebooks';
 	const HIRE_US = 'hire-us';
 	const FAQ = 'faq';
@@ -39,7 +39,7 @@ class Page_Menu_Type {
 				self::HOME     => __( 'Home', 'yoastcom' ),
 				self::SEO_BLOG => __( 'Seo blog', 'yoastcom' ),
 				self::PLUGINS  => __( 'Plugins', 'yoastcom' ),
-				self::COURCES  => __( 'Cources', 'yoastcom' ),
+				self::COURSES  => __( 'Courses', 'yoastcom' ),
 				self::EBOOKS   => __( 'eBooks', 'yoastcom' ),
 				self::HIRE_US  => __( 'Hire us', 'yoastcom' ),
 				self::FAQ      => __( 'FAQ', 'yoastcom' ),
@@ -49,34 +49,41 @@ class Page_Menu_Type {
 
 
 	/**
-	 * Returns the page type for the current page
+	 * Returns the page type of the current page.
 	 *
 	 * @param $post_id
 	 *
 	 * @return string
 	 */
-	public function get_page_type( $post_id = null ) {
+	public static function get_page_type( $post_id = null ) {
 		if ( null === $post_id ) {
 			$post_id = get_the_ID();
 		}
 		$page_type = get_post_meta( $post_id, 'yoastcom_page_type', true );
 
 		if ( ! $page_type ) {
-			$page_type = $this->get_parent_page_type( $post_id );
+			$page_type = self::get_parent_page_type( $post_id );
 		}
 
 		return $page_type;
 	}
 
-	private function get_parent_page_type( $post_id ) {
+	/**
+	 * Returns the page type of the parent.
+	 *
+	 * @param $post_id
+	 *
+	 * @return string
+	 */
+	private static function get_parent_page_type( $post_id ) {
 		$parent_id    = wp_get_post_parent_id( $post_id );
-		$color_scheme = '';
+		$page_type = '';
 
 		// If there is a parent return the parents color scheme.
 		if ( $parent_id ) {
-			$color_scheme = $this->get_page_type( $parent_id );
+			$page_type = self::get_page_type( $parent_id );
 		}
 
-		return $color_scheme;
+		return $page_type;
 	}
 }

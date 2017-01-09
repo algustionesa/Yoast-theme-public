@@ -1,68 +1,81 @@
 // Color Palet
-$color-white:					#FFF;
-$color-black:					#000;
-$color-grey:					#DCDCDC;
+$color-white:							#FFF;
+$color-black:							#000;
+$color-grey:							#DCDCDC;
 
-$color-purple:					#5D237A;
-$color-purple-dark:				#6C2548;
-$color-pink-dark:				#A4286A;
-$color-pink-light:				#D93F69;
-$color-blue:					#0075B3;
-$color-blue-dark:				#084A67;
-$color-green-blue:				#009288;
-$color-green:					#77B227;
-$color-orange:					#DC5C04;
+$color-purple:							#5D237A;
+$color-purple-dark:						#6C2548;
+$color-pink-dark:						#A4286A;
+$color-pink-light:						#D93F69;
+$color-blue:							#0075B3;
+$color-blue-dark:						#084A67;
+$color-green-blue:						#009288;
+$color-green:							#77B227;
+$color-orange:							#DC5C04;
 
-$color-shadow-purple:			#5D237A;
-$color-shadow-pink-dark:		#A4286A;
-$color-shadow-pink-light:		#D93F69;
-$color-shadow-blue:				#0075B3;
-$color-shadow-green-blue:		#009288;
-$color-shadow-green:			#77B227;
-$color-shadow-orange:			#DC5C04;
+$color-shadow-purple:					#5D237A;
+$color-shadow-pink-dark:				#A4286A;
+$color-shadow-pink-light:				#D93F69;
+$color-shadow-blue:						#0075B3;
+$color-shadow-green-blue:				#009288;
+$color-shadow-green:					#77B227;
+$color-shadow-orange:					#DC5C04;
 
-$color-error:					#E23132;
+$color-error:							#E23132;
 
 // Button hovers
-$color-orange-hover:				#F58223;
-$color-grey-hover:					#CDCDCD;
+$color-orange-hover:					#F58223;
+$color-grey-hover:						#CDCDCD;
 
-$color-pink: 						#D93F69;
-$color-pink-hover:					darken( $color-pink, 5% );
+$color-pink: 							#D93F69;
+$color-pink-hover:						darken( $color-pink, 5% );
 
 // Color schemes
-$scheme-home-primary:				$color-pink-light;
-$scheme-home-secondary:				$color-pink-dark;
-$scheme-home-tertiary:				$color-purple;
-$scheme-home-menu-primary:			$color-pink-dark;
-$scheme-home-menu-secondary:		$color-pink-light;
-	
-$scheme-academy-primary:			$color-purple;
-$scheme-academy-secondary:			$color-pink-dark;
-$scheme-academy-tertiary:			$color-pink-light;
-$scheme-academy-menu-primary:		$color-pink-dark;
-$scheme-academy-menu-secondary:		$color-purple;
+// todo [diedexx] make sure all the correct colors are used.
+$scheme-home-primary:					$color-green;
+$scheme-home-secondary:					$color-green-blue;
+$scheme-home-tertiary:					$color-blue;
+$scheme-home-menu-primary:				$color-green;
+$scheme-home-menu-secondary:			$color-green;
 
-$scheme-software-primary:			$color-blue;
-$scheme-software-secondary:			$color-green-blue;
-$scheme-software-tertiary:			$color-green;
-$scheme-software-menu-primary:		$color-green-blue;
-$scheme-software-menu-secondary:	$color-blue;
-	
-$scheme-review-primary:				$color-green-blue;
-$scheme-review-secondary:			$color-green;
-$scheme-review-tertiary:			$color-blue;
-$scheme-review-menu-primary:		$color-green-blue;
-$scheme-review-menu-secondary:		$color-green;
-	
-$scheme-about-primary:				$color-pink-light;
-$scheme-about-secondary:			$color-pink-dark;
-$scheme-about-tertiary:				$color-purple;
-$scheme-about-menu-primary:			$color-pink-dark;
-$scheme-about-menu-secondary:		$color-pink-light;
+$scheme-seo-blog-primary:				$color-purple;
+$scheme-seo-blog-secondary:				$color-pink-dark;
+$scheme-seo-blog-tertiary:				$color-pink-light;
+$scheme-seo-blog-menu-primary:			$color-purple;
+$scheme-seo-blog-menu-secondary:		$color-purple;
+
+$scheme-plugins-primary:				$color-blue;
+$scheme-plugins-secondary:				$color-green-blue;
+$scheme-plugins-tertiary:				$color-green;
+$scheme-plugins-menu-primary:			$color-blue;
+$scheme-plugins-menu-secondary:			$color-green-blue;
+
+$scheme-courses-primary:				$color-pink-light;
+$scheme-courses-secondary:				$color-pink-dark;
+$scheme-courses-tertiary:				$color-purple;
+$scheme-courses-menu-primary:			$color-pink-light;
+$scheme-courses-menu-secondary:			$color-pink-dark;
+
+$scheme-ebooks-primary:					$color-purple-dark;
+$scheme-ebooks-secondary:				$color-pink-dark;
+$scheme-ebooks-tertiary:				$color-pink;
+$scheme-ebooks-menu-primary:			$color-purple-dark;
+$scheme-ebooks-menu-secondary:			$color-purple-dark;
+
+$scheme-hire-us-primary:				$color-green-blue;
+$scheme-hire-us-secondary:				$color-green;
+$scheme-hire-us-tertiary:				$color-blue;
+$scheme-hire-us-menu-primary:			$color-green-blue;
+$scheme-hire-us-menu-secondary:			$color-green-blue;
+
+$scheme-faq-primary:					$color-blue-dark;
+$scheme-faq-secondary:					$color-green-blue;
+$scheme-faq-tertiary:					$color-blue;
+$scheme-faq-menu-primary:				$color-blue-dark;
+$scheme-faq-menu-secondary:				$color-blue-dark;
 
 
-$color-grey-cta:				#DCDCDC;
-$color-grey-line:				#E6E6E6;
-$color-grey-quote:				#8C8C8C;
-$color-grey-text:				#646464;
+$color-grey-cta:						#DCDCDC;
+$color-grey-line:						#E6E6E6;
+$color-grey-quote:						#8C8C8C;
+$color-grey-text:						#646464;

@@ -1,43 +1,79 @@
 .color {
 
-	&-academy {
-		color: $scheme-academy-primary !important;
+	&-courses {
+		color: $scheme-courses-primary !important;
 	}
 
-	&-academy--secondary {
-		color: $scheme-academy-secondary !important;
+	&-courses--secondary {
+		color: $scheme-courses-secondary !important;
 	}
 
-	&-academy--tertiary {
-		color: $scheme-academy-tertiary !important;
+	&-courses--tertiary {
+		color: $scheme-courses-tertiary !important;
 	}
 
-	&-software {
-		color: $scheme-software-primary !important;
+	&-plugins {
+		color: $scheme-plugins-primary !important;
 	}
 
-	&-software--secondary {
-		color: $scheme-software-secondary !important;
+	&-plugins--secondary {
+		color: $scheme-plugins-secondary !important;
 	}
 
-	&-review {
-		color: $scheme-review-primary !important;
+	&-hire-us {
+		color: $scheme-hire-us-primary !important;
 	}
 
-	&-review--secondary {
-		color: $scheme-review-secondary !important;
+	&-hire-us--secondary {
+		color: $scheme-hire-us-secondary !important;
 	}
 
-	&-about {
-		color: $scheme-about-primary !important;
+	&-home {
+		color: $scheme-home-primary !important;
 	}
 
-	&-about--secondary {
-		color: $scheme-about-secondary !important;
+	&-home--secondary {
+		color: $scheme-home-secondary !important;
 	}
 
-	&-about--tertiary {
-		color: $scheme-about-tertiary !important;
+	&-home--tertiary {
+		color: $scheme-home-tertiary !important;
+	}
+
+	&-seo-blog {
+	  color: $scheme-seo-blog-primary !important;
+	}
+
+	&-seo-blog--secondary {
+	  color: $scheme-seo-blog-secondary !important;
+	}
+
+	&-seo-blog--tertiary {
+	  color: $scheme-seo-blog-tertiary !important;
+	}
+
+	&-ebooks {
+	  color: $scheme-ebooks-primary !important;
+	}
+
+	&-ebooks--secondary {
+	  color: $scheme-ebooks-secondary !important;
+	}
+
+	&-ebooks--tertiary {
+	  color: $scheme-ebooks-tertiary !important;
+	}
+
+	&-faq {
+	  color: $scheme-faq-primary !important;
+	}
+
+	&-faq--secondary {
+	  color: $scheme-faq-secondary !important;
+	}
+
+	&-faq--tertiary {
+	  color: $scheme-faq-tertiary !important;
 	}
 
 	&-cta {
@@ -55,45 +91,82 @@
 
 .border-color {
 
-	&-academy {
-		border-color: $scheme-academy-primary !important;
+	&-courses {
+		border-color: $scheme-courses-primary !important;
 	}
 
-	&-academy--secondary {
-		border-color: $scheme-academy-secondary !important;
+	&-courses--secondary {
+		border-color: $scheme-courses-secondary !important;
 	}
 
-	&-academy--tertiary {
-		border-color: $scheme-academy-tertiary !important;
+	&-courses--tertiary {
+		border-color: $scheme-courses-tertiary !important;
 	}
 
-	&-software {
-		border-color: $scheme-software-primary !important;
+	&-plugins {
+		border-color: $scheme-plugins-primary !important;
 	}
 
-	&-software--secondary {
-		border-color: $scheme-software-secondary !important;
+	&-plugins--secondary {
+		border-color: $scheme-plugins-secondary !important;
 	}
 
-	&-review {
-		border-color: $scheme-review-primary !important;
+	&-hire-us {
+		border-color: $scheme-hire-us-primary !important;
 	}
 
-	&-review--secondary {
-		border-color: $scheme-review-secondary !important;
+	&-hire-us--secondary {
+		border-color: $scheme-hire-us-secondary !important;
 	}
 
-	&-about {
-		border-color: $scheme-about-primary !important;
+	&-home {
+		border-color: $scheme-home-primary !important;
 	}
 
-	&-about--secondary {
-		border-color: $scheme-about-secondary !important;
+	&-home--secondary {
+		border-color: $scheme-home-secondary !important;
 	}
 
-	&-about--tertiary {
-		border-color: $scheme-about-tertiary !important;
+	&-home--tertiary {
+		border-color: $scheme-home-tertiary !important;
 	}
+
+	&-seo-blog {
+	  border-color: $scheme-seo-blog-primary !important;
+	}
+
+	&-seo-blog--secondary {
+	  border-color: $scheme-seo-blog-secondary !important;
+	}
+
+	&-seo-blog--tertiary {
+	  border-color: $scheme-seo-blog-tertiary !important;
+	}
+
+	&-ebooks{
+	  border-color: $scheme-ebooks-primary !important;
+	}
+
+	&-ebooks--secondary {
+	  border-color: $scheme-ebooks-secondary !important;
+	}
+
+	&-ebooks--tertiary {
+	  border-color: $scheme-ebooks-tertiary !important;
+	}
+
+	&-faq{
+	  border-color: $scheme-faq-primary !important;
+	}
+
+	&-faq--secondary {
+	  border-color: $scheme-faq-secondary !important;
+	}
+
+	&-faq--tertiary {
+	  border-color: $scheme-faq-tertiary !important;
+	}
+
 
 	&-cta {
 		border-color: $color-orange !important;
@@ -107,68 +180,123 @@
 a, button, input {
 	&.color {
 
-		&-academy {
+		&-courses{
 			&:hover, &:focus {
-				color: $scheme-academy-secondary!important;
+				color: $scheme-courses-secondary!important;
 			}
 		}
 
-		&-academy--secondary {
+		&-courses--secondary {
 			&:hover, &:focus {
-				color: $scheme-academy-primary!important;
+				color: $scheme-courses-primary!important;
 			}
 		}
 
 
-		&-academy--tertiary {
+		&-courses--tertiary {
 			&:hover, &:focus {
-				color: $scheme-academy-primary!important;
+				color: $scheme-courses-primary!important;
 			}
 		}
 
-		&-software {
+		&-plugins {
 			&:hover, &:focus {
-				color: $scheme-software-secondary!important;
+				color: $scheme-plugins-secondary!important;
 			}
 		}
 
-		&-software--secondary {
+		&-plugins--secondary {
 			&:hover, &:focus {
-				color: $scheme-software-primary!important;
+				color: $scheme-plugins-primary!important;
 			}
 		}
 
-		&-review {
+		&-hire-us {
 			&:hover, &:focus {
-				color: $scheme-review-secondary!important;
+				color: $scheme-hire-us-secondary!important;
 			}
 		}
 
-		&-review--secondary {
+		&-hire-us--secondary {
 			&:hover, &:focus {
-				color: $scheme-review-primary!important;
+				color: $scheme-hire-us-primary!important;
 			}
 		}
 
-		&-about {
+		&-home {
 			&:hover, &:focus {
-				color: $scheme-about-secondary!important;
+				color: $scheme-home-secondary!important;
 			}
 		}
 
-		&-about--secondary {
+		&-home--secondary {
 			&:hover, &:focus {
-				color: $scheme-about-primary!important;
+				color: $scheme-home-primary!important;
 			}
 		}
 
-		&-about--tertiary {
+		&-home--tertiary {
 			&:hover, &:focus {
-				color: $scheme-about-primary!important;
+				color: $scheme-home-primary!important;
 			}
 		}
 
-		&-cta {
+		&-seo-blog {
+		  &:hover, &:focus {
+			color: $scheme-seo-blog-secondary!important;
+		  }
+		}
+
+		&-seo-blog--secondary {
+		  &:hover, &:focus {
+			color: $scheme-seo-blog-primary!important;
+		  }
+		}
+
+		&-seo-blog--tertiary {
+		  &:hover, &:focus {
+			color: $scheme-seo-blog-primary!important;
+		  }
+		}
+
+		&-ebooks {
+		  &:hover, &:focus {
+			color: $scheme-ebooks-secondary!important;
+		  }
+		}
+
+		&-ebooks--secondary {
+		  &:hover, &:focus {
+			color: $scheme-ebooks-primary!important;
+		  }
+		}
+
+		&-ebooks--tertiary {
+		  &:hover, &:focus {
+			color: $scheme-ebooks-primary!important;
+		  }
+		}
+
+		&-faq{
+		  &:hover, &:focus {
+			color: $scheme-faq-secondary!important;
+		  }
+		}
+
+		&-faq--secondary {
+		  &:hover, &:focus {
+			color: $scheme-faq-primary!important;
+		  }
+		}
+
+		&-faq--tertiary {
+		  &:hover, &:focus {
+			color: $scheme-faq-primary!important;
+		  }
+		}
+
+
+	  &-cta {
 			&:hover, &:focus {
 				//color: desaturate(lighten($color-orange, 20), 20)!important;
 			}

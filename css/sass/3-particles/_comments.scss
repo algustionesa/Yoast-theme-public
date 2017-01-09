@@ -112,18 +112,76 @@
 		color: $color-white;
 	}
 
-	.comment-form-author,
-	.comment-form-email,
-	.comment-form-url {
-		input {
-			max-width: 34em;
-		}
-	}
-
 	.comment-form-comment {
 		textarea {
-			max-width: 34em;
 			height: 12em;
 		}
 	}
 }
+
+#commentform {
+	p {
+		margin-bottom: 0;
+	}
+}
+
+@media (min-width: 63.25rem) {
+	#commentform {
+		width: 62rem;
+
+		.comment-form-comment {
+			float: left;
+			width: 32rem;
+			textarea {
+				height: 14.1em;
+			}
+		}
+
+		.comment-form-author {
+			float: right;
+			clear: right;
+			width: 28rem;
+		}
+
+		.comment-form-email {
+			float: right;
+			clear: right;
+			width: 28rem;
+		}
+
+		.comment-form-url {
+			float: right;
+			clear: right;
+			width: 28rem;
+		}
+
+		.form-submit {
+			clear: both;
+		}
+	}
+}
+@media (min-width: 640px) and (max-width: 63.24rem) {
+	#commentform {
+		width: 600px;
+
+		.comment-form-author {
+			float: left;
+			width: 290px;
+		}
+
+		.comment-form-email {
+			float: right;
+			width: 290px;
+		}
+
+		.comment-form-url {
+			clear: both;
+		}
+	}
+}
+
+
+.entry-comments {
+	clear: both;
+}
+

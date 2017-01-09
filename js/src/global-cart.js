@@ -20,7 +20,15 @@
 
 	function handleGlobalCartItemNumber( response ) {
 		if ( 'success' === response.status ) {
-			$( '.cart .num-items' ).html( response.data.cartItems );
+			var $container = $( '.cart .num-items' );
+			$container.html( response.data.cartItems );
+
+			if ( response.data.cartItems > 0 ) {
+				$container.addClass( 'has-items' );
+			}
+			else {
+				$container.removeClass( 'has-items' );
+			}
 		}
 	}
 

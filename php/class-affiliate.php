@@ -75,6 +75,9 @@ class Affiliate {
 			return $output;
 		}
 
+		// Make sure we use the default currency (USD) for affiliate details.
+		add_filter( 'yoast_edd_currency_override', '__return_false' );
+
 		$commissions = array();
 
 		foreach ( $cart as $key => $item ) {
@@ -120,6 +123,9 @@ class Affiliate {
 
 			$commissions[ $commission_type ][] = $price;
 		}
+
+		// Clean up the filter to force default currency.
+		remove_filter( 'yoast_edd_currency_override', '__return_false' );
 
 		/*
 		 * Group by download_category taxonomy

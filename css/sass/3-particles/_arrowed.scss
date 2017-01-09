@@ -124,7 +124,6 @@
 			border-top: ($arrowwidth + .1rem) solid transparent;
 			border-bottom: $arrowwidth solid transparent;
 		}
-
 	}
 }
 
@@ -140,43 +139,58 @@
 .arrowed {
 
 	.theme-home &,
-	&.theme-home  {
+	&.theme-home {
 		@include line-arrow-color($scheme-home-primary);
 	}
 
-	.theme-academy &,
-	&.theme-academy {
-		@include line-arrow-color($scheme-academy-primary);
+	.theme-seo-blog &,
+	&.theme-seo-blog {
+		@include line-arrow-color($scheme-seo-blog-primary);
 	}
 
-	&.theme-academy--secondary, &.border-color-academy--secondary {
-		@include line-arrow-color($scheme-academy-secondary);
+	.theme-ebooks &,
+	&.theme-ebooks {
+		@include line-arrow-color($scheme-ebooks-primary);
 	}
 
-	.theme-software &,
-	&.theme-software {
-		@include line-arrow-color($scheme-software-primary);
+	.theme-faq &,
+	&.theme-faq {
+		@include line-arrow-color($scheme-faq-primary);
 	}
 
-	&.theme-software--secondary, &.border-color-software--secondary {
-		@include line-arrow-color($scheme-software-secondary);
+	.theme-courses &,
+	&.theme-courses {
+		@include line-arrow-color($scheme-courses-primary);
 	}
 
-	.theme-review &,
-	&.theme-review {
-		@include line-arrow-color($scheme-review-primary);
+	&.theme-courses--secondary, &.border-color-courses--secondary {
+		@include line-arrow-color($scheme-courses-secondary);
 	}
 
-	&.theme-review--secondary {
-		@include line-arrow-color($scheme-review-secondary);
+	.theme-plugins &,
+	&.theme-plugins {
+		@include line-arrow-color($scheme-plugins-primary);
+	}
+
+	&.theme-plugins--secondary, &.border-color-plugins--secondary {
+		@include line-arrow-color($scheme-plugins-secondary);
+	}
+
+	.theme-hire-us &,
+	&.theme-hire-us {
+		@include line-arrow-color($scheme-hire-us-primary);
+	}
+
+	&.theme-hire-us--secondary {
+		@include line-arrow-color($scheme-hire-us-secondary);
 	}
 
 	.theme-about &,
 	&.theme-about {
-		@include line-arrow-color($scheme-about-primary);
+		@include line-arrow-color($scheme-home-primary);
 	}
 
 	&.theme-about--secondary {
-		@include line-arrow-color($scheme-about-secondary);
+		@include line-arrow-color($scheme-home-secondary);
 	}
 }

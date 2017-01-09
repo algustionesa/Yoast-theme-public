@@ -19,63 +19,80 @@
 		border-top: none;
 	}
 
-	.theme-academy & {
-		border-color: $scheme-academy-primary;
+	.theme-courses & {
+		border-color: $scheme-courses-primary;
 	}
 
-	.theme-academy--secondary & {
-		border-color: $scheme-academy-secondary;
+  	.theme-seo-blog & {
+	  	border-color: $scheme-seo-blog-primary;
 	}
 
-	.theme-software & {
-		border-color: $scheme-software-primary;
+	.theme-courses--secondary & {
+		border-color: $scheme-courses-secondary;
 	}
 
-	.theme-review & {
-		border-color: $scheme-review-primary;
+	.theme-plugins & {
+		border-color: $scheme-plugins-primary;
 	}
 
-	.theme-about & {
-		border-color: $scheme-about-primary;
+	.theme-hire-us & {
+		border-color: $scheme-hire-us-primary;
 	}
 
 	.theme-home & {
-		border-color: $scheme-about-primary;
+		border-color: $scheme-home-primary;
 	}
+
+	.theme-faq & {
+	  border-color: $scheme-faq-secondary;
+	}
+
+	.theme-ebooks & {
+	  border-color: $scheme-ebooks-secondary;
+	}
+
 
 
 	/* Explicit theming */
 
-	&.theme-academy {
-		border-color: $scheme-academy-primary;
+	&.theme-courses {
+		border-color: $scheme-courses-primary;
 	}
 
-	&.theme-academy--secondary {
-		border-color: $scheme-academy-secondary;
+  	&.theme-seo-blog {
+		border-color: $scheme-seo-blog-primary;
+  	}
+
+	&.theme-courses--secondary {
+		border-color: $scheme-courses-secondary;
 	}
 
-	&.theme-software {
-		border-color: $scheme-software-primary;
+	&.theme-plugins {
+		border-color: $scheme-plugins-primary;
 	}
 
-	&.theme-software--secondary {
-		border-color: $scheme-software-secondary;
+	&.theme-plugins--secondary {
+		border-color: $scheme-plugins-secondary;
 	}
 
-	&.theme-review {
-		border-color: $scheme-review-primary;
+	&.theme-hire-us {
+		border-color: $scheme-hire-us-primary;
 	}
 
-	&.theme-review--secondary {
-		border-color: $scheme-review-secondary;
+	&.theme-hire-us--secondary {
+		border-color: $scheme-hire-us-secondary;
 	}
 
-	&.theme-about {
-		border-color: $scheme-about-primary;
-	}
+  	&.theme-home {
+		border-color: $scheme-home-primary;
+  	}
 
-	&.theme-about--secondary {
-		border-color: $scheme-about-secondary;
+  	&.theme-faq {
+		border-color: $scheme-faq-secondary;
+  	}
+
+	&.theme-ebooks {
+	  border-color: $scheme-ebooks-secondary;
 	}
 
 	&.link {

@@ -5,8 +5,8 @@ body.edd-checkout {
   }
 }
 
-#edd_next_button {
-
+#edd_checkout_wrap {
+  padding: 20px;
 }
 
 .checkout-wrap__container {
@@ -75,6 +75,8 @@ body.edd-checkout {
     color: $color-grey-text;
     float: right;
     margin-left: 4px;
+
+    padding: 0 3px;
     &:hover, &:focus {
       text-decoration: none;
     }
@@ -98,7 +100,6 @@ body.edd-checkout {
   select {
     margin: 0;
     line-height: 1.5em;
-    border: none;
   }
 
   input[type="radio"] {
@@ -183,7 +184,9 @@ body.edd-checkout {
 
 // Style the purchase form to make it more compact and responsive
 #edd_purchase_form {
-  @extend .iceberg;
+  //@extend .iceberg;
+
+  padding-bottom: 0;
 
   p {
     display: block;
@@ -418,5 +421,10 @@ body.edd-checkout {
         display: inline;
       }
     }
+  }
+
+  .yst-payment-method {
+    margin-right:4px;
+    height: 30px;
   }
 }

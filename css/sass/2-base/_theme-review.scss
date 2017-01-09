@@ -1,7 +1,0 @@
-.widget.theme-review {
-  @include headers($scheme-review-primary, $scheme-review-secondary);
-}
-
-.theme-review {
-  @include theme($scheme-review-primary, $scheme-review-secondary, $scheme-review-tertiary, $scheme-review-menu-primary, $scheme-review-menu-secondary);
-}

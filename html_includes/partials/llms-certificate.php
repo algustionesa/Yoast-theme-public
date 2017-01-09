@@ -93,7 +93,7 @@ $certificate = new LLMS_Certificate;
 			        onclick="window.print();"><?php _e( 'Print certificate', 'yoastcom' ); ?></button>
 		</div>
 
-		<section class="clear certificate-badge no-print row theme-academy">
+		<section class="clear certificate-badge no-print row theme-courses">
 			<h2><?php _e( 'Show your certificate on your site, implement our badge.', 'yoastcom' ); ?></h2>
 
 			<?php $badge_html = \Yoast\YoastCom\Academy\get_badge_html( get_the_ID(), get_current_user_id() ); ?>

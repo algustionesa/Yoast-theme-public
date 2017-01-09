@@ -64,7 +64,7 @@ if ( ! $download_page_url ) {
 				?>
 
 				<button type="submit"
-				        class="color-academy-secondary button--naked">&laquo; <?php _e( 'Add to cart', 'yoastcom' ); ?></button>
+				        class="color-courses-secondary button--naked">&laquo; <?php _e( 'Add to cart', 'yoastcom' ); ?></button>
 			</form>
 		</div>
 	</div>

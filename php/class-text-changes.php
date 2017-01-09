@@ -129,8 +129,8 @@ class Text_Changes {
 	 * @return array
 	 */
 	public function filter_crumbs( $links ) {
-		$this->filter_crumbs_helper( $links, 'theme-software', 478759 );
-		$this->filter_crumbs_helper( $links, 'theme-academy', 409369 );
+		$this->filter_crumbs_helper( $links, 'theme-plugins', 478759 );
+		$this->filter_crumbs_helper( $links, 'theme-courses', 409369 );
 
 		return $links;
 	}

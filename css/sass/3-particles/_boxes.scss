@@ -1,260 +1,247 @@
 @media only screen and (min-width: $page-width-full) {
-	.boxes {
-		@include rounded--large();
-		position: absolute;
-		z-index: -1;
+  .boxes {
+    @include rounded--large();
+    position: absolute;
+    z-index: -1;
 
-		&::before {
-			content: "";
-			@include rounded--large();
-			display: block;
-			position: absolute;
-		}
-		&::after {
-			content: "";
-			@include rounded--large();
-			display: block;
-			position: absolute;
-		}
+    &::before {
+      content: "";
+      @include rounded--large();
+      display: block;
+      position: absolute;
+    }
+    &::after {
+      content: "";
+      @include rounded--large();
+      display: block;
+      position: absolute;
+    }
 
-		&--promo-home {
-			border-color: $color-blue;
-			width: 10em;
-			height: 11em;
-			top: 4rem;
-			left: -5.5rem;
-			&::before {
-				border-color: $color-pink-light;
-				width: 10em;
-				height: 9em;
-				top: 5rem;
-				right: -3.5rem;
-			}
-			&::after {
-				display: none;
-			}
-		}
+    &--promo-home {
+      border-color: $color-blue;
+      width: 10em;
+      height: 11em;
+      top: 4rem;
+      left: -5.5rem;
+      &::before {
+        border-color: $color-pink-light;
+        width: 10em;
+        height: 9em;
+        top: 5rem;
+        right: -3.5rem;
+      }
+      &::after {
+        display: none;
+      }
+    }
 
-		&--promo {
-			border-color: $color-green;
-			width: 10em;
-			height: 11em;
-			top: 4rem;
-			left: -5.5rem;
-			&::before {
-				border-color: $color-pink-light;
-				width: 10em;
-				height: 9em;
-				top: 5rem;
-				right: -3.5rem;
-			}
-			&::after {
-				display: none;
-			}
-		}
+    &--promo {
+      border-color: $color-green;
+      width: 10em;
+      height: 11em;
+      top: 4rem;
+      left: -5.5rem;
+      &::before {
+        border-color: $color-pink-light;
+        width: 10em;
+        height: 9em;
+        top: 5rem;
+        right: -3.5rem;
+      }
+      &::after {
+        display: none;
+      }
+    }
 
-		&--promo-review {
-			border-color: $color-green;
-			width: 12em;
-			height: 11em;
-			bottom: 2rem;
-			left: -2.5rem;
-			&::before {
-				display: none;
-			}
-			&::after {
-				display: none;
-			}
-		}
+    &--promo-review {
+      border-color: $color-green;
+      width: 12em;
+      height: 11em;
+      bottom: 2rem;
+      left: -2.5rem;
+      &::before {
+        display: none;
+      }
+      &::after {
+        display: none;
+      }
+    }
 
-		&--header {
-			border-color: $color-green;
-			width: 13.5em;
-			height: 10em;
-			bottom: 6rem;
-			right: 7.5rem;
+    &--header {
+      border-color: $color-green;
+      width: 13.5em;
+      height: 10em;
+      bottom: 6rem;
+      right: 7.5rem;
 
-			&::before {
-				border-color: $color-pink-light;
-				top: 7rem;
-				left: -3.5rem;
-				width: 9em;
-				height: 10em;
-			}
-			&::after {
-				border-color: $color-blue;
-				width: 10em;
-				height: 10em;
-				top: 8em;
-				right: -6em;
-			}
-		}
+      &::before {
+        border-color: $color-pink-light;
+        top: 7rem;
+        left: -3.5rem;
+        width: 9em;
+        height: 10em;
+      }
+      &::after {
+        border-color: $color-blue;
+        width: 10em;
+        height: 10em;
+        top: 8em;
+        right: -6em;
+      }
+    }
 
-		&--academy {
-			border-color: $color-green;
-			width: 13.5em;
-			height: 10em;
-			bottom: 6rem;
-			right: 7.5rem;
+    &--courses {
+      border-color: $color-green;
+      width: 13.5em;
+      height: 10em;
+      bottom: 6rem;
+      right: 7.5rem;
 
-			&::before {
-				border-color: $color-pink-light;
-				top: 7rem;
-				left: -3.5rem;
-				width: 9em;
-				height: 10em;
-			}
-			&::after {
-				border-color: $color-blue;
-				width: 10em;
-				height: 10em;
-				top: 8em;
-				right: -6em;
-			}
-		}
+      &::before {
+        border-color: $color-pink-light;
+        top: 7rem;
+        left: -3.5rem;
+        width: 9em;
+        height: 10em;
+      }
+      &::after {
+        border-color: $color-blue;
+        width: 10em;
+        height: 10em;
+        top: 8em;
+        right: -6em;
+      }
+    }
 
-		&--software {
-			border-color: $color-green;
-			width: 8em;
-			height: 5em;
-			bottom: 2rem;
-			right: 7.5rem;
+    &--plugins {
+      border-color: $color-green;
+      width: 8em;
+      height: 5em;
+      bottom: 2rem;
+      right: 7.5rem;
 
-			&::before {
-				border-color: $color-pink-light;
-				bottom: 4rem;
-				top: auto;
-				left: -4.5rem;
-				width: 8em;
-				height: 6em;
-			}
-			&::after {
-				border-color: $color-pink-dark;
-				width: 8em;
-				height: 10em;
-				bottom: 0em;
-				top: auto;
-				right: -6em;
-			}
-		}
+      &::before {
+        border-color: $color-pink-light;
+        bottom: 4rem;
+        top: auto;
+        left: -4.5rem;
+        width: 8em;
+        height: 6em;
+      }
+      &::after {
+        border-color: $color-pink-dark;
+        width: 8em;
+        height: 10em;
+        bottom: 0em;
+        top: auto;
+        right: -6em;
+      }
+    }
 
-		&--review {
-			border-color: $color-pink-light;
-			width: 9em;
-			height: 5em;
-			bottom: 2rem;
-			right: 7.5rem;
+    &--hire-us {
+      border-color: $color-pink-light;
+      width: 9em;
+      height: 5em;
+      bottom: 2rem;
+      right: 7.5rem;
 
-			&::before {
-				border-color: $color-pink-dark;
-				bottom: 3.5rem;
-				top: auto;
-				left: -6.5rem;
-				width: 9em;
-				height: 8em;
-			}
-			&::after {
-				border-color: $color-blue;
-				width: 9em;
-				height: 6.2em;
-				bottom: 0em;
-				top: auto;
-				right: -6em;
-			}
-		}
+      &::before {
+        border-color: $color-pink-dark;
+        bottom: 3.5rem;
+        top: auto;
+        left: -6.5rem;
+        width: 9em;
+        height: 8em;
+      }
+      &::after {
+        border-color: $color-blue;
+        width: 9em;
+        height: 6.2em;
+        bottom: 0em;
+        top: auto;
+        right: -6em;
+      }
+    }
 
-		&--about {
-			border-color: $color-pink-dark;
-			width: 9em;
-			height: 6.5em;
-			bottom: 2rem;
-			right: 6.5rem;
+    &--home {
+      border-color: $color-pink-dark;
+      width: 9em;
+      height: 6.5em;
+      bottom: 2rem;
+      right: 6.5rem;
 
-			&::before {
-				border-color: $color-green;
-				bottom: 0rem;
-				top: auto;
-				left: -6.5rem;
-				width: 10em;
-				height: 5em;
-			}
-			&::after {
-				border-color: $color-blue;
-				width: 10em;
-				height: 10em;
-				bottom: 3.5em;
-				top: auto;
-				right: -6em;
-			}
-		}
+      &::before {
+        border-color: $color-green;
+        bottom: 0rem;
+        top: auto;
+        left: -6.5rem;
+        width: 10em;
+        height: 5em;
+      }
+      &::after {
+        border-color: $color-blue;
+        width: 10em;
+        height: 10em;
+        bottom: 3.5em;
+        top: auto;
+        right: -6em;
+      }
+    }
 
-		&--header-home {
-			bottom: 8rem;
-		}
+    &--header-home {
+      bottom: 8rem;
+    }
 
-		&--footer {
-			border-color: $color-purple;
-			width: 10em;
-			height: 10em;
-			bottom: 1em;
-			left: -3rem;
-			&::before {
-				border-color: $color-pink-light;
-				width: 10em;
-				height: 10em;
-				top: 6rem;
-				left: -6.5rem;
-			}
-			&::after {
-				border-color: $color-green;
-				width: 10em;
-				height: 8em;
-				top: 8em;
-				right: -6em;
-			}
-		}
+    &--footer {
+      border-color: $color-purple;
+      width: 10em;
+      height: 10em;
+      bottom: 1em;
+      left: -3rem;
+      &::before {
+        border-color: $color-pink-light;
+        width: 10em;
+        height: 10em;
+        top: 6rem;
+        left: -6.5rem;
+      }
+      &::after {
+        border-color: $color-green;
+        width: 10em;
+        height: 8em;
+        top: 8em;
+        right: -6em;
+      }
+    }
+  }
 
-	}
+  .supportbox {
+    width: 306px;
+    margin: 10px 30px 20px 10px;
+    float: left;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-color: $color-pink-dark;
+  }
 
-	.supportbox {
-		width: 306px;
-		margin: 10px 30px 20px 10px;
-		float: left;
-		padding: 20px;
-		border: 1px solid;
-		border-radius: 30px;
-		border-bottom-right-radius: 0;
-		border-color: $color-pink-dark;
-	}
-
-	.supportbox:nth-child(3n+4) {
-		margin-right: 0;
-	}
-
+  .supportbox:nth-child(3n+4) {
+    margin-right: 0;
+  }
 }
 
 .supportbox {
-	h2 {
-		color: $color-pink-dark;
-	}
-	p {
-		color: $color-black;
-	}
+  h2 {
+    color: $color-pink-dark;
+  }
+  p {
+    color: $color-black;
+  }
 
-	button, a.button {
-		background-color: $color-pink;
-		color: $color-white;
-		width: 90%;
-		margin-bottom: 15px;
-	}
-	button::after, a.button::after {
-		border-left-color: $color-pink;
-	}
-
-	button:hover, a.button:hover {
-		background-color: $color-pink-hover;
-	}
-	button:hover::after, a.button:hover::after {
-		border-left-color: $color-pink-hover;
-	}
+  button, a.button {
+    width: 100%;
+    color: $color-white;
+    margin-bottom: 15px;
+  }
 }

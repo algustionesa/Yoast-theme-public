@@ -1,64 +1,82 @@
 // http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
 .media {
-	margin-bottom: $spacing;
-	.img img { display:block; }
-	p:last-child { margin-bottom: 0; }
+  margin-bottom: $spacing;
+  .img img {
+    display: block;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
 
-	// always float, also on small screens
-	.imgExt, .img--right{
-		float:right; 
-		margin-left: 15px;
+  // always float, also on small screens
+  .imgExt, .img--right {
+    float: right;
+    margin-left: 15px;
 
-		img {
-			border: 1px solid $color-grey;
-		}
+    img {
+      border: 1px solid $color-grey;
+    }
 
-		img.noborder {
-			border: none;
-		}
-	}
+    img.noborder {
+      border: none;
+    }
+  }
 
-	.img {
-		float:left; 
-		margin-right: 15px;
-	}
+  .img {
+    float: left;
+    margin-right: 15px;
+  }
 
-	.img--large { 
-		margin-right: $spacing-double;
-	}
+  .img--large {
+    margin-right: $spacing-double;
+  }
 
-	.vid {
-		float: left;
-		margin-right: 30px;
-		width: 300px;
-	}
+  .vid {
+    float: left;
+    margin-right: 30px;
+    width: 300px;
+  }
 
-	// no float on responsive
-	@media only screen and (max-width: $page-width-medium) {
-		&--nofloat {
-			img {
-				min-width: 20%;
-				height: auto;
-			}
-			.imgExt, .img--right, .img{
-				float: none;
-				display: inline-block;
-				margin-left: 0;
-			}
-			.img--large {
-				margin-right: 0;
-			}
-			.vid {
-				float: none;
-				width: 100%;
-				margin-bottom: $spacing;
-			}
-		}
-	}
+  // no float on responsive
+  @media only screen and (max-width: $page-width-medium) {
+    &--nofloat {
+      img {
+        min-width: 20%;
+        height: auto;
+      }
+      .imgExt, .img--right, .img {
+        float: none;
+        display: inline-block;
+        margin-left: 0;
+      }
+      .img--large {
+        margin-right: 0;
+      }
+      .vid {
+        float: none;
+        width: 100%;
+        margin-bottom: $spacing;
+      }
+    }
+  }
 }
 
 .category .media:first-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.media, .media-right, .bd {overflow:hidden; _overflow:visible; zoom:1;}
+.media, .media-right, .bd {
+  overflow: hidden;
+  _overflow: visible;
+  zoom: 1;
+}
+
+.archive {
+  .bd {
+    .button, button {
+      & + p {
+        font-size: 0.9em;
+      }
+    }
+  }
+}

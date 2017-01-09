@@ -1,0 +1,7 @@
+.widget.theme-faq {
+  @include headers($scheme-faq-primary, $scheme-faq-secondary);
+}
+
+.theme-faq {
+  @include theme($scheme-faq-primary, $scheme-faq-secondary);
+}

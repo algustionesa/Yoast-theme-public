@@ -10,9 +10,14 @@
 
 <script type="text/html" id="tmpl-autocomplete-post-suggestion">
 	<a class="suggestion-link" href="{{ data.permalink }}" title="{{ data.post_title }}">
-		<div class="suggestion-post-attributes">
+		<#
+			var image_class = '';
+			if ( data.images.thumbnail ) {
+				image_class = 'with-image';
+			}
+		#>
+		<div class="suggestion-post-attributes {{image_class}}">
 			<span class="suggestion-post-title">{{{ data._highlightResult.post_title.value }}}</span>
-
 			<#
 				var attributes = ['content', 'title6', 'title5', 'title4', 'title3', 'title2', 'title1'];
 				var attribute_name;

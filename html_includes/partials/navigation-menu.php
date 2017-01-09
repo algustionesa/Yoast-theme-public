@@ -1,13 +1,11 @@
 <?php
-namespace Yoast\YoastCom\Theme;
 
-use Yoast\YoastCom\Menu\Menu_Structure;
+namespace Yoast\YoastCom\Theme;
 
 if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 
 	/** @noinspection PhpUndefinedVariableInspection */
 	$main_menu_items = $template_args['menu_data'];
-	$cart_url        = $template_args['cart_url'];
 
 	echo '<div id="yoast-main-menu" class="sticky" data-sticky-desktop data-sticky>';
 	echo '<nav role="navigation">';
@@ -24,14 +22,15 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 //	echo '</a>';
 
 	echo '<a class="cart" href="' . apply_filters( 'yoast:url', 'checkout' ) . '">';
-	echo '<img src="' . get_template_directory_uri() . '/images/cart.svg" alt="Shopping Cart" />';
-	echo '<span class="visuallyhidden focusable">Cart</span>';
+	echo '<img src="' . get_template_directory_uri() . '/images/cart.svg" alt="' . esc_attr( __( 'Shopping Cart', 'yoastcom' ) ) . '" />';
+	echo '<span class="visuallyhidden focusable">' . esc_html( __( 'Cart', 'yoastcom' ) ) . '</span>';
 	echo '<div class="num-items-container"><span class="num-items"></span></div>';
 	echo '</a>';
 
-//	echo '<a href="#">';
-//	echo '<span class="fa fa-search fa-flip-horizontal"></span>';
-//	echo '</a>';
+	// Only for Yoast.com & my.yoast.com:
+	if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
+		get_template_part( 'html_includes/partials/navigation-currency-switcher', Checkout_HTML::get_currency_switch_template_arguments() );
+	}
 
 	echo '</li>';
 

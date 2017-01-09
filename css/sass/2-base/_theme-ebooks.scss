@@ -1,0 +1,7 @@
+.widget.theme-ebooks {
+  @include headers($scheme-ebooks-primary, $scheme-ebooks-secondary);
+}
+
+.theme-ebooks {
+  @include theme($scheme-ebooks-primary, $scheme-ebooks-secondary);
+}

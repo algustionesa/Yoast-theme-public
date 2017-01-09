@@ -33,12 +33,6 @@ body {
 
 }
 
-body.edd-checkout {
-  .siteheader {
-    margin-bottom: 1rem;
-  }
-}
-
 .siteheader--home {
   @media only screen and (min-width: $page-width-medium) {
     padding-top: 2.1rem;
@@ -65,7 +59,7 @@ body.edd-checkout {
     position: fixed;
     top: 0;
     z-index: 99;
-    background-color: $scheme-home-secondary;
+    background-color: $color-pink-dark;
     border-bottom: 1px solid $color-white;
 
     .admin-bar & {
@@ -87,8 +81,8 @@ body.edd-checkout {
     background: url(./../images/logo-diap.svg) no-repeat left;
 
     @media only screen and (min-width: $page-width-medium) {
-      width: 15em;
-      height: 7em;
+      width: 8.5em;
+      height: 5.2em;
       background-image: url(./../images/logo.svg);
     }
 

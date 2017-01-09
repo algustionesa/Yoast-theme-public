@@ -57,39 +57,57 @@
     border-color: $color-white !important;
   }
 
-  &.theme-academy {
+  &.theme-courses {
     a {
-      color: $scheme-academy-primary !important;
+      color: $scheme-courses-primary !important;
     }
   }
 
-  &.theme-academy.secondary {
+  &.theme-seo-blog {
     a {
-      color: $scheme-academy-secondary !important;
+      color: $scheme-seo-blog-primary !important;
     }
   }
 
-  &.theme-software {
+  &.theme-courses.secondary {
     a {
-      color: $scheme-software-primary !important;
+      color: $scheme-courses-secondary !important;
     }
   }
 
-  &.theme-review {
+  &.theme-plugins {
     a {
-      color: $scheme-review-primary !important;
+      color: $scheme-plugins-primary !important;
     }
   }
 
-  &.theme-review.secondary {
+  &.theme-hire-us {
     a {
-      color: $scheme-review-secondary !important;
+      color: $scheme-hire-us-primary !important;
     }
   }
 
-  &.theme-about {
+  &.theme-hire-us.secondary {
     a {
-      color: $scheme-about-primary !important;
+      color: $scheme-hire-us-secondary !important;
+    }
+  }
+
+  &.theme-home {
+    a {
+      color: $scheme-home-primary !important;
+    }
+  }
+
+  &.theme-ebooks {
+    a {
+      color: $scheme-ebooks-primary !important;
+    }
+  }
+
+  &.theme-faq {
+    a {
+      color: $scheme-faq-primary !important;
     }
   }
 
@@ -170,20 +188,20 @@ a.promoblock {
     line-height: 1;
   }
 
-  body.theme-about [class *= "promoblock--icon"]::before {
-    color: $scheme-about-primary;
+  body.theme-home [class *= "promoblock--icon"]::before {
+    color: $scheme-home-primary;
   }
 
-  body.theme-about .promoblock a.color-cta {
+  body.theme-home .promoblock a.color-cta {
     color: $color-green-blue !important;
   }
 
-  body.theme-academy [class *= "promoblock--icon"]::before {
-    color: $scheme-academy-primary;
+  body.theme-courses [class *= "promoblock--icon"]::before {
+    color: $scheme-courses-primary;
   }
 
-  body.theme-software [class *= "promoblock--icon"]::before {
-    color: $scheme-software-primary;
+  body.theme-plugins [class *= "promoblock--icon"]::before {
+    color: $scheme-plugins-primary;
   }
 
   .promoblock--icon-academy::before {
