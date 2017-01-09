@@ -54,6 +54,12 @@ body {
   }
 }
 
+@media screen and (max-width: 600px) {
+  #wpadminbar {
+    position: fixed ;
+  }
+}
+
 .masthead {
   @media only screen and (max-width: $page-width-medium) {
     position: fixed;
