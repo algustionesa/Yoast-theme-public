@@ -7,7 +7,15 @@ use Yoast\YoastCom\RemoteCheckout\Remote_Purchase_Button;
 
 <div class="one-third medium-one-half small-full">
 	<div class="promoblock">
-		<?php echo do_shortcode( '[video_modal title="Temporary video" video_url="https://www.youtube.com/embed/YlUsuNzETx4"]' ); ?>
+		<?php
+		$video_title = get_the_title( );
+		$image_url   = post_meta( 'youtube_video_thumbnail' );
+		$video_url   = post_meta( 'youtube_video_code' );
+		if ( ! empty( $video_url ) ) {
+			$video_url = 'https://www.youtube.com/embed/' . $video_url;
+		}
+		echo do_shortcode( '[video_modal title="' . $video_title . '"  image_url="' . $image_url . '" video_url="' . $video_url . '"]' );
+		?>
 
 		<h3 class="h4">
 			<a href="<?php echo get_the_permalink(); ?>">
@@ -29,8 +37,7 @@ use Yoast\YoastCom\RemoteCheckout\Remote_Purchase_Button;
 		if ( $download_id ) {
 			$remote_purchase_button = new Remote_Purchase_Button();
 			echo $remote_purchase_button->add_to_cart_button( array(
-				'id'   => intval( $download_id ),
-				'text' => __( 'Buy Yoast SEO Premium', 'yoastcom' ) . ' &raquo;',
+				'id'   => intval( $download_id )
 			) );
 		}
 		?>
