@@ -527,18 +527,31 @@ class Shortcodes {
 	 */
 	public function video_modal( $atts = array() ) {
 		$args = wp_parse_args( $atts, array(
-			'link_text'      => __( 'View video', 'yoastcom' ),
 			'title'     => __( 'Video', 'yoastcom' ),
-			'video_url' => "",
-			'image_url' => "",
+			'link_text' => '',
+			'video_url' => '',
+			'image_url' => '',
 		) );
 
+		// Don't add the video modal if there is no video to show.
+		if ( empty( $args['video_url'] ) ) {
+			return "";
+		}
 
-		$out = '<a class="open-video-modal" data-title="' . $args['title'] . '" href="' . $args['video_url'] . '">' . $args['link_text'] . '<img src="' . $args['image_url'] . '"></a>';
+		$image = '';
+		if ( ! empty( $args['image_url'] ) ) {
+			$image = '<img src="' . $args['image_url'] . '">';
+		}
+
+		$out = <<<MODAL
+<a href="{$args['video_url']}" class="open-video-modal" data-title="{$args['title']}">
+	{$image}
+	{$args['link_text']}
+</a>
+MODAL;
 
 		Video_Modal::add_video_modal( $args );
 
 		return $out;
 	}
-
 }
