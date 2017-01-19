@@ -100,3 +100,23 @@
 .prices-modal.modal, #video-modal.modal {
   display: inline-block;
 }
+.open-video-modal, .open-video-modal:hover{
+  color: $color-pink-light !important;
+  text-decoration: none;
+}
+
+.video-modal {
+
+  h3 {
+	margin-bottom: 0;
+  }
+
+  .content {
+	padding: 0;
+
+	.videowrapper {
+	  padding-top: 0;
+	  margin: 0;
+	}
+  }
+}

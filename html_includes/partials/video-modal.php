@@ -1,4 +1,4 @@
-<div id="video-modal">
+<div class="video-modal" id="video-modal">
 	<h3>
 		<i class="fa fa-play" aria-hidden="true"></i>
 		<span id="video-modal-title"></span>
