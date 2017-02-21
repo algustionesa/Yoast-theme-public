@@ -26,18 +26,8 @@ namespace Yoast\YoastCom\Theme;
 					<?php else: ?>
 						<?php _e( 'or find them on', 'yoastcom' ); ?>
 					<?php endif; ?>
-					<?php if ( author_has( 'twitter' ) ) : ?>
-						<a href="<?php echo esc_url( url_social_site( 'twitter' ) ); ?>" class="link--implicit">
-							<span class="visuallyhidden focusable">Twitter</span>
-							<span class="text-icon text-icon--twitter text-icon--social">&#xf081;</span>
-						</a>
-					<?php endif; ?>
-					<?php if ( author_has( 'linkedin' ) ) : ?>
-						<a href="<?php echo esc_url( url_social_site( 'linkedin' ) ); ?>" class="link--implicit">
-							<span class="visuallyhidden focusable">Linkedin</span>
-							<span class="text-icon text-icon--linkedin text-icon--social">&#xf08c;</span>
-						</a>
-					<?php endif; ?>
+
+					<?php get_template_part( 'html_includes/partials/social-icons' ); ?>
 				</p>
 			</div>
 		</div>

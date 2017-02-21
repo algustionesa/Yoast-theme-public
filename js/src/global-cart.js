@@ -6,7 +6,7 @@
 	function init() {
 		$body = $(document.body);
 
-		retrieveGlobalCartItemNumber();
+//		retrieveGlobalCartItemNumber();
 		handleShowCoupon();
 	}
 

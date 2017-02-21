@@ -139,6 +139,7 @@ class Theme_Settings {
 				'' => __( 'None', 'yoastcom' ),
 				'site-structure' => __( 'Honeycomb and bee', 'yoastcom' ),
 				'new-years' => __( 'Fireworks', 'yoastcom' ),
+				'balloons' => __( 'Balloons', 'yoastcom' ),
 			],
 			'default' => get_theme_option( 'banner_theme_variation', 'child-settings' ),
 		) );

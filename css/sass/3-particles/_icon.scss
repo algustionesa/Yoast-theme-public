@@ -34,6 +34,12 @@
       color: desaturate(lighten(#BD081C, 20), 30);
     }
   }
+  &--instagram {
+    color: #c13584;
+    &:hover, &:focus {
+      color: desaturate(lighten(#c13584, 20), 30);
+    }
+  }
 
 }
 

@@ -7,9 +7,9 @@
 
 namespace Yoast\YoastCom\Theme;
 
-require_once( dirname( __FILE__ ) . '/php/functions-helpers.php' );
-require_once( dirname( __FILE__ ) . '/php/functions-links.php' );
-require_once( dirname( __FILE__ ) . '/php/functions-checkout.php' );
+require_once __DIR__ . '/php/functions-helpers.php';
+require_once __DIR__ . '/php/functions-links.php';
+require_once __DIR__ . '/php/functions-checkout.php';
 
 spl_autoload_register( function( $classname ) {
 	if ( false !== strpos( $classname, 'Yoast\\YoastCom\\Theme\\' ) ) {
@@ -18,7 +18,7 @@ spl_autoload_register( function( $classname ) {
 		$classname = strtolower( $classname );
 		$classname = str_replace( '_', '-', $classname );
 
-		require_once( dirname( __FILE__ ) . '/php/class-' . $classname . '.php' );
+		require_once __DIR__ . '/php/class-' . $classname . '.php';
 	}
 });
 
@@ -30,7 +30,7 @@ spl_autoload_register( function( $classname ) {
 function theme_object() {
 	static $theme_object;
 
-	if ( ! isset( $theme_object ) ) {
+	if ( null === $theme_object ) {
 		$theme_object = new Theme();
 	}
 
@@ -38,5 +38,3 @@ function theme_object() {
 }
 
 theme_object();
-
-// Comment to test submodule push. #3

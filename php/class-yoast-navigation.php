@@ -31,7 +31,11 @@ class Yoast_Navigation {
 
 		$this->menu_structure  = ( is_null( $menu_structure ) ? new Menu_Structure() : $menu_structure );
 		$this->main_menu_items = $this->menu_structure->getMenuItems();
-		$this->current_url     = $this->scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+		$this->current_url = '';
+		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+			$this->current_url = $this->scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		}
 
 		// We use the wp filter here, so the post_id is available and the page isn't rendered yet, so we can change the active menu item.
 		if ( ! is_admin() ) {

@@ -60,7 +60,6 @@ class Theme {
 		new Page_Academy_Settings();
 		new Query();
 		new Featured_Image();
-		new Affiliate();
 
 		if ( is_admin() ) {
 			$theme_settings = new Theme_Settings();

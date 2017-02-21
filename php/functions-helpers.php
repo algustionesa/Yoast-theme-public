@@ -7,7 +7,7 @@
 
 namespace Yoast\YoastCom\Theme;
 
-use Yoast\YoastCom\Api\EDD_Client;
+use Yoast\YoastCom\RemoteCheckout\Remote_Product;
 
 /**
  * Like get_template_part() put lets you pass args to the template file
@@ -376,12 +376,10 @@ function get_product_icon( $product_id = null, $diapositive = false ) {
 		$icon = get_product_icon( $premium_id, $diapositive );
 	}
 
-	if ( '' === $icon && class_exists( 'Yoast\YoastCom\Api\EDD_Client', false ) ) {
-		$edd_client = new EDD_Client();
-
-		$plugin_information = $edd_client->get_product( $product_id );
-		if ( isset( $plugin_information['meta'], $plugin_information['meta'][ $icon_key ] ) ) {
-			$icon = $plugin_information['meta'][ $icon_key ][0];
+	if ( '' === $icon && class_exists( 'Yoast\YoastCom\RemoteCheckout\Remote_Product' ) ) {
+		$remote_product = new Remote_Product( $product_id );
+		if ( method_exists( $remote_product, 'get_icon_url' ) ) {
+			$icon = $remote_product->get_icon_url( $icon_key );
 		}
 	}
 

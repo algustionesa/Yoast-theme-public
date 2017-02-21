@@ -1,10 +1,24 @@
 {
+    "minimum-stability": "dev",
     "name": "yoast/yoast-theme",
     "description": "Theme used on yoast.com and other yoast sites",
     "type": "wordpress-theme",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Yoast/website-menu-structure"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Yoast/visitor-to-currency"
+        }
+    ],
     "require": {
-        "composer/installers": "^1.0"
+        "composer/installers": "^1.0",
+        "yoast/visitor-to-currency": "dev-master",
+        "yoast/menu-structure": "dev-master"
     },
+
     "authors": [
         {
             "name": "Team Yoast",

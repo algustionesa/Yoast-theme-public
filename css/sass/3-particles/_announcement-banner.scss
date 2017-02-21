@@ -41,6 +41,10 @@
 	  background-image: url(./../images/announcement-banners/banner-fireworks-bg.png);
 	}
 
+	&.balloons {
+		background-image: url(./../images/announcement-banners/banner-balloons-bg.png);
+	}
+
 	&.right {
 	  @include vendor(transform, scaleX(-1));
 	  right: 0;
