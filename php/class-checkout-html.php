@@ -213,7 +213,7 @@ class Checkout_HTML {
 		if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
 			$currency_controller = Currency_Controller::get_instance();
 
-			return $currency_controller->get_default_currency()->get_code();
+			return $currency_controller->get_default_currency();
 		}
 
 		return 'USD';
@@ -273,6 +273,7 @@ class Checkout_HTML {
 	public static function get_currency_switch_template_arguments( $label = '', $wrap = false, $country = '', $return = false ) {
 		$default = self::get_default_currency();
 		$current = self::get_current_currency();
+
 
 		return [
 			'options' => self::get_available_currencies( $country ),

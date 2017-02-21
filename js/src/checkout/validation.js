@@ -135,7 +135,7 @@
 		function fixTaxAfterRecalculation( e, data ) {
 			var taxData = data.response;
 
-			if ( taxData.billing_country !== '' ) {
+			if ( typeof taxData.billing_country !== 'undefined' && taxData.billing_country !== '' ) {
 				displayVATField( taxData.billing_country );
 			}
 
