@@ -113,15 +113,20 @@
 		}
 
 		/**
-		 * Rounds a price to two decimal places
+		 * Rounds a price to two decimal places.
 		 *
-		 * @param {int} price
-		 * @returns {int}
+		 * @param {int} price The initial price.
+		 * @returns {int} The rounded price with two decimal places.
 		 */
 		function roundPrice( price ) {
 			return Math.round( price * 100 ) / 100;
 		}
 
+		/**
+		 * Determines whether or not the current VATDetails global is a valid, non-Dutch tax rate.
+		 *
+		 * @returns {boolean} Whether or not the tax rate is considered valid.
+		 */
 		function isValidNonDutchTaxRate() {
 			return VATDetails.valid == true && VATDetails.country !== 'NL' && taxData.tax_rate_raw !== 0;
 		}
@@ -131,6 +136,8 @@
 		 *
 		 * @param {jQuery.Event} e
 		 * @param {Object} data Data returned by the EDD AJAX.
+		 *
+		 * @returns {void}
 		 */
 		function fixTaxAfterRecalculation( e, data ) {
 			var taxData = data.response;
@@ -167,7 +174,9 @@
 		}
 
 		/**
-		 * Hides or shows the state field based on the selected country
+		 * Hides or shows the state field based on the selected country.
+		 *
+		 * @returns {void}
 		 */
 		function hideOrShowStateField() {
 			var $billingCountry = $( '#billing_country' );
@@ -195,50 +204,88 @@
 				type: 'post',
 				success: function( response ) {
 					if ( response.display_vat === true ) {
-						showVATData();
+						showVATElements();
 					} else {
-						hideVATData();
+						hideVATElements();
 					}
+
+					displayVATWarning( country );
 				}
 			} );
 		}
 
 		/**
-		 * Hides or shows the VAT Number field based on the selected country
+		 * Hides or shows the VAT Number field based on the selected country.
+		 *
+		 * @returns {void}
 		 */
 		function hideOrShowVATNumber( taxData ) {
 			var billingCountry = $( '#billing_country' ).val();
 
 			// Don't display the VAT number input field unless we support said country.
-			hideVATData();
-
+			hideVATElements();
 			$( '#yst-dutch-vat-notice' ).remove();
 
 			// No special BTW rule for The Netherlands
 			if ( billingCountry === 'NL' ) {
-				showVATData();
+				showVATElements();
+				displayVATWarning( billingCountry );
 			}
 
 			// Check if the country is in our special tax list
 			if ( taxData && taxData.tax_rate_raw === 0 ) {
-				hideVATData();
+				hideVATElements();
 				return;
 			}
 		}
 
-		function showVATData() {
+		/**
+		 * Adds the VAT warning to the DOM.
+		 *
+		 * @returns {void}
+		 */
+		function addVATWarning() {
+			$( '#yst-edd-btw-wrap' ).after( '<p id="yst-dutch-vat-notice" style="display: none;"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
+		}
+
+		/**
+		 * Displays or hides the VAT warning.
+		 *
+		 * @param {string} country The country to check.
+		 *
+		 * @returns {void}
+		 */
+		function displayVATWarning( country ) {
+			console.log( $( '#yst-dutch-vat-notice' ).length );
+			if ( country !== 'NL' ) {
+				$( '#yst-dutch-vat-notice' ).hide();
+
+				return;
+			}
+
+			$( '#yst-dutch-vat-notice' ).show();
+		}
+
+		/**
+		 * Shows the VAT-related fields and information.
+		 *
+		 * @returns {void}
+		 */
+		function showVATElements() {
 			$( '#yst-edd-btw-wrap' ).show();
 			$( '.edd_cart_tax_row' ).css( 'display', 'table-row' );
-
-			if ( $('#yst-dutch-vat-notice').length === 0 ) {
-				$( '#yst-edd-btw-wrap' ).after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
-			}
 		}
 
-		function hideVATData() {
-			$( '#yst-edd-btw-wrap', '#yst-dutch-vat-notice' ).hide();
+		/**
+		 * Hides the VAT-related fields and information.
+		 *
+		 * @returns {void}
+		 */
+		function hideVATElements() {
+			$( '#yst-edd-btw-wrap' ).hide();
 			$( '.edd_cart_tax_row' ).css( 'display', 'none' );
 		}
+
 
 		function initChosen() {
 			$( ".chosen-select" ).chosen();
@@ -256,6 +303,7 @@
 
 			hideOrShowStateField();
 			hideOrShowVATNumber();
+			addVATWarning();
 			initChosen();
 
 			$body.on( 'edd_taxes_recalculated', fixTaxAfterRecalculation );
