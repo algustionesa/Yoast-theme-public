@@ -24,20 +24,20 @@
 			extra += "; domain=" + domain;
 		}
 
-		document.cookie = name + "=" + value + extra + "";
+		document.cookie = name + "=" + value + extra;
 	}
 
 	/**
 	 * Looks up and reads a cookie by a given name.
 	 *
 	 * @param {string} name The name of the cookie to look for.
-	 * @returns {string} The cookie's value.
+	 * @returns {string|null} The cookie's value.
 	 */
 	function readCookie( name ) {
 		var nameEQ = name + "=";
 		var cookieArguments = document.cookie.split( ';' );
 
-		for ( var i = 0; i < cookieArguments.length; i ++ ) {
+		for ( var i = 0; i < cookieArguments.length; i++ ) {
 			var cookieArgument = cookieArguments[i];
 
 			while ( cookieArgument.charAt( 0 ) == ' ' ) {
