@@ -134,9 +134,10 @@
 		 */
 		function fixTaxAfterRecalculation( e, data ) {
 			var taxData = data.response;
+			var billing_country = data.postdata.billing_country;
 
-			if ( typeof taxData.billing_country !== 'undefined' && taxData.billing_country !== '' ) {
-				displayVATField( taxData.billing_country );
+			if ( billing_country !== '' ) {
+				displayVATField( billing_country );
 			}
 
 			if ( isValidNonDutchTaxRate() ) {
@@ -194,9 +195,9 @@
 				type: 'post',
 				success: function( response ) {
 					if ( response.display_vat === true ) {
-						$( '#yst-edd-btw-wrap' ).show();
+						showVATData();
 					} else {
-						$( '#yst-edd-btw-wrap' ).hide();
+						hideVATData();
 					}
 				}
 			} );
@@ -207,26 +208,36 @@
 		 */
 		function hideOrShowVATNumber( taxData ) {
 			var billingCountry = $( '#billing_country' ).val();
-			var btw_wrap = $( '#yst-edd-btw-wrap' );
+
+			// Don't display the VAT number input field unless we support said country.
+			hideVATData();
 
 			$( '#yst-dutch-vat-notice' ).remove();
 
 			// No special BTW rule for The Netherlands
 			if ( billingCountry === 'NL' ) {
-				btw_wrap
-					.after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
-
+				showVATData();
 			}
 
 			// Check if the country is in our special tax list
 			if ( taxData && taxData.tax_rate_raw === 0 ) {
-				btw_wrap.hide();
-				$( '.edd_cart_tax_row' ).css( 'display', 'none' );
+				hideVATData();
 				return;
 			}
+		}
 
+		function showVATData() {
+			$( '#yst-edd-btw-wrap' ).show();
 			$( '.edd_cart_tax_row' ).css( 'display', 'table-row' );
-			btw_wrap.show();
+
+			if ( $('#yst-dutch-vat-notice').length === 0 ) {
+				$( '#yst-edd-btw-wrap' ).after( '<p id="yst-dutch-vat-notice"><strong>Please note:</strong> Since Yoast is based in the Netherlands we cannot reverse charge the VAT.<br />VAT will be added to the invoice.</p>' );
+			}
+		}
+
+		function hideVATData() {
+			$( '#yst-edd-btw-wrap', '#yst-dutch-vat-notice' ).hide();
+			$( '.edd_cart_tax_row' ).css( 'display', 'none' );
 		}
 
 		function initChosen() {
